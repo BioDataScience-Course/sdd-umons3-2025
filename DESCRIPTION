@@ -1,7 +1,7 @@
 Type: Book
 Package: placeholder
-Title: SDD III UMONS version 2024
-Version: 2024.0.0
+Title: SDD III UMONS version 2025
+Version: 2025.0.0
 Depends:
     learnitdown
 Imports:
@@ -51,7 +51,10 @@ Remotes:
     rstudio/bookdown,
     SciViews/svMisc,
     SciViews/svBase,
+    SciViews/svFast,
     SciViews/svFlow,
+    SciViews/svTidy,
+    SciViews/helpai,
     SciViews/data.io,
     SciViews/chart,
     SciViews/exploreit,
