@@ -427,7 +427,7 @@ Si je veux rechercher un point je dois écrire `\\.`, car sinon, j'indique que j
 
 ##### Exercez-vous {.unnumbered}
 
-```{block2, type='bdd'}
+```{block, type='bdd'}
 Il n'est possible de véritablement comprendre les expressions régulières qu'en réalisant des exercices. Nous vous proposons donc de réaliser les exercices proposés sur le site [RegexOne](https://regexone.com/). Les exercices interactifs offrent un niveau de difficulté croissant et balayent les notions principales à connaitre pour manipuler les expressions régulières. 
 ```
 
@@ -486,7 +486,7 @@ species_f2 <- recode(species_f,
 species_f2
 ```
 
-```{block2, type='warning'}
+```{block, type='warning'}
 Les variables facteurs sont utiles, mais il faut toujours prendre le temps de bien comprendre chaque niveau de la variable. Soyons encore plus vigilant si les données sont amenées à évoluer au cours du temps. 
 ```
 

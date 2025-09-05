@@ -1,4 +1,16 @@
 # Learnitdown configuration and functions
+# We use glue() often for variables replacement from learnitdown, so, we
+# define the `!` operator for character objects to glue the string
+# Cons: it slightly slows down the usual `!` operator (10x slower)
+`!` <- function(x) {
+  if (is.character(x)) {
+    as.character(glue::glue_data(learnitdown, x))
+  } else {# Usual ! operator
+    .Primitive('!')(x)
+  }
+}
+
+# General configuration data
 learnitdown <- list(
   baseurl = "https://wp.sciviews.org", # The base URL for the site
   imgbaseurl =
@@ -22,25 +34,80 @@ learnitdown <- list(
   ),
   acad_year = "2025-2026",               # The academic year
   YY = 25,                               # The academic year short id
+  YYYY = 2025,                           # The academic year long id
   W = as.Date("2025-09-07") + (0:37)*7,  # Sundays before each academic week
   Q1 = as.Date("2025-09-07") + (0:15)*7, # There are 15 weeks at Q1
   Q2 = as.Date("2026-02-01") + c(0:11, 14:16)*7 # Q2 starts 02/02 w22 but w33-34 are holidays
 )
 
-# We use glue() often for variables replacement from learnitdown, so, we
-# define the `!` operator for character objects to glue the string
-# Cons: it slightly slows down the usual `!` operator (10x slower)
-`!` <- function(x) {
-  if (is.character(x)) {
-    as.character(glue::glue_data(learnitdown, x))
-  } else {# Usual ! operator
-    .Primitive('!')(x)
-  }
-}
+# Course start and end dates
+learnitdown$course_start <- !"{W[4]+1}"
+learnitdown$course_end   <- !"{W[15]+2}"
+
+
+# Modules dates
+learnitdown$mod <- as.data.frame(tibble::tribble(
+  ~id,       ~term,       ~start,       ~class1,         ~end,       ~class2,         ~N3,            ~N4,   ~challenge,        ~test,
+  # Q1
+  "install",  "Q1",  !"{W[4]+1}", "08:15-10:15",          "-",          "-",          "-",            "-",          "-",          "-",
+  "C01",      "Q1",  !"{W[5]+1}", "08:15-10:15",  !"{W[5]+4}", "08:15-12:30", !"{W[6]+1}",    !"{W[5]+4}",          "-",  !"{W[5]+4}",
+  "C02",      "Q1",  !"{W[7]+1}", "08:15-10:15",  !"{W[7]+5}", "08:15-12:30", !"{W[8]+1}",  "continue...",          "-",  !"{W[7]+5}",
+  "C03",      "Q1", !"{W[9]+1}",  "08:15-10:15",  !"{W[9]+3}", "13:30-17:45", !"{W[10]+1}",  !"{W[12]+2}",  !"{W[9]+3}",          "-",
+  "C04",      "Q1", !"{W[11]+1}", "08:15-10:15", !"{W[11]+5}", "08:15-12:30", !"{W[12]+1}",  !"{W[11]+5}",          "-", !"{W[11]+5}",
+  "C05",      "Q1", !"{W[13]+1}", "08:15-10:15", !"{W[13]+5}", "08:15-12:30", !"{W[14]+1}",  !"{W[15]+2}",          "-", !"{W[13]+5}",
+  "remed",    "Q1", !"{W[15]+1}", "08:15-10:15",          "-",          "-",           "-",           "-",          "-",          "-"
+))
+rownames(learnitdown$mod) <- learnitdown$mod$id
+
+# Assignment URLS
+learnitdown$assign_url <- list(
+  # SDD3
+  C00Qa_issues         = "https://classroom.github.com/a/szP1qZ9s",
+  # SDD4
+  D00Qa_issues         = "https://classroom.github.com/a/2-eyJMao"
+)
+
+
+# Date and time for start and end of classes for each module
+class1_start <- function(x, module)
+  paste0(x[module, 'start'], " ", substring(x[module, 'class1'], 1, 5), ":00")
+class1_end <- function(x, module)
+  paste0(x[module, 'start'], " ", substring(x[module, 'class1'], 7, 11), ":00")
+class2_start <- function(x, module)
+  paste0(x[module, 'end'], " ", substring(x[module, 'class2'], 1, 5), ":00")
+class2_end <- function(x, module)
+  paste0(x[module, 'end'], " ", substring(x[module, 'class2'], 7, 11), ":00")
+n3_end <- function(x, module, hour = "23:59:59")
+  paste0(x[module, 'N3'], " ", hour)
+n4_end <- function(x, module, hour = "23:59:59")
+  paste0(x[module, 'N4'], " ", hour)
 
 # Examples:
 #!"svbox{svbox} is for academic year {acad_year}"
 #  -> svbox2024 is for academic year 2024-2025
+
+
+# Link inside the courses: the link are a little bit more complex because the
+# bookdown is embedded in a Wordpress site. A direct link like:
+# https://wp.sciviews.org/sdd-umons2-2025/outils-de-diagnostic-suite.html#résumé-avec-summarysuite
+# becomes:
+# https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2025/outils-de-diagnostic-suite.html%23résumé-avec-summarysuite
+course_link <- function(label, course = 1, page, anchor = "", year = !"{YYYY}",
+                        baseurl = !"{baseurl}", course_page = "sdd-umons") {
+  if (course == 1) {
+    course <- ""
+  } else{
+    course <- as.character(course)
+  }
+  if (anchor != "")
+    anchor <- paste0("%23", anchor) # %23 is the URLencoded value of '#'
+  baseurl2 <- sub("https://", "", baseurl, fixed = TRUE) # Remove https://
+  url <- glue::glue("{baseurl}/{course_page}{course}/?iframe={baseurl2}/{course_page}{course}-{year}/{page}.html{anchor}")
+  paste0("[", label, "](", url, ")")
+}
+# ex.: course_link("diagnostic", 2, "outils-de-diagnostic-suite", "résumé-avec-summarysuite")
+
+
 #microbenchmark::microbenchmark(!TRUE, .Primitive('!')(TRUE), .Primitive('!'))
 
 # Unary + binary + is nice too, but it slows down additions!

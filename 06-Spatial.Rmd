@@ -184,7 +184,7 @@ La fonction `st_read()` permet de lire ces données dans R. Attention, les fichi
 europe_map <- st_read("data/europe.shp")
 ```
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 Les fichiers au format **shapefile** sont souvent assez volumineux. La précision de la carte aura une très grande importance sur la taille du fichier. Le tableau ci-dessous met en avant la différence de la taille du fichier en fonction de l'échelle de la carte des pays d'Europe <https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/countries#countries20> 
 
 Cartes de l'Europe au format **shapefile** en fonction de l'échelle de la carte.
@@ -490,7 +490,7 @@ m_tm
 
 Notre objet est précisément un **RasterLayer** (une couche raster). Il contient plus de 3,7 millions de pixels. La résolution d'un pixel (carré) est d'environ 0.008° en latitude comme en longitude. Cela représente environ 924km à cet endroit de la terre. Les valeurs (élévations) vont de 1m à 4057m.
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 La plupart des rasters que vous importerez proviendront de logiciels SIG et seront enregistrés soit en une forme particulière d'image TIFF appelée GeoTIFF avec extension `.tif`, soit au format NetCDF avec extenstion `.nc`. Il suffit d'utiliser `raster("filename")` pour lire ces données et les inclure dans un objet **RasterLayer** en une seule étape. L'objet supporte également des rasters tellement volumineux qu'ils ne tiennent pas entièrement en mémoire !
 
 Pour exporter vos rasters, vous utiliserez la fonction `writeRaster()`. Elle supporte de nombreux formats différents dont les deux cités ci-dessus, voir `?writeFormats`.

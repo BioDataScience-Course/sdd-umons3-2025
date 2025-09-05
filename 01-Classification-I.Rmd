@@ -68,7 +68,7 @@ Rappelez-vous, la **classification** sert à regrouper les individus d'un jeu de
 
 Nous allons aborder maintenant la **classification supervisée** (un sous-ensemble de l'apprentissage machine ou *"machine learning"* en anglais). Elle permet d'utiliser un ordinateur pour lui faire apprendre à classer des objets selon nos propres critères que nous spécifions par ailleurs. Par exemple, en biologie, nous sommes amenés à classer le vivant (la fameuse classification taxonomique selon la [nomenclature binomiale de Linné](https://www.tela-botanica.org/2018/11/carl-von-linne-pere-de-la-classification-des-plantes-missionbotanique/)). Nous pourrions être amenés à nous faire seconder par un ordinateur pour classer nos plantes en herbier, nos insectes en collections... ou nos photos d'oiseaux ou de poissons. À partir du moment où nous pouvons collecter ou mesurer différentes caractéristiques quantitatives ou qualitatives sur chaque individu, et que pour certains, nous en connaissons le nom scientifique, la classification supervisée pourrait être utilisée pour classer automatiquement d'autres individus, uniquement sur base des mêmes mesures. Mais ceci n'est qu'un exemple d'application possible parmi beaucoup d'autres en biologie...
 
-```{block2, type='note'}
+```{block, type='note'}
 Les techniques de classification supervisée font l'objet d'une effervescence toute particulière ces derniers temps, en particulier dans leurs versions d'apprentissage profond ou *deep learning* en anglais. Ces méthodes sont, en général (mais pas obligatoirement pour les approches plus traditionnelles) appliquées sur de très gros jeux de données contenant des dizaines de milliers, des centaines de milliers, voire des millions, ou d'avantage d'observations. C'est précisément ce très grand nombre d'observations qui mérite que nous essayions d'automatiser leur classement.
 ```
 
@@ -92,7 +92,7 @@ La classification supervisée va se décomposer en réalité en trois phases.
 
 3.  **Déploiement** : si le classifieur obtient des performances satisfaisantes, il est utilisé pour classer **automatiquement** tous les autres items du jeu de données.
 
-```{block2, type='warning'}
+```{block, type='warning'}
 Les trois phases sont appliquées sur des individus *différents*, donc souvent sur des tableaux de données *différents* eux aussi. Vous devez veiller à ce que ces trois tableaux soient **compatibles entre eux**, c'est-à-dire, qu'ils contiennent les mêmes variables dans les mêmes formats. En particulier, vous devez veiller à ce que la variable à prédire porte le même nom et soit sous forme **factor** dans R, à la fois dans le set d'apprentissage et dans le set de test.
 
 Vous devez également veiller à ce qu'il n'y ait pas de données manquantes, si la méthode de classification utilisée ne les supporte pas (cas le plus fréquent). Les modifications éventuelles des données sont donc à réaliser *avant* de séparer le tableau de données initial en set d'apprentissage et set de test. De cette façon, le pré-traitement n'est effectué qu'une seule fois, et nous sommes certains que les deux tableaux d'apprentissage et de test sont conformes après séparation. Pour le déploiement, n'oubliez pas d'effectuer les mêmes préparatifs des variables avant de prédire les classes à partir de ce troisième tableau.
@@ -397,7 +397,7 @@ if (exists("assignment2"))
 
 Il existe de nombreux algorithmes de classification supervisée. Nous allons commencer notre exploration de ces outils statistiques avec l'**analyse discriminante linéaire**. Cette analyse recherche la meilleure discrimination possible des groupes par rotation des axes, en diagonalisant la **matrice variance-covariance inter-groupe**, ce qui revient à calculer les combinaisons linéaires des variables initiales qui séparent le mieux ces groupes.
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 Le principe de cet algorithme ne vous rappelle rien ? Evidemment que oui, cet algorithme se base sur les mêmes principes que l'ACP.
 ```
 
@@ -458,7 +458,7 @@ penguins %>.%
   penguins
 ```
 
-```{block2, type = 'warning'}
+```{block, type = 'warning'}
 La fonction "speedy" `sdrop_na()` (ou son équivalent dans la famille "tidy", `drop_na()`) est bien pratique pour obtenir un tableau de données propre sans aucunes valeurs manquantes. Cependant, elle est assez impitoyable si les colonnes à considérer ne sont pas précisées : toute ligne du tableau qui contient au moins une valeur manquante est éliminée. Toujours sélectionner les valeurs que l'on veut retenir dans le modèle *avant* de l'appliquer, ou alors, préciser le nom des colonnes à utiliser. Sinon, on retirera aussi des lignes pour lesquelles les variables qui ne nous intéressent pas ont aussi des valeurs manquantes (ici, le sexe, par exemple).
 ```
 
@@ -473,7 +473,7 @@ chart(penguins, bill_length ~ flipper_length %color=% species) +
 
 Le jeu de données est découpé en un **set d'apprentissage** et un **set de test**. Nous décidons de conserver 2/3 des observations pour le set d'apprentissage.
 
-```{block2, type='warning'}
+```{block, type='warning'}
 **Très important :** pensez bien toujours à préparer et remainer vos données *avant* la séparation en set d'apprentissage et set de test. Ainsi, vous vous assurez d'avoir deux tableaux compatibles. Les points à prendre en considération ici sont : (1) vérifier que la variable à prédire est bien sous forme **factor** (utilisez `class(df$var)` pour le déterminer si le tableau s'appelle `df` et la variable s'appelle `var`, ensuite utiliser `df$var <- as.factor(df$var)` si c'est nécessaire), (2) éliminer les variables inutilisées avec `sselect()` ou `select()`, (3) transformer les variables qui doivent l'être avec `smutate()` ou `mutate()` (transformation log, puissance, standardisation, etc., sachant que l'ADL apprécie les  associations linéaires entre les variables), (4) éliminer éventuellement les données manquantes avec `sdrop_na()` ou `drop_na()` tout à la fin et vérifier ensuite qu'il reste suffisamment de données pour construire et tester le classifieur. *Notez bien que nous avons fait tout cela plus haut avec notre jeu de données exemple `penguins`.*
 
 Rappelez-vous bien également plus tard de rendre votre troisième tableau compatible lors de la phase de déploiement. En particulier, si des variables ont été transformées en apprentissage et test, il faut bien évidemment appliquer la même transformation pour ces variables avant prédiction à l'aide du modèle.

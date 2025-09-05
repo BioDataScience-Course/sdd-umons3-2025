@@ -18,7 +18,7 @@ SciViews::R("ts", lang = "fr")
 
 Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la [visualisation](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/introvisu.html) et le [traitement des données](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/import.html)) doivent être acquis. La notion de corrélation ([partie du module 6 du cours 1](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/corr%25C3%25A9lation.html)) doit également être bien comprise au départ.
 
-```{block2, type='note'}
+```{block, type='note'}
 Nous utiliserons ici essentiellement le package R {pastecs} qui est une réécriture entre autres par l'un des auteurs de ce cours du logiciel PASSTEC 2000, un programme écrit initialement en Visual Basic par le [Prof. Frédéric Ibañez](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4247415/) dans les années 1980, sous la direction de ce dernier. C'est au Prof. Ibañez que l'on doit d'avoir rassemblé un grand nombre de techniques utiles en écologie et en biologie en général en matière d'analyse de séries spatio-temporelles, et d'en avoir démontré l'utilité quelque fois pour la première fois.
 ```
 
@@ -176,7 +176,7 @@ plot(marbio_ts[, c("Acartia", "ClausocalanusA", "Pteropods")],
 
 Ici aussi la distribution du plancton le long du transect n'est pas homogène. Alors que les ptéropodes (mollusques planctoniques) se retrouvent essentiellement près de Nice, les crustacés copépodes comme *Acartia spp* ou *Clausocalanus spp* se retrouvent plutôt en pleine mer.
 
-```{block2, type='note'}
+```{block, type='note'}
 Au travers de ces quatre exemples concrets, nous constatons que les séries spatio-temporelles sont utilisées dans de nombreux domaines en biologie. Le troisième exemple en particulier (EEG) nous laisse un peu démuni. Nous réalisons à ce stade que nous avons besoin d'une toute nouvelle panoplie d'outils pour analyser ce type de données car étant des mesures successives dans le temps d'un *même* individu, nous n'avons **pas d'indépendance des observations les unes par rapport aux autres**, qui est pourtant une hypothèse de départ de pratiquement toutes les techniques statistiques que nous avons étudiées jusqu'ici.
 ```
 
@@ -299,7 +299,7 @@ La sélection à l'aide des identifiants est souvent préférable, car plus expl
 colnames(marphy_ts[, c("Temperature", "Density")])
 ```
 
-```{block2, type='warning'}
+```{block, type='warning'}
 N'essayez pas d'utiliser la sélection à l'aide de `[,]` sur un objet **ts** contenant une série univariée. Vous génèreriez une erreur car cet objet contient un *vecteur* et non pas une *matrice*. De plus, cela n'a aucun sens de faire une sélection parmi... une seule série dans cet objet !
 ```
 
@@ -590,7 +590,7 @@ $$P_i = \hat \beta_{1 i}^2 + \hat \beta_{2 i}^2$$
 
 avec $\hat \beta_{1 i}$ et $\hat \beta_{2 i}$ qui sont les *estimateurs* des paramètres $\beta_{1 i}$ et $\beta_{2 i}$ pour les différentes fréquences $\omega_i$ sur base de l'échantillon dont nous disposons (nos observations). Bien que la démonstration de ceci sorte du cadre de ce cours --elle fait intervenir la théorie de l'information et la probabilité d'observer un pic ou un creux dans une série à un instant *t* donné, ce qu'on appelle un **point de retournement**-- il est possible d'estimer la probabilité qu'une valeur de $P_i$ se produise dans une série non périodique. Nous pouvons dès lors en dériver un test d'hypothèse. dont l'interprétation sera la suivante : **si la valeur de** $P_i$ est supérieure à un seuil défini par rapport à $\alpha$, nous pourrons considérer qu'il existe un signal périodique significatif à la fréquence $\omega_i$ correspondante dans notre série. Autrement dit, pour cette fréquence-là, il est très peu probable (probabilité du test \< $\alpha$) qu'une telle amplitude de signal apparaisse par pur hasard dans la série.
 
-```{block2, type='note'}
+```{block, type='note'}
 L’estimation fournie par le périodogramme brut donne un diagramme très irrégulier. Pour y remédier, on divise l’intervalle des fréquences en bandes centrées autour de *j* fréquences équidistantes. Ensuite, on lisse le signal à l'aide d'une moyenne mobile pondérée associée à chaque bande de fréquence (nous verrons au module suivant ce qu'est une moyenne mobile, retenez simplement que c'est une technique efficace pour lisser une courbe). Le périodogramme lissé est ainsi beaucoup plus facile à interpréter, mais au prix d'une perte de résolution au niveau des fréquences, exprimée par une **largeur de bande** plus grande dans le périodogramme lissé.
 ```
 
@@ -615,7 +615,7 @@ R offre aussi la possibilité de représenter le **périodogramme cumulé** qui 
 cpgram(tser)
 ```
 
-```{block2, type='warning'}
+```{block, type='warning'}
 L'analyse spectrale ne peut se faire que sur une série qui ne présente *pas* de tendance à long terme. On parle alors de **série stationnarisée**. Si ce n'est pas le cas, nous devons éliminer cette tendance générale *avant* de faire l'analyse spectrale. Les techniques pour éliminer cette tendance générale seront vues au prochain module.
 
 Parmi nos séries d'exemples, `co2` présente une tendance générale croissante très marquée. Cette série ne peut donc pas être analysées à l'aide de `spectrum()` ou `cpgram()` telle quelle. Nous devons d'abord la stationnariser, donc éliminer sa tendance générale.
@@ -627,7 +627,7 @@ Parmi nos séries d'exemples, `co2` présente une tendance générale croissante
 
 #### Analyse spectrale croisée
 
-```{block2, type='info'}
+```{block, type='info'}
 Cette partie sur l'analyse spectrale croisée est présentée sans démonstration et comme matériel complémentaire facultatif. Veuillez vous référez à l'aide en ligne en entrant l'instruction `?stats::spectrum` à la console R et au [manuel de {pastecs}](https://github.com/phgrosjean/pastecs/blob/master/manual/pastecs_manuel_utilisateur.pdf) pour plus de détails.
 ```
 
@@ -687,7 +687,7 @@ Il est possible de tester de manière non paramétrique l'existence d'une tendan
 
 Les valeurs du coefficient de Spearman sont comprises entre -1 et +1. Si la série est purement aléatoire, la valeur de $\rho$ tend vers zéro et sa variance est égale à 1/(*n*-1). Un test d'hypothèse existe pour déterminer si un coefficient de corrélation est significativement différent de zéro ou non. Nous pouvons réutiliser ce test, mais dans le cas présent, les hypothèses testées sont : $H_0:$ pas de tendance générale et $H_1:$ tendance générale présente.
 
-```{block2, type='warning'}
+```{block, type='warning'}
 On constate que lorsque le nombre d’ex æquos (correspondant par exemple à des valeurs nulles pour un phénomène rare dans le temps) est supérieur à 80%, la valeur de ce coefficient est totalement biaisée, et donc, le test d'hypothèse associé n'est pas utilisable.
 ```
 

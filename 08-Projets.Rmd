@@ -49,7 +49,7 @@ Mais en respectant quelques règles, nous pouvons y arriver. Du point de vue du 
 
 Cela peut sembler évident, mais une erreur fréquente du débutant est de se perdre dans les données, les analyses ou la bibliographie ... pour au final discuter de tout autre chose et **ne pas** répondre à la question de départ. C'est pour cela que la section **but** est très importante : elle exprime de manière concise et claire cette fameuse question qui est, et doit rester centrale pour que le projet soit cohérent.
 
-```{block2, type = 'warning'}
+```{block, type = 'warning'}
 Rédigez méticuleusement la section "but" de votre travail et gardez cela à l'esprit à chaque instant pour éviter de vous perdres dans les méandres des possibilités que l'étude d'un sujet biologique permet. C'est la meilleure façon de rester centré sur ses objectifs... et au final d'y répondre. La cohérence du projet est cruciale.
 ```
 
@@ -63,7 +63,7 @@ Pour les gros projets, une structure bien pensée dès le départ est *indispens
 
 Si vous avez suivi l'ensemble des cours de sciences de données, vous êtes déjà familier avec la plupart de ces éléments. Dans les cours précédents, nous n'avons pas insisté sur les protocoles, car nous partions la plupart du temps sur des données préexistantes. De même, les projets étant plus restreints, nous n'avons pas encore abordé un outil comme [Quarto](https://quarto.org/docs/tools/rstudio.html) ou [Bookdown](https://bookdown.org/yihui/bookdown/) pour rédiger de gros manuscrits, mais nous avons abondamment utilisé diverses formes de documents R Markdown, ainsi que les notebooks. En fait, les cours précédents ont été structurés pour vous amener progressivement à utiliser correctement les projets et pour vous préparer à utiliser des projets reproductibles sous RStudio.
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 Ce module ne s'attarde pas sur le contenu en dehors de sa cohérence. La pertinence de la question de recherche n'est pas abordée ici, par exemple. Néanmoins, nous vous proposons quand même quelques astuces pour gérer au mieux le contenu, et en particulier votre bibliographie en fin de module.
 ```
 
@@ -83,7 +83,7 @@ Il est de plus intéressant de pouvoir rendre les données de sa recherche acces
 
 Comme vous le voyez, toutes les grandes règles ont déjà été abordées dans le cadre des cours de sciences de données. La documentation précise et riche des données est une étape longue et fastidieuse. En pratique, elle est très souvent bâclée... et c'est dommage, car c'est leur **réutilisabilité** qui est impactée au final.
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 En résumé, des données sans documentation sont des données inutilisables.  Elles seront perdues avec le temps. Votre objectif sera de permettre à une personne externe de comprendre vos données, et si possible, de pouvoir les réutiliser dans son propre contexte (en respect des droits de la licence que vous leurs associerez, bien entendu).
 
 Ne perdez jamais de vue l'importance des données. Cette importance est à placer au même niveau qu'une bonne publication scientifique. Malheureusement, l'évaluation du curriculum d'un scientifique ne mets pas encore assez l'accent sur les données, et c'est dommage, car cela n'insite pas à les rendre réutilisables. Mais la mouvance de science ouverte, et dans son sillage, de données ouvertes (Open Data) est en train de recentrer l'intérêt sur les jeux de données de qualité. A noter d'ailleurs que la même remarque peut être faite pour les logiciels et codes informatiques qui mériteraient aussi d'être mieux valorisés dans une carrière scientifique.
@@ -120,7 +120,7 @@ Si les données sont très volumineuses, pensez bien à les exclure (aussi bien 
 
 Si vous devez travailler sur des sous-ensembles de vos données, ou si vos données sont trop volumineuses pour se charger intégralement en mémoire vive, vous les convertirez plutôt en une base de données ou un autre format qui vous permet de récupérer des sous-tableaux sans devoir passer par l'ouverture du jeu de données complet. Le plus simple (mais pas le plus performant) consiste à utiliser le moteur de base de données SQLite et d'accéder à vos données via des requêtes SQL, ou via le package [{dbplyr}](https://dbplyr.tidyverse.org). SQLite ne nécessite pas d'installer un serveur de base de données, car son code est contenu directement dans le package {RSQLite} qui permet d'y accéder depuis R.
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 Lors du choix du format de stockage de vos données retravaillées, vous devez sélectionner le format qui convient le mieux à vos données (taille du fichier de stockage, vitesse d'importation, interopérabilité et requêtes sous-tableaux possibles ou non). Préférez les formats les plus universels aux formats spécifiques. Gardez toujours à l'esprit que des logiciels de niche avec des formats propriétaires peuvent être problématiques dans quelques années s'ils ne fonctionnement plus sur des systèmes informatiques plus récents. Par contre, R, Python, ou Java, par exemple, sont des langages qui ont toutes les chances de perdurer et sont donc sains comme choix.
 
 Pour les données brutes, la question d'interopérabilité est encore plus cruciale si vous voulez ouvrir vos données au maximum. Actuellement, le CSV est le format le plus universel, et donc, le plus sûr pour assurer une réutilisabilité maximale de vos données brutes.
@@ -130,7 +130,7 @@ Pour les données brutes, la question d'interopérabilité est encore plus cruci
 
 Après avoir collecté et remanié vos données, l'étape suivante consiste à explorer et décrire vos données. Ensuite, vous envisagerez diverses pistes d'analyses probablement, et vous serez amené à adopter un processus itératif où vous explorez une idée, celle-ci vous livre de nouvelles informations, ce qui vous conduit à une nouvelle idée, que vous étudiez, et ainsi de suite.
 
-```{block2, type = 'warning'}
+```{block, type = 'warning'}
 Ne négligez jamais le temps nécessaire pour explorer et analyser vos données. Cela peut très facilement vous occuper la moitié du temps de l'ensemble de votre travail ! Une erreur fréquente est de passer tout son temps à la paillasse ou sur le terrain, en espérant que la quantité de données acquise sera ensuite digérée et analysée en quelques jours seulement.
 ```
 
@@ -140,7 +140,7 @@ Votre objectif sera donc de permettre à une personne externe de comprendre vos 
 
 Nommez vos différents fichiers de manière concise, mais explicite quant au contenu. Cela facilite grandement la clarté de l'ensemble. Enfin, si une succession logique existe entre ces différents fichiers (étapes successives de l'analyse), pensez à les nommer de manière à ce qu'ils apparaissent correctement rangés lorsque les fichiers sont présentés par ordre alphabétique. Le plus simple étant d'utiliser un préfixe numérique correspondant à l'étape de l'analyse, par exemple, `01_description.Rmd`, `02_first_exploration.Rmd`, `03_model1.Rmd`, `04_model2.Rmd`. Si l'analyse est vraiment très complexe, n'hésitez pas à structurer à l'aide de sous-dossiers dans `results`.
 
-```{block2, type = 'warning'}
+```{block, type = 'warning'}
 Tout bon chercheur doit analyser ses données de la ou des manipulations précédentes *avant* de lancer une nouvelle expérience. Sans cela, comment pourra-t-il tirer les enseignements de ses résultats passés pour améliorer ses futurs travaux ? Dans votre palnning, assurez-vous de laisser suffisamment de temps entre deux expériences successives pour permettre l'analyse des données et, éventuellement, l'ajustement du protocole de la seconde manipulation en fonction des enseignements tirés des travaux précédents.
 ```
 
@@ -162,7 +162,7 @@ Ce qui unifie l'ensemble des formats de sortie ci-dessus est qu'ils sont tous r�
 
 La maîtrise de R Markdown dans des projets RStudio sous gestionnaire de version git est une compétence capitale en science des données. Elle vous permettra de vous hisser facilement au-dessus de vos collègues biologistes qui ne maîtrisent souvent pas cet outil.
 
-```{block2, type = 'info'}
+```{block, type = 'info'}
 Au cours de la carrière d'un des auteurs, un travail de consultant a consisté à explorer de manière méthodique une grosse base de données. Pour chaque catégorie, les commanditaires voulaient un rapport détaillant différentes caractéristiques de cette catégorie. Chaque rapport individuel s'étalait facilement sur plusieurs dizaines de pages et devait présenter de nombreux graphiques. Ce travail aurait été extrêmement chronophage s'il devait être réalisé à la main dans Excel et Word. Mais avec R Markdown et quelques scripts R, le tout a pu être automatisé, et plus de 700 pages de rapports exhaustifs (répondant à la demande) ont pu être générés en quelques jours de travail seulement. C'est évidemment un cas extrême, mais les possibilités d'automatisation et de reproductibilité qu'offrent Quarto et R Markdown font vraiement la différence au quotidien.
 ```
 
@@ -238,7 +238,7 @@ Il existe plusieurs outils pour gérer sa bibliographie comme [Mendeley](https:/
 
 Toutes les informations nécessaires sont ainsi ajoutées dans la base de données bibliographique de Mendeley. Il est également possible d'ajouter le fichier PDF d'un article scientifique. Dans ce cas, l'application va analyser le fichier pour extraire les informations pertinentes pour le citer ensuite. Il faut cependant vérifier les informations que l'on peut modifier facilement (la partie à droite dans la copie d'écran présentée ci-dessus).
 
-```{block2, type = 'note'}
+```{block, type = 'note'}
 Mendeley propose une fonction de veille automatique. Sur base des articles que vous avez déjà ajouté à votre gestionnaire de bibliographie, Mendeley propose des nouveaux articles en lien avec ceux-ci.
 ```
 
@@ -256,7 +256,7 @@ Maintenant que vous maîtrisez les principaux types de variables rencontrées en
 
 -   Décidez si vous voulez que votre dépôt soit **public** ou **privé**. Si vos recherches sont confidentielles, choisissez **privé** (si vous ne pouvez répondre à cette question, choisissez aussi **privé** par défaut).
 
-```{block2, type = 'info'}
+```{block, type = 'info'}
 Rendre votre dépôt public permet de montrer ce que vous savez faire en matière d'analyse de données. Vous pouvez alors indiquer un lien vers ce dépôt dans votre curriculum vitae... un gros plus si naturellement, cela démontre des capacités intéressantes ! Par contre, gardez à l'esprit que vos données de mémoire **ne vous appartiennent pas**. Rendre votre dépôt **public** ne peut se faire qu'avec l'accord de votre promoteur, du chef de labo, du ou des resposables de projet et collaborateurs, et éventuellement aussi, des financeurs. Si, par exemple, un brevet est prévu sur ces données, alors elles **ne peuvent pas** être divulguées prématurément ! Discutez-en avec toutes les personnes concernées au préalable.
 ```
 
