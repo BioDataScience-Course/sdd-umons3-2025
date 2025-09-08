@@ -46,7 +46,7 @@ Vous devez aussi maîtriser les bases de Git et de GitHub (avoir un compte GitHu
 
 `r h5p(149, height = 270, toc = NULL)`
 
-L'ensemble de ces outils a été abordé dans les cours précédents [SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/), [SDD II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/) et SDD III (les six premiers modules du présent cours) que vous devez avoir réalisé avant d'entamer la matière du cours SDD IV : pratique.
+L'ensemble de ces outils a été abordé dans les cours précédents `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les six premiers modules du présent cours) que vous devez avoir réalisé avant d'entamer la matière du cours SDD IV : pratique.
 
 ## Dates
 
@@ -112,7 +112,7 @@ diff == diff1 # diff et diff1 sont identiques
 class(diff)
 ```
 
-### Conversion d'une chaîne de caractères en date
+### Conversion d'une chaîne de caractères en date {#conversiondate}
 
 En pratique vous serez souvent amené à convertir des chaînes de caractères en variable de temps. Pour ce faire, le package {lubridate} offre des fonctions très utiles pour convertir des chaînes de caractères en dates. Regardez par vous-même pour en déduire la logique simple ci-dessous :
 
@@ -254,7 +254,7 @@ Lorsque l'on étudie le temps perdu dans les bouchons à Bruxelles. Il sera trè
 
 Lorsque l'on étudie des séries temporelles en écologie, on ne s'intéresse pas aux années bissextiles, ou aux mois de 29 ou 31 jours.
 
-Dans R avec les objets **ts** et **mts** nous avions vu au [module 4](https://wp.sciviews.org/sdd-umons3/?iframe=wp.sciviews.org/sdd-umons3-2024/series1.html) et [module 5](https://wp.sciviews.org/sdd-umons3/?iframe=wp.sciviews.org/sdd-umons3-2024/series2.html) du cours de science des données 3. Avec ces objets, le temps est décompté de manière décimale dans une unité arbitraire que vous avez décidée. Le package {pastecs} reprend ce principe. Ainsi, si vous étudiez un phénomène saisonnier, vous allez naturellement choisir l'année comme unité. Par contre, décompter le temps en années de manière décimale n'est pas très conforme au calendrier grégorien, aux mois de durées différentes et aux années bissextiles. Par contre, la plupart des phénomènes biologiques (naturels) que vous étudiez se soucient assez peu du calendrier grégorien. Leurs rythmes sont calqués plutôt sur les saisons, les journées, les cycles lunaires ou de marées, etc. L'utilisation de valeurs numériques, quitte à tordre un peu les choses par rapport calendrier grégorien (donc à avoir des années ou des mois qui commencent et finissent jusqu'à un jour plus tôt ou plus tard) est alors pratique ici. Ainsi, considérer une année moyenne (considérant les années bissextiles) comme étant égale à 365,25 jours et un mois comme étant 365,25/12 est bien plus pratique ici. Le tableau ci-dessous représente le temps dans ce système.
+Dans R avec les objets **ts** et **mts** nous avions vu au `r course_link("module 4", 3,page = "series1")` et `r course_link("module 5", 3,page = "series2")` du cours de science des données 3. Avec ces objets, le temps est décompté de manière décimale dans une unité arbitraire que vous avez décidée. Le package {pastecs} reprend ce principe. Ainsi, si vous étudiez un phénomène saisonnier, vous allez naturellement choisir l'année comme unité. Par contre, décompter le temps en années de manière décimale n'est pas très conforme au calendrier grégorien, aux mois de durées différentes et aux années bissextiles. Par contre, la plupart des phénomènes biologiques (naturels) que vous étudiez se soucient assez peu du calendrier grégorien. Leurs rythmes sont calqués plutôt sur les saisons, les journées, les cycles lunaires ou de marées, etc. L'utilisation de valeurs numériques, quitte à tordre un peu les choses par rapport calendrier grégorien (donc à avoir des années ou des mois qui commencent et finissent jusqu'à un jour plus tôt ou plus tard) est alors pratique ici. Ainsi, considérer une année moyenne (considérant les années bissextiles) comme étant égale à 365,25 jours et un mois comme étant 365,25/12 est bien plus pratique ici. Le tableau ci-dessous représente le temps dans ce système.
 
 | Temps     | Période | Longueur (j)      |
 |-----------|---------|-------------------|
@@ -281,16 +281,16 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-043'         = !"D07Ia_{YY}M_data"),
     course.urls = c(
-      'S-BIOG-043'         = "https://classroom.github.com/a/..."),
+      'S-BIOG-043'         = !"{assign_url$D07Ia_data}"),
     course.starts = c(
-      'S-BIOG-043'         = !"{W[4]+1} 08:00:00"),
+      'S-BIOG-043'         = !"{class1_start(mod, 'D07')}"),
     course.ends = c(
-      'S-BIOG-043'         = !"{W[6]+5} 23:59:59"),
+      'S-BIOG-043'         = !"{n3_end(mod, 'D07')}"),
     term = "Q1", level = 3,
     toc = "Données, partie I : dates")
 ```
 
-## Données textuelles
+## Données textuelles {#donneestextuelles}
 
 ### Encodage
 
@@ -408,7 +408,7 @@ En effet le `.` a une signification particulière dans les expressions réguliè
 
 -   [Handling Strings With R](https://www.gastonsanchez.com/r4strings/) : tout ce que vous auriez voulu savoir sur les chaînes de caractères en R (sans oser le demander), en anglais.
 
-### Expression régulière
+### Expression régulière {#expressionreguliere}
 
 Les expressions régulières servent à manipuler du texte. Elles permettent de rechercher et/ou remplacer des parties de texte dans les chaînes de caractères. Il s'agit pratiquement d'un petit langage en tant que tel pour spécifier ces recherches et remplacements. La syntaxe de base des expressions régulières est très riche, mais en voici quelques cas fréquents pour vous faire une première idée. Pour trouver une chaîne de caractères...
 
@@ -708,11 +708,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-043'         = !"D07Ia_{YY}M_data"),
     course.urls = c(
-      'S-BIOG-043'         = "https://classroom.github.com/a/..."),
+      'S-BIOG-043'         = !"{assign_url$D07Ia_data}"),
     course.starts = c(
-      'S-BIOG-043'         = !"{W[5]+1} 08:00:00"),
+      'S-BIOG-043'         = !"{class1_start(mod, 'D07')}"),
     course.ends = c(
-      'S-BIOG-043'         = !"{W[6]+5} 23:59:59"),
+      'S-BIOG-043'         = !"{n3_end(mod, 'D07')}"),
     term = "Q1", level = 3,
     toc = "Données, partie II : variables circulaires")
 ```
@@ -721,7 +721,7 @@ if (exists("assignment"))
 
 -   [Circular Data in Biology](https://rfitak.github.io/Circular_Biology/Circular_data_exercise.html) introduction aux variables circulaires avec R en anglais.
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifd07}
 
 Ce module vous a permis de prendre connaissance des principes de bases des données temporelles, des données textuelles et des variables circulaires. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 

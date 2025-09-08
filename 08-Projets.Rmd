@@ -16,7 +16,9 @@ Ce second module du cours SDD IV : recherche reproductible vous prépare à l'a
 
 ##### Prérequis {.unnumbered}
 
-Dans ce module, nous traiterons de RStudio et des projets RStudio, de R Markdown, de git et GitHub, ainsi que de divers outils de R pour importer, remanier, décrire et analyser des données biologiques. Toutes ces notions doivent être parfaitement connues avant d'aborder le présent module qui va vous emmener un niveau plus loin vers un gros projet constitué de plusieurs étapes successives dans l'analyse. Toutes ces notions ont été utilisées en routine dans les trois cours précédents, [SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/), [SDD II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/) et SDD III (les six premiers modules du présent cours). Ainsi, si vous avez bien suivi ces trois cours-là, vous êtes en principe parfaitement préparé pour aborder cette matière.
+Dans ce module, nous traiterons de RStudio et des projets RStudio, de R Markdown, de git et GitHub, ainsi que de divers outils de R pour importer, remanier, décrire et analyser des données biologiques. Toutes ces notions doivent être parfaitement connues avant d'aborder le présent module qui va vous emmener un niveau plus loin vers un gros projet constitué de plusieurs étapes successives dans l'analyse. Toutes ces notions ont été utilisées en routine dans les trois cours précédents, `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les six premiers modules du présent cours). Ainsi, si vous avez bien suivi ces trois cours-là, vous êtes en principe parfaitement préparé pour aborder cette matière.
+
+
 
 ## Structurer un projet
 
@@ -26,7 +28,7 @@ Un **projet scientifique** est essentiellement centré autour d'une question qu'
 
 Si ces deux projets (RStudio *versus* scientifique) n'ont rien à voir l'un avec l'autre en apparence, ils sont étroitement liés en science des données, du moins si vous avez choisi RStudio, R, git et GitHub pour travailler (il existe bien sûr d'autres outils similaires, comme [Jupyter](https://jupyter.org), [Python](https://www.python.org), [Julia](https://julialang.org), [Matlab](https://fr.mathworks.com/products/matlab.html), [GitLab](https://about.gitlab.com), [Bitbucket](https://bitbucket.org) ...). En effet, un *projet RStudio* sera le contenant informatique idéal pour votre *projet scientifique* quel qu'en soit la taille et la complexité. Par la suite, lorsque nous parlerons de **projet**, il s'agira donc d'un projet RStudio qui lui-même contient le matériel relatif à votre projet scientifique, le tout ne formant donc plus qu'une seule entité.
 
-### Qualités d'un bon projet
+### Qualités d'un bon projet {#qualiteprojet}
 
 Pour que votre projet soit **compréhensible**, **maintenable**, **reproductible** et **cohérent**, vous allez devoir le structurer et le construire en respectant certaines règles. Nous en avons déjà abordé plusieurs dans les modules et cours précédents :
 
@@ -53,7 +55,7 @@ Cela peut sembler évident, mais une erreur fréquente du débutant est de se pe
 Rédigez méticuleusement la section "but" de votre travail et gardez cela à l'esprit à chaque instant pour éviter de vous perdres dans les méandres des possibilités que l'étude d'un sujet biologique permet. C'est la meilleure façon de rester centré sur ses objectifs... et au final d'y répondre. La cohérence du projet est cruciale.
 ```
 
-### Structure conseillée
+### Structure conseillée {#structureconseillee}
 
 Pour les gros projets, une structure bien pensée dès le départ est *indispensable*. Nous vous en proposons une ici, sachant que des variations sur ce thème (sous-dossiers différents) seront possibles plus tard en fonction de vos goûts personnels. Mais pour l'instant, imprégnez-vous de cette structure et attachez-vous à comprendre en quoi elle permet d'atteindre les trois qualités de clarté, maintenabilité et reproductibilité du projet. Notre projet sera composé des éléments suivants :
 
@@ -69,17 +71,19 @@ Ce module ne s'attarde pas sur le contenu en dehors de sa cohérence. La pertine
 
 La suite reprend et détaille les trois éléments principaux de votre projet : ses données, ses carnets de notes et ses documents de synthèse. Enfin, ce module se clôturera sur quelques astuces et vous aurez un projet GitHub Classroom qui vous permettra de mettre en pratique toute cette théorie.
 
-## Données
+## Données {donnees}
 
 Nous avons à plusieurs reprises déjà abordé les points importants à prendre en compte pour représenter ses données sous un format informatique exploitable ensuite. Avant d'aller plus loin, relisez attentivement les sections suivantes :
 
--   [Acquisition de données](https://wp.sciviews.org/sdd-umons-2024/acquisition-de-donn%C3%A9es.html)
+-   `r course_link("Acquisition de données", 1,page = "acquisition")`
 
--   [Encodage des données dans un tableau cas par variables](https://wp.sciviews.org/sdd-umons-2024/tableaux-de-donn%C3%A9es.html#tableaux-cas-par-variables)
+-   `r course_link("Encodage des données dans un tableau cas par variables", 1, page = "tableaudonnees", anchor = "tableaux-cas-par-variables" )`
 
--   [Ajout de métadonnées](https://wp.sciviews.org/sdd-umons-2024/tableaux-de-donn%C3%A9es.html#m%C3%A9tadonn%C3%A9es) avec utilisation d'un [dictionnaire des données](https://wp.sciviews.org/sdd-umons-2024/tableaux-de-donn%C3%A9es.html#dictionnaire-des-donn%C3%A9es)
+-   `r course_link("Ajout de métadonnées", 1, page = "tableaudonnees",anchor = "m%C3%A9tadonn%C3%A9es" )` avec utilisation d'un `r course_link("dictionnaire des données", 1, page = "tableaudonnees",anchor = "dictionnaire-des-donn%C3%A9es" )`
 
-Il est de plus intéressant de pouvoir rendre les données de sa recherche accessibles en respectant les normes et les règles de l'[Open Data](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/donn%25C3%25A9es-ouvertes.html).
+Il est de plus intéressant de pouvoir rendre les données de sa recherche accessibles en respectant les normes et les règles de l'`r course_link("Open Data", 2, page = "donneesouvertes")`.
+
+
 
 Comme vous le voyez, toutes les grandes règles ont déjà été abordées dans le cadre des cours de sciences de données. La documentation précise et riche des données est une étape longue et fastidieuse. En pratique, elle est très souvent bâclée... et c'est dommage, car c'est leur **réutilisabilité** qui est impactée au final.
 
@@ -89,7 +93,7 @@ En résumé, des données sans documentation sont des données inutilisables.  E
 Ne perdez jamais de vue l'importance des données. Cette importance est à placer au même niveau qu'une bonne publication scientifique. Malheureusement, l'évaluation du curriculum d'un scientifique ne mets pas encore assez l'accent sur les données, et c'est dommage, car cela n'insite pas à les rendre réutilisables. Mais la mouvance de science ouverte, et dans son sillage, de données ouvertes (Open Data) est en train de recentrer l'intérêt sur les jeux de données de qualité. A noter d'ailleurs que la même remarque peut être faite pour les logiciels et codes informatiques qui mériteraient aussi d'être mieux valorisés dans une carrière scientifique.
 ```
 
-### Données brutes et retravaillées
+### Données brutes et retravaillées {#donneesbrutesretravaillees}
 
 Lors d'une expérience ou d'une observation sur le terrain, les données collectées sont les **données brutes**. Nous conseillons de les placer dans le sous-dossier `data/raw`. Ces données vont devoir être retravaillées afin d'être exploitables dans les carnets de notes et les documents de synthèse par la suite. Voici une liste d'étapes à réaliser pour passer des données brutes aux données remaniées :
 
@@ -110,7 +114,7 @@ Ce travail doit être réalisé de manière reproductible et doit être correcte
 
 2.  Utiliser un notebook. Cette option est surtout intéressante si le remaniement des données n'est pas évident et nécessite de longues explications textuelles ou la présentation de graphiques qui montrent pourquoi les données sont remaniées de cette façon. Dans ce cas, la partie Markdown du document, et sa compilation en page HTML, fourniront une présentation plus adéquate. Vous partirez systématiquement des données retravaillées pour tous vos carnets de notes et documents de synthèse à partir du sous-dossier `data`.
 
-### Format des données
+### Format des données {#formatdonnees}
 
 Quel que soit le type de document utilisé, écrivez la version remaniée de vos données dans le sous-dossier `data` dans le format le plus pratique et compact possible. Si les analyses sont réalisées dans R uniquement, le format de données natif `.rds` est idéal, car il préserve tous les attributs des objets R et il permet aussi de stocker des objets spécifiques, comme des tables de contingence ou des séries spatio-temporelles par exemple. De plus, vous pouvez compresser les données afin qu'elles occupent le moins de place possible dans le fichier.
 
@@ -144,7 +148,7 @@ Nommez vos différents fichiers de manière concise, mais explicite quant au con
 Tout bon chercheur doit analyser ses données de la ou des manipulations précédentes *avant* de lancer une nouvelle expérience. Sans cela, comment pourra-t-il tirer les enseignements de ses résultats passés pour améliorer ses futurs travaux ? Dans votre palnning, assurez-vous de laisser suffisamment de temps entre deux expériences successives pour permettre l'analyse des données et, éventuellement, l'ajustement du protocole de la seconde manipulation en fonction des enseignements tirés des travaux précédents.
 ```
 
-## Documents de synthèse
+## Documents de synthèse {#docsynthese}
 
 Cette dernière étape s'attaque à la rédaction de documents finalisés qui servent à disséminer les résultats obtenus. C'est, en théorie, l'étape la plus courte des trois. Vous avez d'une part des données et des métadonnées correctement présentées (travail déjà réalisé à l'étape une). D'autre part, vous avez des carnets de notes où toutes vos analyses sont consignées (étape deux). Vous devez à présent extraire les éléments les plus pertinents en tenant compte du format de sortie du document de synthèse qui est le plus souvent imposé.
 
@@ -177,11 +181,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-043'         = !"D08Ia_{YY}M_project"),
     course.urls = c(
-      'S-BIOG-043'         = "https://classroom.github.com/a/..."),
+      'S-BIOG-043'         = !"{assign_url$D08Ga_project}"),
     course.starts = c(
-      'S-BIOG-043'         = !"{W[6]+1} 08:00:00"),
+      'S-BIOG-043'         = !"{class1_start(mod, 'D08')}"),
     course.ends = c(
-      'S-BIOG-043'         = !"{W[8]+5} 23:59:59"),
+      'S-BIOG-043'         = !"{n4_end(mod, 'D10')}"),
     term = "Q1", level = 3,
     toc = "Organisation d'un projet dans RStudio")
 ```
@@ -190,7 +194,7 @@ if (exists("assignment"))
 
 Cette section propose quelques astuces pour améliorer encore vos projets.
 
-### Exclusion de fichiers du dépôt git
+### Exclusion de fichiers du dépôt git {#exclusiongit}
 
 Vous l'avez certainement remarqué : vos projets liés au gestionnaire de version git ont dans le dossier principal un fichier qui se nomme `.gitignore`. Jusqu'à présent vous n'avez jamais eu à la modifier. Ce fichier permet d'exclure certains fichiers ou dossiers du gestionnaire de version. Il est bien utile pour éviter d'enregistrer les versions de fichiers temporaires et de ceux qui sont générés, mais qu'il n'est pas utile de conserver dans le dépôt directement, comme les compilations HTML ou PDF de vos documents R Markdown dans la plupart des cas.
 
@@ -264,7 +268,7 @@ Une fois le formulaire rempli, vous pouvez cliquer sur **Create repository from 
 
 Enfin, prenez connaissance des différentes instructions, et explorez les dossiers et fichiers qui s'y trouvent. *Bon travail !*
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifd08}
 
 Ce module vous a permis de revoir un ensemble de notions sur la gestion d'un projet scientifiques dans le cadre de travaux de plus grande envergure. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 

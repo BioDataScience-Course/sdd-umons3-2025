@@ -19,7 +19,7 @@ description: "Cours interactif pour la science des données avec R & SciViews-R 
 cover-image: "images/front-cover.png"
 ---
 
-# Préambule {.unnumbered}
+# Préambule {#preambule .unnumbered}
 
 ```{r setup, include=FALSE, cache=FALSE}
 knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
@@ -47,7 +47,7 @@ sessioninfo::session_info()
 
 </details>
 
-## Vue générale des cours {.unnumbered}
+## Vue générale des cours {#vuegenerale .unnumbered}
 
 Cet ouvrage interactif est le troisième volume d'une série de trois ouvrages traitant de la science des données biologiques. L'écriture de cette suite de livres a débuté au cours de l'année académique 2018-2019. Pour l'année académique `r !'{acad_year}'`, cet ouvrage interactif est le support des cours suivants :
 
@@ -69,7 +69,7 @@ Ensuite, deux modules sont consacrés à des données particulières avec des d�
 
 Ce cours à option vient terminer la formation en science de données biologiques en approfondissant la gestion du code et des projets et en s'intéressant à un "écosystème logiciel" plus large avec les bases de données et le calcul sur le cloud. Le premier module est consacré à une initiation à l'analyse de données spatialisées et à la réalisation de cartes avec R. Il s'agit d'un aspect important pour beaucoup de biologistes, en particulier ceux qui travaillent sur le terrain. Le second module permet de se familiariser avec des données particulières comme les dates, les données circulaires et le texte (y compris les expressions régulières). Le troisième module vise à s'organiser pour gérer au mieux un gros projet. Les deux modules suivants abordent successivement la modularisation du code, son optimisation et son test, la gestion de bases de données, et enfin, l'utilisation de packages R, de calcul en parallèle et sur le cloud. Un projet mettant en œuvre ces techniques plus avancées est également réalisé par les étudiants qui ont choisi de suivre ce cours.
 
-## Matériel pédagogique {.unnumbered}
+## Matériel pédagogique {#pedagogie .unnumbered}
 
 Le matériel pédagogique, rassemblé dans ce syllabus interactif, est aussi varié que possible. Vous pourrez ainsi piocher dans l'offre en fonction de vos envies et de votre profil d'apprenant pour optimiser votre travail. Vous trouverez :
 
@@ -109,7 +109,7 @@ Pour annoter ou surligner, vous sélectionnez du texte et vous cliquez sur l'un 
 :::
 ```
 
-## Approche pédagogique {.unnumbered}
+## Approche pédagogique {#approchepedagogique .unnumbered}
 
 Ce livre en ligne ainsi que tout le matériel pédagogique cité plus haut a été développé pour être employé en pédagogie active en classe inversée. On peut résumer cette approche en deux phases. Vous apprenez d'abord à la maison, nous appliquons *ensuite* en présentiel.
 
@@ -172,9 +172,9 @@ if (exists("assignment2"))
     course.urls = c(
       'S-BIOG-025'         = !"{assign_url$C00Qa_issues}"),
     course.starts = c(
-      'S-BIOG-006' = !"{course_start} 08:00:00"),
+      'S-BIOG-025' = !"{course_start} 08:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{course_end} 23:59:59"),
+      'S-BIOG-025' = !"{course_end} 23:59:59"),
     term = "", level = 0,
     toc = "Poser ses questions dans une issue.", n = 100,
     texts = learnitdown::assignment2_fr(

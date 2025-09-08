@@ -48,23 +48,42 @@ learnitdown$course_end   <- !"{W[15]+2}"
 # Modules dates
 learnitdown$mod <- as.data.frame(tibble::tribble(
   ~id,       ~term,       ~start,       ~class1,         ~end,       ~class2,         ~N3,            ~N4,   ~challenge,        ~test,
-  # Q1
+  # SDD III
   "install",  "Q1",  !"{W[4]+1}", "08:15-10:15",          "-",          "-",          "-",            "-",          "-",          "-",
   "C01",      "Q1",  !"{W[5]+1}", "08:15-10:15",  !"{W[5]+4}", "08:15-12:30", !"{W[6]+1}",    !"{W[5]+4}",          "-",  !"{W[5]+4}",
   "C02",      "Q1",  !"{W[7]+1}", "08:15-10:15",  !"{W[7]+5}", "08:15-12:30", !"{W[8]+1}",  "continue...",          "-",  !"{W[7]+5}",
-  "C03",      "Q1", !"{W[9]+1}",  "08:15-10:15",  !"{W[9]+3}", "13:30-17:45", !"{W[10]+1}",  !"{W[12]+2}",  !"{W[9]+3}",          "-",
+  "C03",      "Q1",  !"{W[9]+1}",  "08:15-10:15", !"{W[9]+3}", "13:30-17:45", !"{W[10]+1}",  !"{W[12]+2}",  !"{W[9]+3}",          "-",
   "C04",      "Q1", !"{W[11]+1}", "08:15-10:15", !"{W[11]+5}", "08:15-12:30", !"{W[12]+1}",  !"{W[11]+5}",          "-", !"{W[11]+5}",
   "C05",      "Q1", !"{W[13]+1}", "08:15-10:15", !"{W[13]+5}", "08:15-12:30", !"{W[14]+1}",  !"{W[15]+2}",          "-", !"{W[13]+5}",
-  "remed",    "Q1", !"{W[15]+1}", "08:15-10:15",          "-",          "-",           "-",           "-",          "-",          "-"
+  "remed",    "Q1", !"{W[15]+1}", "08:15-10:15",          "-",          "-",           "-",           "-",          "-",          "-",
+  # SDD IV
+  "D06",      "Q1",  !"{W[4]+2}", "10:30-12:30",   !"{W[4]+4}", "08:15-12:30", !"{W[5]+1}",            "-",          "-",          "-",
+  "D07",      "Q1",  !"{W[6]+1}", "10:30-12:30",   !"{W[6]+4}", "08:15-12:30", !"{W[7]+1}",            "-",          "-",          "-",
+  "D08",      "Q1", !"{W[10]+3}", "10:30-12:30",  !"{W[10]+4}", "08:15-12:30",         "-",   !"{W[10]+3}",          "-",          "-",
+  "D09",      "Q1", !"{W[12]+1}", "10:30-12:30",  !"{W[12]+4}", "08:15-12:30",         "-",  "continue...",          "-",          "-",
+  "D10",      "Q1", !"{W[14]+1}", "10:30-12:30",  !"{W[14]+4}", "08:15-12:30",         "-",  !"{W[15]+4}",           "-",          "-"
 ))
 rownames(learnitdown$mod) <- learnitdown$mod$id
+
+
 
 # Assignment URLS
 learnitdown$assign_url <- list(
   # SDD3
   C00Qa_issues         = "https://classroom.github.com/a/szP1qZ9s",
+  C01Ia_debug          = "https://classroom.github.com/a/...",
+  C01Ga_metrics        = "https://classroom.github.com/a/...",
+  C02Ia_zoo            = "https://classroom.github.com/a/...",
+  C03Ia_cardiovascular = "https://classroom.github.com/a/...",
+  C03Ca_ml_wine        = "https://classroom.github.com/a/...",
+  C04Ia_ts             = "https://classroom.github.com/a/...",
+  C04Ga_tseries        = "https://classroom.github.com/a/...",
+  C05Ia_tsd            = "https://classroom.github.com/a/...",
   # SDD4
-  D00Qa_issues         = "https://classroom.github.com/a/2-eyJMao"
+  D00Qa_issues         = "https://classroom.github.com/a/...",
+  D06Ia_map            = "https://classroom.github.com/a/...",
+  D07Ia_data           = "https://classroom.github.com/a/...",
+  D08Ga_project        = "https://classroom.github.com/a/..."
 )
 
 

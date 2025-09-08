@@ -18,7 +18,7 @@ SciViews::R("ts", lang = "fr")
 
 Ce module nécessite que vous maîtrisiez parfaitement toutes les notions et techniques abordées dans le précédent module (chapitre 4) concernant la manipulation et la description de séries chronologiques.
 
-## Décomposition de séries
+## Décomposition de séries {#decompseries}
 
 Toutes les techniques présentées dans cette partie ont pour but de décomposer des séries spatio-temporelles régulières (donc, à pas de temps constant et sans trous) en deux ou plusieurs composantes. On extrait soit une composante issue d'un filtrage ou d'un lissage, ou alors correspondant à un modèle (variation cyclique, tendance linéaire, polynomiale, exponentielle...). Quel que soit le nombre de composantes obtenues, la dernière constitue toujours les résidus (*residuals* en anglais), c'est-à-dire, la fraction de la série initiale (*series*) qui ne se retrouve dans aucune des autres composantes (*components*) extraites.
 
@@ -50,7 +50,7 @@ plot(time, trend2 * cycle2, type = "l", xlab = "Temps", ylab = "Série multiplic
 
 `r h5p(35, height = 270, toc = "Stationnarisation d'une série")`
 
-### Fonction générale de décomposition
+### Fonction générale de décomposition {#fctgeneraledecomp}
 
 Dans {pastecs}, toutes les techniques de décomposition de séries fonctionnent selon le même canevas et renvoient toutes un objet **tsd** (*time series decomposition*). Cet objet contient à la fois les composantes de la ou des séries qui ont été décomposées, des informations sur la méthode utilisée, ainsi que des données supplémentaires qui servent au diagnostic du traitement réalisé.
 
@@ -174,7 +174,7 @@ Avec `tsd()` vous avez plusieurs méthodes de décomposition disponibles, même 
 - `"loess"` pour une décomposition plus complète en tendance générale, cycle saisonnier et résidus.
 ```
 
-## Filtrage d'une série
+## Filtrage d'une série {#filtrageserie}
 
 Le filtrage d'une série consiste à remplacer chaque valeur de cette série par une combinaison de ses diverses valeurs. Lorsque le filtre conduit à réduire la variance en éliminant notamment les très hautes fréquences, on parle aussi de **lissage** du signal (*smoothing* en anglais). Nous allons à présent aborder quelques techniques de filtrage et découvrir dans quelles situations elles sont utiles.
 
@@ -244,7 +244,7 @@ plot(lynx_mb)
 
 Mais ce faisant, nous avons *aussi* éliminé le cycle à 10 ans dans les résidus ! Rappelez-vous que la moyenne mobile filtre également des signaux de fréquences dont la bande de lissage est multiple, dont ici d'une période de 10 ans. Il nous reste alors une tendance générale qui diminue légèrement pour remonter ensuite. Donc, en travaillant avec les moyennes mobiles, nous devons cibler en premier les cycles de plus grande fréquence, c'est-à-dire, de plus petite période (période de 10 ans \< période de 40 ans = fréquence 1/10 \> fréquence de 1/40, toujours en vertu du raisonnement que la période est égale à 1/fréquence).
 
-### Médianes mobiles
+### Médianes mobiles {#medianemobile}
 
 Comme vous l'avez certainement deviné, les médianes mobiles fonctionnent comme les moyennes mobiles en baladant une fenêtre de largeur fixe le long de la série, mais cette fois-ci en calculant à chaque fois la médiane. Alors que la moyenne mobile s'exprime sous forme d'une somme de termes, ce qui l'associe à un modèle linéaire (on parle donc de filtrage linéaire), les médianes mobiles représentent par contre un *lissage non linéaire*. Il est possible de montrer que la répétition de cette opération conduit finalement à stabiliser le signal filtré. Cette courbe est caractérisée par une série de paliers successifs. Ainsi, la technique est utile pour *segmenter* une série, ce qui se rapproche des sommes cumulées pour détecter des transitions brusques dans la série (mais ici au lieu de les détecter, nous les mettons en évidence via le filtrage).
 
@@ -297,7 +297,7 @@ Les pics sont bien ici remplacés par des paliers.
 
 `r learnr("C05La_ts_filter", title = "Filtrage de séries chronologiques", toc = "Filtrage de séries chronologiques")`
 
-### Filtrage par différences
+### Filtrage par différences {#filtragedifference}
 
 La méthode des différences a pour but d'éliminer la tendance. Ce n'est valable que si la série a une tendance monotone et non en "dents de scie". Autrement dit, cela suppose que la série est autocorrélée positivement ou négativement.
 
@@ -378,14 +378,14 @@ plot(eeg_evf, col = 1:3)
 
 La série originale bruitée en noir est transformée en un signal beaucoup plus propre dans la courbe en rouge. Les résidus sont dans la série en vert.
 
-## Régressions et séries
+## Régressions et séries {#regressionseries}
 
 Les régressions linéaires et non linéaires, surtout s'il s'agit de modèles ajustés par les moindres carrés, ne sont *a priori* pas compatibles avec les séries spatio-temporelles puisqu'elles nécessitent une indépendance des observations, une distribution normale des résidus, etc. Mais en fait toutes ces conditions s'appliquent aux **tests d'hypothèses** autour de la régression. Si nous nous contentons d'utiliser la régression pour estimer la forme d'une composante, et ensuite que nous l'extrayons sans utiliser le tableau de l'ANOVA, les tests de Student sur les paramètres, etc., alors notre usage de cet outil sera approprié ici. **Hors de question, donc, d'effectuer tous ces tests pour déterminer si votre modèle est correct sur des séries spatio-temporelles**. Vous vous guidez essentiellement grâce à, et dans l'ordre :
 
 -   Vos connaissances *a priori* du phénomène étudié qui vous guide vers une formulation ou une autre de l'équation du modèle,
 -   L'ajustement visuel du modèle, donc via sa représentation graphique.
 
-### Estimation de la tendance par régression
+### Estimation de la tendance par régression {#estimationregression}
 
 Les méthodes de filtrage présentées ci-dessus permettent d'extraire ou d'éliminer une tendance de forme quelconque (on n'a pas d'idée *a priori* de sa forme ; on ne cherche pas à la modéliser). Les méthodes d'estimation par régression, au contraire, font appel à des hypothèses très fortes quant à sa nature : on cherche à ajuster une ou plusieurs équations fonctionnelles à la tendance de la série.
 
@@ -528,7 +528,7 @@ plot(nottem_sindec, stack = FALSE, resid = FALSE, col = 1:2,
 Notre modèle (co)sinusoïdal semble s'adapter relativement bien pour représenter les températures. Nous voyons immédiatement où se situent les années à étés plus chauds, et les hivers plus ou moins rigoureux. Nous pouvons naturellement extraire les composantes et les analyser plus avant (nous vous laissons cela comme exercice). Les résidus ici sont appelés anomalies de température par rapport au modèle choisi. Mais les météorologues préfèrent généralement utiliser dans ce cas les moyennes mensuelles des températures sur une longue période, par exemple sur 10 ans, ou même, sur un siècle.
 
 
-## Décomposition par LOESS
+## Décomposition par LOESS {#decomploess}
 
 LOESS (prononcez "LO-ESSE") est une méthode de régression polynomiale locale. Pour chaque valeur $X_t$ d'une série $X$, on va considérer les *k* voisins à gauche et à droite, éventuellement pondérés (par exemple par la distance les séparant de $X_t$). On effectue une régression par les moindres carrés d'un polynôme d'ordre *p* (habituellement *p* vaut 1 ou 2), et on récupère la valeur prédite au temps $t$ (voir Cleveland *et al*, 1992). Il s'agit donc de l'utilisation d'une régression polynomiale dans une fenêtre mobile. Si l'ordre *p* du polynôme vaut 0, le calcul se ramène à une moyenne mobile classique.
 
@@ -618,11 +618,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C05Ia_{YY}M_tsd"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/hWwQOHHP"),
+      'S-BIOG-025'         = !"{assign_url$C05Ia_tsd}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[13]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C05')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[14]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C05')}"),
     term = "Q1", level = 3,
     toc = "Décomposition d'une série spatio-temporelle")
 ```
@@ -634,17 +634,17 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-025'         = !"C04Ga_{YY}M_tseries"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/bhc6uWnL"),
+      'S-BIOG-025'         = !"{assign_url$C04Ga_tseries}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[11]+5} 08:00:00"),
+      'S-BIOG-025'         = !"{class2_start(mod, 'C04')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[15]+2} 23:59:59"),
+      'S-BIOG-025'         = !"{n4_end(mod, 'C05')}"),
     term = "Q1", level = 4, n = 4,
     toc = "Analyse libre de séries spatio-temporelles (partie 2)")
 ```
 
 
-## Régularisation
+## Régularisation {#regularisation}
 
 La régularisation d'une série spatio-temporelle permet de transformer une série échantillonnée avec un pas de temps irrégulier ou présentant des trous en une série régulière. Malheureusement, en biologie, on a rarement affaire à des séries parfaitement régulières, soit parce qu'il y a des observations manquantes, soit parce qu'on ne contrôle pas l'intervalle de temps. Dans ce cas, la régularisation est une opération préliminaire indispensable à beaucoup d'analyses de séries spatio-temporelles, que ce soit avec les outils {pastecs} ou avec d'autres méthodes. Les objets **ts** doivent être *d'office* des séries spatio-temporelles régulières dans R. Cette étape est donc requise pour adapter des **data frame**s avant de pouvoir les transformer en séries temporelles ! Plusieurs méthodes de régularisation sont disponibles dans {pastecs} : régularisation par valeur constante (`regconst()`), linéaire (`reglin()`), par courbes splines (`regspline()`) et par la méthode des aires (`regarea()`). Afin de simplifier le travail de régularisation, et de faciliter ensuite la création des séries temporelles, toutes ces fonctions ont été regroupées sous une fonction commune `regul()`, dans la même philosophie que `tsd()` regroupe les différentes techniques de décomposition, par ailleurs implémentées par les fonctions `decXXX()`.
 
@@ -737,7 +737,7 @@ Comme nous pouvons le constater, nous avons à présent une série régulière q
 
 </details>
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifc05}
 
 Dans ce module 5, vous aviez à réaliser les exercices suivants :
 

@@ -16,13 +16,13 @@ SciViews::R("ts", lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la [visualisation](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/introvisu.html) et le [traitement des données](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/import.html)) doivent être acquis. La notion de corrélation ([partie du module 6 du cours 1](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/corr%25C3%25A9lation.html)) doit également être bien comprise au départ.
+Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la `r course_link("visualisation", 1,page = "introvisu")` et le `r course_link("visualisation", 1,page = "import")`) doivent être acquis. La notion de corrélation (`r course_link("partie du module 6 du cours 1", 1,page = "correlation")`) doit également être bien comprise au départ.
 
 ```{block, type='note'}
 Nous utiliserons ici essentiellement le package R {pastecs} qui est une réécriture entre autres par l'un des auteurs de ce cours du logiciel PASSTEC 2000, un programme écrit initialement en Visual Basic par le [Prof. Frédéric Ibañez](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4247415/) dans les années 1980, sous la direction de ce dernier. C'est au Prof. Ibañez que l'on doit d'avoir rassemblé un grand nombre de techniques utiles en écologie et en biologie en général en matière d'analyse de séries spatio-temporelles, et d'en avoir démontré l'utilité quelque fois pour la première fois.
 ```
 
-## Observations dépendantes du temps
+## Observations dépendantes du temps {#obstemps}
 
 Démarrons tout de suite notre étude des séries chronologiques par plusieurs exemples concrets qui vont nous emmener dans les plaines enneigées du Grand Nord canadien, au sommet d'un volcan à Hawaï, dans le cerveau d'un patient épileptique ou au large de la mer Méditerranée.
 
@@ -57,7 +57,7 @@ chart(lynx, trapping ~ time) +
 
 Nous sommes tout de suite surpris par la variation importante dans les captures d'une année à l'autre. Il semble que les années de captures abondantes reviennent à intervalle régulier. Mais comment analyser plus à fond ces données ? Notons d'emblée que l'unité d'échantillonnage (territoire Canadien) est la même pour chaque mesure. Donc, il n'y a **pas indépendance** des observations les unes par rapport aux autres. Intuitivement, nous pouvons d'ailleurs facilement imaginer cela. Connaissant les captures à une année, nous pouvons considérer que celles l'année d'avant ou l'année d'après ne sont pas complètement indépendantes, puisqu'il s'agit de la *même* population de lynx qui est échantillonnée. Cette continuité dans le temps *doit* être figurée sur le graphique en reliant les points. C'est donc une erreur de représenter une telle série chronologique à l'aide d'un nuage de points classique qui, quant à lui, figure des points séparés les uns des autres pour des observations indépendantes. Plus précisément, relier les points indique à la fois qu'il y a variation continue et aussi qu'il y a probablement un certain degré de dépendance entre les observations.
 
-### CO~2~ à Hawaï
+### CO~2~ à Hawaï {#co2hawai}
 
 Nous sommes en période de grands changements climatiques et de réchauffement planétaire, ce n'est plus un secret pour personne. Une des causes identifiées de ces changements est l'augmentation du CO~2~ dans l'atmosphère suite à la combustion massive d'énergie fossile (charbon, gaz et pétrole). Ces changements ont des effets bien visibles sur le vivant. En biologie, nous devons souvent confronter nos observations par rapport aux changements du milieu, et donc, nous manipulons fréquemment des séries chronologiques de données physico-chimiques. Le CO~2~ (en ppm ou parties par million) a été mesuré dans l'atmosphère au [laboratoire NOAA situé en haut du volcan Mauna Loa à Hawaï](https://www.esrl.noaa.gov/gmd/ccgg/trends/).
 
@@ -121,7 +121,7 @@ plot(eeg)
 
 Cette série chronologique est comptabilisée sur l'axe du temps simplement avec le numéro de la mesure commençant par 2001, mais en réalité, 256 mesures sont réalisées par seconde ici. Dans cette série, les fluctuations sont importantes, mais apparaissent difficiles à interpréter sur le graphique brut.
 
-### Plancton méditerranéen
+### Plancton méditerranéen {#planctonmedit}
 
 Les séries chronologiques sont aussi appelées séries spatio-temporelles, car sous certaines conditions, elles peuvent aussi servir à représenter des évènements qui varient spatialement, voir dans l'espace et le temps simultanément. Mais attention, quand nous parlons de variation spatiale, il ne peut s'agir que de variation **unidimensionnelle**, par exemple, le long d'un **transect** (tracé rectiligne ou non entre deux points et le long duquel les mesures sont réalisées). Un bon exemple d'une telle variation spatio-temporelle est représenté par l'étude du plancton en mer Méditerranée entre Nice et la Corse.
 
@@ -184,7 +184,7 @@ Au travers de ces quatre exemples concrets, nous constatons que les séries spat
 
 `r h5p(26, height = 270, toc = "Représentation des séries chronologiques")`
 
-## Qu'est-ce qu'une série chronologique ?
+## Qu'est-ce qu'une série chronologique ? {#seriechronologique}
 
 Lorsque nous mesurons de manière répétée le *même* individu à des moments différents, nous parlons de **série chronologique**, de **séries temporelles**, ou de **série spatio-temporelle** (*space-time series* en anglais). Ce dernier terme "spatio-temporel" se réfère, en réalité, à un axe unidimensionnel que nous représentons toujours par convention sur l'axe des abscisses sur un graphique et le long duquel nos observations s'étalent. Il peut s'agir du temps, ou d'une dimension spatiale linéaire (mesures le long d'un **transect**, comme nous l'avons vu pour le plancton méditerranéen), ou d'un mélange des deux, c'est-à-dire que le temps se déroule alors que nous progressons dans nos mesures le long du transect. Quoi qu'il en soit, le fait de mesurer toujours le même individu ou la même entité mène à une interdépendance des observations les unes par rapport aux autres.
 
@@ -196,7 +196,7 @@ Une autre caractéristique importante des séries temporelles est l'existence de
 
 Au cours de notre exploration des séries temporelles, nous utiliserons les fonctions standard de R pour la manipulation et l'analyse des séries temporelles. Nous aborderons aussi des outils plus spécialisés contenus dans les packages {pastecs} ("Package for the Analysis of Space-Time Ecological Series") et {xts} ("eXtensible Time Series"). Nous allons successivement étudier comment créer et manipuler des séries temporelles dans R et comment les décrire. Dans le module suivant, nous poursuivrons en apprenant à les décomposer, et enfin, nous verrons comment régulariser des séries irrégulières.
 
-### Séries régulières
+### Séries régulières {#seriesregulieres}
 
 Une série régulière est un ensemble de données mesurées sur la même entité (même individu, même unité statistique) avec un **espacement constant dans le temps** (ou le long d'un transect). La série n'a pas de valeurs manquantes. Ce type de série a des avantages énormes, car nous pouvons décaler la série d'un ou plusieurs pas de temps, et les observations après décalage correspondent aux **mêmes dates** que les observations originales, à part aux extrémités bien entendu.
 
@@ -206,7 +206,7 @@ Après avoir effectué un décalage (*lag* en anglais) d'un pas de temps, et moy
 
 $$L X_t = X_{t-1}$$
 
-Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman) entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir [module 6 du cours SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/corr%25C3%25A9lation.html)) :
+Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman) entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir `r course_link("module 6 du cours SDD I", 1,page = "correlation")`) :
 
 $$r_{X_t,LX_t} = \frac{cov_{X_t,LX_t}}{\sqrt{S^2_{X_t} + S^2_{LX_t}}}$$
 
@@ -307,13 +307,13 @@ N'essayez pas d'utiliser la sélection à l'aide de `[,]` sur un objet **ts** co
 
 `r h5p(27, height = 270, toc = "Création d'un objet ts")`
 
-### Séries à trous
+### Séries à trous {#seriestrous}
 
 Une série à trous est une série régulière, mais avec des valeurs manquantes. Comme R représente des valeurs manquantes dans un vecteur par `NA`, il est possible de créer et manipuler des séries à trous à l'aide des objets **ts** et **mts**. Par contre, certaines méthodes statistiques ne géreront pas ces valeurs manquantes et refuseront de produire un résultat.
 
 En profitant des propriétés d'autocorrélation de la série, il est possible d'estimer des valeurs raisonnables pour remplacer les données manquantes si elles sont peu nombreuses. Par exemple, il est possible de faire une interpolation linéaire entre les deux observations qui encadrent la valeur manquante. Cette technique, et d'autres seront abordées dans le module suivant dans la section relative à la **régularisation**. Retenez juste, à ce stade, que notre objectif sera de régulariser autant que possible une série à trous avant de l'analyser.
 
-### Séries irrégulières
+### Séries irrégulières {#seriesirreguliere}
 
 Dès que le pas de temps entre les observations n'est pas constant, nous parlons de série irrégulière. Les séries irrégulières ne peuvent pas être représentées par des objets **ts** ou **mts** de R qui imposent un pas de temps régulier. Par contre, les packages {zoo} et {xts} permettent de manipuler ce genre de données.
 
@@ -484,11 +484,11 @@ La fonction `stats::lag()` permet de décaler la série en arrière dans le temp
 
 Manipulez et décrivez les différentes séries en exemples. Notez par exemple que `EEG` est constituée de mesures effectuées à un rythme de 256 par seconde, mais que l'axe du temps reprend simplement les observations les unes après les autres (ou si vous préférez, une "unité" de temps de 1/256 sec et une fréquence de 1). Comment feriez-vous pour transformer cette série avec une unité de temps de la seconde ? Ou de la milliseconde ?
 
-## Analyse de séries
+## Analyse de séries {#analyseseries}
 
 Les différentes techniques présentées dans cette section permettent de caractériser des séries spatio-temporelles, que ce soit en analysant l'autocorrélation ou la cross-corrélation, en effectuant une analyse spectrale, ou en déterminant l'existence d'une tendance générale ou locale. Le module suivant traitera plus particulièrement de la décomposition de séries en plusieurs composantes (tendance, cycle saisonnier, résidus par exemple). Bien que la décomposition et l'analyse soient des phases du traitement des séries spatio-temporelles qui ne se font pas l'une sans l'autre, nous les traitons dans des chapitres différents parce qu'elles renvoient des résultats différents. Alors que les techniques d'analyse ne modifient pas la série de départ et renvoient seulement les résultats statistiques de l'analyse, les décompositions renvoient des objets plus complexes qui contiennent aussi les composantes issues du traitement, composantes qui peuvent être transformées à nouveau en objets **ts** ou **mts** pour être traitées ou analysées en cascade si nécessaire.
 
-### Autocorrélation, autocovariance, cross-corrélation et cross-covariance
+### Autocorrélation, autocovariance, cross-corrélation et cross-covariance {#autocorrelation}
 
 Une série spatio-temporelle est caractérisée principalement par une autocorrélation non nulle, nous l'avons déjà vu, ce qui signifie que les différentes observations dans la série ne sont pas indépendantes les unes des autres. Cette autocorrélation s'étudie en considérant le profil de la **fonction d'autocorrélation** L'autocorrélation sera d'autant plus grande que les deux séries (initiale et décalée) sont similaires. À l'inverse, si les séries sont opposées, l'autocorrélation sera négative. Une autocorrélation nulle indique qu'il n'y a pas de corrélation entre la série initiale et la série décalée au pas de temps considéré. Le graphique de l'autocorrélation (caractéristique d'une série périodique) pour notre série artificielle `tser` est obtenu en utilisant la fonction `acf()` :
 
@@ -673,7 +673,7 @@ Ceci nous indique que la première série est *avancée* sur la seconde de 5 moi
 
 -   Une autre présentation de l'[analyse spectrale](https://bookdown.org/rdpeng/timeseriesbook/spectral-analysis.html), théorie et application dans R, en anglais.
 
-### Tendance générale
+### Tendance générale {#tendancegenerale}
 
 La **tendance** générale (*general trend*, en anglais) représente une variation lente dans un sens déterminé. Cependant, si le plus souvent la tendance correspond à une fonction plus ou moins monotone croissante ou décroissante, dans d'autres cas la tendance générale est figurée par le cycle annuel par exemple. Dans ce cas, on parle de **tendance cyclique** et nous l'analysons via l'analyse spectrale.
 
@@ -923,11 +923,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C04Ia_{YY}M_ts"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/cPaSlMJg"),
+      'S-BIOG-025'         = !"{assign_url$C04Ia_ts}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[11]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C04')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[12]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C04')}"),
     term = "Q1", level = 3,
     toc = "Description et analyse de séries chronologiques")
 ```
@@ -939,16 +939,16 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-025'         = !"C04Ga_{YY}M_tseries"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/bhc6uWnL"),
+      'S-BIOG-025'         = !"{assign_url$C04Ga_tseries}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[11]+5} 08:00:00"),
+      'S-BIOG-025'         = !"{class2_start(mod, 'C04')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[15]+2} 23:59:59"),
+      'S-BIOG-025'         = !"{n4_end(mod, 'C05')}"),
     term = "Q1", level = 4, n = 4,
     toc = "Analyse libre de séries spatio-temporelles (partie 1)")
 ```
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifc04}
 
 Dans ce module 4, vous aviez à réaliser les exercices suivants :
 

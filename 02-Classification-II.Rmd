@@ -30,7 +30,7 @@ Enfin, vous devez être également capable de créer un classifieur avec R (en u
 
 S'il subsiste des doutes ou des incompréhensions pour ces aspects clés de la classification supervisée, vous feriez mieux d'approfondir le module \@ref(classif1) *avant* d'aborder celui-ci.
 
-## Validation croisée
+## Validation croisée {#validationcroisee}
 
 Rappelez-vous qu'une règle à laquelle il ne faut *jamais* déroger, c'est de ne pas utiliser les mêmes individus en apprentissage et en test.
 
@@ -128,7 +128,7 @@ Le résultat est le même. Donc, nous venons de montrer que, dans le cas de ce j
 
 -   L'approche par validation croisée optimise l'utilisation des données à disposition. C'est la technique à préférer, sauf si nous disposons vraiment de données à profusion.
 
-## Différents algorithmes
+## Différents algorithmes {#diffalgorithmes}
 
 Les algorithmes de classification supervisée se subdivisent en trois grandes classes :
 
@@ -140,9 +140,11 @@ Les algorithmes de classification supervisée se subdivisent en trois grandes cl
 
 Nous avons déjà étudié l'analyse discriminante linéaire dans le précédent module et nous allons découvrir ici quelques autres algorithmes de chaque catégorie, ainsi que dans le module suivant. Enfin, nous mettrons tout cela en musique pour étudier différents algorithmes de classification en pratique, en vue de choisir celui qui nous semble le plus adéquat pour le cas étudié.
 
-### Indiens diabétiques
+### Indiens diabétiques {#indiensdiabetiques}
 
-Afin d'explorer et comparer l'utilisation de différents algorithmes de classification supervisée, nous reprendrons notre jeu de données `pima` concernant une population d'Amérindiens qui sont connus pour compter un haut taux d'obèses et de diabétiques. Nous avions déjà utilisé ces données pour [illustrer l'ACP dans le cours de Science des Données biologiques II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/analyse-en-composantes-principales.html). Pour rappel, le jeu de données se présente comme suit :
+Afin d'explorer et comparer l'utilisation de différents algorithmes de classification supervisée, nous reprendrons notre jeu de données `pima` concernant une population d'Amérindiens qui sont connus pour compter un haut taux d'obèses et de diabétiques. Nous avions déjà utilisé ces données pour `r course_link("illustrer l'ACP dans le cours de Science des Données biologiques II", 2, "analyse-en-composantes-principales")`. Pour rappel, le jeu de données se présente comme suit :
+
+
 
 ```{r, warning=FALSE}
 SciViews::R("ml")
@@ -220,7 +222,10 @@ pima %>.%
 nrow(pima2)
 ```
 
-Dans ce second jeu de données, nous avons pu tout de même conserver `r nrow(pima2)` cas. [L'ACP que nous avions réalisée sur ces données](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/analyse-en-composantes-principales.html) nous montrait que la variance se répartir à 53% sur deux axes, mais qu'il faut considérer cinq axes pour capturer 90% de cette variance. Ceci suggère, comme la matrice de corrélation, que les différentes variables apportent chacune une information complémentaire. Au final, nous n'observions pas de séparation nette sur le graphique des individus de l'ACP entre la sous-population diabétique et celle qui ne l'est pas. Nous allons reconsidérer la question ici à l'aide de techniques plus spécifiques visant à *prédire* qui est diabétique ou non en fonction des huit (`pima1`) ou six (`pima2`) attributs à disposition, et ce, à l'aide de différents algorithmes de classification supervisée. Commençons par voir ce que cela donne avec l'ADL que nous connaissons maintenant bien, en utilisation, une validation croisée dix fois.
+
+
+Dans ce second jeu de données, nous avons pu tout de même conserver `r nrow(pima2)` cas. `r course_link("L'ACP que nous avions réalisée sur ces données", 2, "analyse-en-composantes-principales")`
+nous montrait que la variance se répartir à 53% sur deux axes, mais qu'il faut considérer cinq axes pour capturer 90% de cette variance. Ceci suggère, comme la matrice de corrélation, que les différentes variables apportent chacune une information complémentaire. Au final, nous n'observions pas de séparation nette sur le graphique des individus de l'ACP entre la sous-population diabétique et celle qui ne l'est pas. Nous allons reconsidérer la question ici à l'aide de techniques plus spécifiques visant à *prédire* qui est diabétique ou non en fonction des huit (`pima1`) ou six (`pima2`) attributs à disposition, et ce, à l'aide de différents algorithmes de classification supervisée. Commençons par voir ce que cela donne avec l'ADL que nous connaissons maintenant bien, en utilisation, une validation croisée dix fois.
 
 ```{r}
 set.seed(364)
@@ -329,16 +334,16 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C02Ia_{YY}M_zoo"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/n_smIDv1"),
+      'S-BIOG-025'         = !"{assign_url$C02Ia_zoo}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[7]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C02')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[8]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C02')}"),
     term = "Q1", level = 3,
     toc = "Création d'un classifieur optimal")
 ```
 
-## Partitionnement récursif
+## Partitionnement récursif {#partirecursif}
 
 Le partitionnement récursif est un algorithme de classification supervisée qui crée un arbre dichotomique où, à chaque nœud, une variable permet de déterminer si le parcours de l'arbre doit être poursuivi vers la gauche du nœud (lorsque la valeur de la variable est inférieure à un seuil fixé), ou vers sa droite (si la valeur est supérieure ou égale à ce seuil). La variable utilisée à chaque nœud ainsi que la valeur du seuil sont déterminées par l'algorithme. Cela est fait de manière à maximiser la séparation entre les deux sous-entités ainsi obtenues qui doivent discriminer au mieux entre les différents groupes à identifier. Le traitement est poursuivi tout au long de l'arbre de manière récursive jusqu'à aboutir à une extrémité, nommée "feuille". Cette feuille de l'arbre représente une classe donnée. Notez qu'il peut très bien y avoir plusieurs feuilles qui représentent une même classe. La classe attribuée à un individu est donc celle à laquelle on aboutit après avoir parcouru l'arbre de la base jusqu'aux feuilles.
 
@@ -406,7 +411,7 @@ Ici, nous sommes légèrement en dessous des 25%. L'arbre est différent. La per
 
 -   Explication sur la façon dans les règles sont établies dans l'arbre [ici](http://perso.ens-lyon.fr/lise.vaudor/classification-par-arbres-decisionnels/).
 
-## Forêt aléatoire
+## Forêt aléatoire {#foretaleatoire}
 
 La forêt aléatoire, ou *random forest* en anglais (RF) est un algorithme introduit par Breiman (2001) qui créé un ensemble d'arbres décisionnels individuels, dont la variable discriminante à chaque nœud est choisie dans un sous-ensemble aléatoire de toutes les *p* variables utilisées (afin d'introduire une variation aléatoire dans chaque arbre de partitionnement qui est donc toujours différent des autres). Lorsque l'ensemble des arbres est créé, un vote à la majorité est appliqué en utilisant la réponse donnée par chaque arbre pour déterminer à quelle classe appartient l'individu étudié. **C'est actuellement un des algorithmes les plus performants de classification supervisée.** Par contre, étant donné qu'il faut créer plusieurs centaines d'arbres, le temps de calcul est généralement plus élevé qu'avec des méthodes simples comme ADL, k plus proches voisins, ou l'utilisation d'un arbre unique.
 
@@ -424,7 +429,7 @@ Pour la forêt aléatoire, les paramètres principaux à définir sont le nombre
 
 ![Schéma du principe de la forêt aléatoire pour la classification. Cet algorithme crée un ensemble d'arbres de partitionnement différents où, à chaque nœud, une variable discriminante et un seuil sont choisis comme les meilleures règles, mais seulement parmi un sous-ensemble aléatoire de tous les attributs. Lorsque la forêt est construite, le même individu est présenté à la base de chaque arbre. Le groupe auquel il appartient est obtenu par un vote à la majorité de tous les arbres.](images/02-classification2/rforest.png)
 
-### Pima avec forêt aléatoire
+### Pima avec forêt aléatoire {#pimaforetaleatoire}
 
 La forêt aléatoire est disponible dans {mlearning}. Son utilisation est similaire aux autres fonctions du package, avec ici la fonction `ml_rforest()` et ses arguments `ntree=` pour le nombre d'arbres, et `mtry=` pour le nombre de variables à sélectionner au hasard à chaque nœud. Par défaut, 500 arbres sont construits et les 2/3 des variables sont utilisées. Voyons ce que cela donne avec ces valeurs par défaut :
 
@@ -491,7 +496,7 @@ Pour l'instant {mlearning} utilise les fonctions du package {randomForest} qui r
 
 `r learnr("C02Lb_ml2", title = "K plus proches voisins, méthode par arbres et forêt aléatoire", toc = "K plus proches voisins, méthode par arbres et forêt aléatoire")`
 
-## Optimisation et métriques
+## Optimisation et métriques {#optimetriques}
 
 Maintenant que vous avez découvert différents algorithmes de classification supervisée, que vous êtes capable d'utiliser la validation croisée et les matrices de confusion pour en dériver des métriques, vous avez les éléments nécessaires en main pour vous attaquer à l'optimisation de votre classifieur. La tâche n'est pas simple, car vous avez, en fait, de nombreux paramètres sur lesquels influer. C'est essentiellement par la pratique que vous allez "sentir" ce qui fonctionne bien ou moins bien. Il est cependant utile à ce stade de faire un bilan. Quels sont les moyens d'optimiser un classifieur ? Quelles métriques utiliser pour surveiller votre progression ? De combien devez-vous améliorer votre métrique pour considérer que le gain est appréciable ?
 
@@ -537,17 +542,17 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-025'         = !"C01Ga_{YY}M_metrics"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/2jy2rMUP"),
+      'S-BIOG-025'         = !"{assign_url$C01Ga_metrics}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[5]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class2_start(mod, 'C01')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[12]+2} 23:59:59"),
+      'S-BIOG-025'         = !"{n4_end(mod, 'C03')}"),
     term = "Q1", level = 0, n = 4,
     toc = "Aide-mémoire sur les métriques et optimisation (partie II)",
     clone = TRUE)
 ```
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifc02}
 
 Dans ce second module, vous aviez à réaliser les exercices suivants :
 

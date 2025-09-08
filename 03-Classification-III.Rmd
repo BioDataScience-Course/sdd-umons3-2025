@@ -18,11 +18,11 @@ SciViews::R("ml", lang = "fr")
 
 Ce module constitue le troisième volet d'une trilogie consacrée à la classification supervisée. Le niveau de difficulté allant crescendo, assurez-vous d'avoir bien assimilé toutes les notions importantes et les subtilités étudiées dans les deux premiers volets avant d'aborder celui-ci.
 
-## Métriques et proportions
+## Métriques et proportions {#metriqueproportions}
 
 À partir du moment où la classification ne se fait pas sans erreurs, nous avons la présence de faux positifs et de faux négatifs. Le fait d'être un faux positif ou un faux négatif dépend essentiellement du point de vue, c'est-à-dire, de la classe d'intérêt. Cependant ces erreurs restent des erreurs, quel que soit le point de vue (sauf si nous fusionnons les classes confondues, bien évidemment). Un élément important à considérer est que le taux d'erreur, qu'il soit global ou local tel que mesuré, par exemple, par le rappel ou la précision pour une classe cible **dépend énormément des proportions d'occurrences observées dans les différentes classes**, et ce, aussi bien dans la phase d'apprentissage que de test ou de déploiement.
 
-Ce problème nous ramène, en réalité à des calculs basiques de probabilités et au théorème de Bayes que nous avons abordés dans le [module 6 du premier cours de science des données biologiques](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/proba.html%23th%C3%A9or%C3%A8me-de-bayes). **Rappelez-vous, nous avions traité le cas du dépistage d'une maladie, dont le résultat dépendait du fait que la maladie est fréquente ou rare dans la population (sa prévalence)**. Si vous ne vous souvenez plus de quoi il s'agit, il peut être utile de relire maintenant les sections 6.1.1 à 6.1.3 de ce premier cours, car ce contenu s'applique parfaitement ici.
+Ce problème nous ramène, en réalité à des calculs basiques de probabilités et au théorème de Bayes que nous avons abordés dans le `r course_link("module 6 du premier cours de science des données biologiques", page = "proba", anchor = "th%C3%A9or%C3%A8me-de-bayes")`. **Rappelez-vous, nous avions traité le cas du dépistage d'une maladie, dont le résultat dépendait du fait que la maladie est fréquente ou rare dans la population (sa prévalence)**. Si vous ne vous souvenez plus de quoi il s'agit, il peut être utile de relire maintenant les sections 6.1.1 à 6.1.3 de ce premier cours, car ce contenu s'applique parfaitement ici.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -188,7 +188,7 @@ table(pima1_train$diabetes) |> # Tableau mieux balancé sans perte
 
 Bien évidemment, si les classes sont extrêmement inégales en effectifs, nous pouvons réaliser les deux approches simultanément : dupliquer, voire tripliquer les classes rares et sous-échantillonner les classes plus abondantes.
 
-### Probabilités *a priori*
+### Probabilités *a priori* {#probaapriori}
 
 Nous pouvons estimer les proportions relatives des classes dans les données à classer. Il suffit de réaliser un échantillonnage aléatoire de taille raisonnable (par exemple, un minimum de 100 individus pour exprimer les résultats en pour cent), et de comptabiliser les proportions observées dans chaque classe. Ces proportions seront appelées les **probabilités *a priori*** (*prior probabilities* en anglais). Pour nos Indiennes Pima, les probabilités *a priori* (si l'échantillonnage de départ est bien aléatoire et réalisé dans les règles de l'art) sont déterminées en fonction de la table de contingence, mais plus loin, nous devrons fournir un vecteur numérique, donc nous convertissons directement ici à partir des proportions calculées sur l'ensemble des données. Voici comment le faire dans R pour obtenir un vecteur nommé des proportions par classes :
 
@@ -206,7 +206,7 @@ Dans le cas où les probabilités *a priori* ne sont pas calculée à partir des
 
 `r h5p(243, height = 270, toc = "Probabilités a priori et set d'apprentissage")`
 
-De nombreux algorithmes de classification peuvent nous renvoyer des probabilités d'appartenir à une classe (la prédiction de la classe n'est que celle qui a la probabilité la plus élevée, en réalité). L'arbre de probabilités (résolution graphique), ou un calcul simple de probabilités faisant intervenir le théorème de Bayes (résolution numérique) permet de combiner les probabilités *a priori* et les probabilités issues du classifieur pour calculer ce que nous appelons les **probabilités *a posteriori***, c'est-à-dire les probabilités d'être A ou B approchant les valeurs que nous observerons en déploiement de notre classifieur. Ce calcul nous l'avions déjà fait dans le [module 6 du cours I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-2024/proba.html%23th%C3%A9or%C3%A8me-de-bayes). Nous ne redéveloppons pas ces calculs ici. Encore une fois, vous êtes invité à relire cette section si vous ne vous en souvenez plus.
+De nombreux algorithmes de classification peuvent nous renvoyer des probabilités d'appartenir à une classe (la prédiction de la classe n'est que celle qui a la probabilité la plus élevée, en réalité). L'arbre de probabilités (résolution graphique), ou un calcul simple de probabilités faisant intervenir le théorème de Bayes (résolution numérique) permet de combiner les probabilités *a priori* et les probabilités issues du classifieur pour calculer ce que nous appelons les **probabilités *a posteriori***, c'est-à-dire les probabilités d'être A ou B approchant les valeurs que nous observerons en déploiement de notre classifieur. Ce calcul nous l'avions déjà fait dans le `r course_link("module 6 du cours I", 1,page = "proba", anchor = "th%C3%A9or%C3%A8me-de-bayes")`. Nous ne redéveloppons pas ces calculs ici. Encore une fois, vous êtes invité à relire cette section si vous ne vous en souvenez plus.
 
 Dans {mlearning}, les probabilités *a priori* peuvent être injectées dans l'objet **confusion** pour corriger nos métriques en faveur de valeurs plus réalistes relatives aux probabilités *a posteriori*. Donc, pour nos métriques obtenues à l'aide du set d'apprentissage `pima1b` aux proportions modifiées, nous rétablissons des valeurs plus plausibles par rapport à la population étudiée, et en même temps, plus comparables avec les métriques sur `pima1` en procédant comme suit :
 
@@ -234,11 +234,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C03Ia_{YY}M_cardiovascular"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/1d1Y9FRD"),
+      'S-BIOG-025'         = !"{assign_url$C03Ia_cardiovascular}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[9]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C03')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[10]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C03')}"),
     term = "Q1", level = 3,
     toc = "Métriques en fonction des proportions & SVM (partie I)")
 ```
@@ -329,7 +329,7 @@ pROC::auc(pima1b_resampled$diabetes, pima1b_resampled$membership)
 
 Nous pouvons observer que notre second classifieur `pima1b_rf` est effectivement globalement légèrement plus performant que `pima1_rf`, avec toutefois des précautions d'usage puisque les données utilisées ne sont pas *strictement* identiques. Seulement les proportions relatives dans les deux classes ont été alignées entre les deux courbes. Par contre, selon le seuil de détection choisi, le classifieur `pima1_rf` peut localement égaler, ou même dépasser légèrement les performances de `pima1b_rf`. De manière générale, les courbes ROC seront parfaitement utilisables *sans ajustement nécessaire par contre,* pour comparer deux modèles différents obtenus à partir d'exactement les *mêmes* données.
 
-## Machine à vecteurs supports
+## Machine à vecteurs supports {#machinevecteurssupports}
 
 Les **machines à vecteurs supports** (*Support Vector Machine* en anglais, ou SVM en abrégé) forment une autre famille d'algorithmes utilisables en classification supervisée. Au départ, l'idée est simple : il s'agit de déterminer le meilleur hyperplan qui divise l'hyperespace représenté par les attributs décrivant un cas à deux classes. Avec deux attributs seulement (cas le plus simple, disons *x~1~* et *x~2~*), cela signifie que nous recherchons une **droite** qui divise notre plan *x~1~-x~2~* en deux, chaque région issue de cette séparation représentant le domaine de l'une des deux classes.
 
@@ -431,7 +431,7 @@ L'algorithme SVM est potentiellement très performant, mais il est délicat parc
 
 -   Une présentation de SVM en français [détaillant un peu plus l'aspect mathématique de SVM](https://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-m-app-svm.pdf).
 
-## Réseaux de neurones artificiels
+## Réseaux de neurones artificiels {#reseauxneurones}
 
 L'idée de cet algorithme vient de l'étude du fonctionnement de notre cerveau, d'où son nom, par analogie. Le modèle est constitué de plusieurs couches *i* interconnectées. Les nœuds *j* de ces connexions constituent les neurones artificiels. La première couche est constituée des attributs mesurés sur les individus et la dernière couche renseigne les classes à identifier (Venables & Ripley 2003). Là où les couches intermédiaires permettent de paramétrer le système d'apprentissage. Les connexions entre neurones sont caractérisées par les seuils ω~ij~ variants de 0 à 1, et le transfert du "signal" est, par exemple, modélisé par des fonctions logistiques variant entre ces deux extrêmes. Ces seuils permettent de moduler les relations entre neurones et ainsi de déterminer la classe à laquelle un individu appartient à partir des valeurs des attributs mesurés sur celui-ci, par la transmission des signaux de proche en proche, dont le passage est autorisé ou bloqué en fonction des seuils de déclenchement définis (Venables & Ripley 2003). Ce type de fonctionnement est, en effet, parfaitement comparable au transfert d'un influx nerveux le long d'un réseau de neurones dans notre cerveau.
 
@@ -439,7 +439,7 @@ Les réseaux de neurones artificiels sont des techniques très sophistiquées. E
 
 ![Représentation simplifiée d'une partie d'un réseau de neurones à une seule couche cachée (en bleu) et complètement connectée. En vert, la couche sensorielle qui reçoit les valeurs des attributs. En jaune, le neurone qui prédit une classe (source Wikipedia).](images/03-classification3/reseau-neurones.png)
 
-### Pima avec réseau de neurones
+### Pima avec réseau de neurones {#pimareseauneurones}
 
 Un réseau de neurones simple à une seule couche cachée est disponible avec la fonction `ml_nnet()` dans {mlearning}. L'utilisation est similaire aux autres fonctions du package :
 
@@ -516,11 +516,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C03Ia_{YY}M_cardiovascular"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/1d1Y9FRD"),
+      'S-BIOG-025'         = !"{assign_url$C03Ia_cardiovascular}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[9]+1} 08:00:00"),
+      'S-BIOG-025'         =  !"{class1_start(mod, 'C03')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[10]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C03')}"),
     term = "Q1", level = 3,
     toc = "Métriques en fonction des proportions & SVM (partie II)")
 ```
@@ -534,11 +534,11 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-025'         = !"C01Ga_{YY}M_metrics"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/2jy2rMUP"),
+      'S-BIOG-025'         = !"{assign_url$C01Ga_metrics}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[5]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class2_start(mod, 'C01')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[12]+2} 23:59:59"),
+      'S-BIOG-025'         = !"{n4_end(mod, 'C03')}"),
     term = "Q1", level = 0, n = 4,
     toc = "Aide-mémoire sur les métriques et optimisation (partie III)",
     clone = TRUE)
@@ -563,14 +563,14 @@ if (exists("challenge"))
       'S-BIOG-025' = !"C03Ca_{YY}M_ml_wine",
       'sdd3late'   = !"C03Ca_{YY}M_ml_wine"),
     course.urls = c(
-      'S-BIOG-025' = "https://classroom.github.com/a/wvLUo0Rh",
-      'sdd3late'   = "https://classroom.github.com/a/wvLUo0Rh"),
+      'S-BIOG-025' = !"{assign_url$C03Ca_ml_wine}",
+      'sdd3late'   = !"{assign_url$C03Ca_ml_wine}"),
     course.starts = c(
-      'S-BIOG-025' = !"{W[9]+3} 13:30:00",
-      'sdd3late'   = !"{W[9]+3} 13:30:00"),
+      'S-BIOG-025' = !"{mod['C03', 'challenge']} 09:45:00",
+      'sdd3late'   = !"{mod['C03', 'challenge']} 09:45:00"),
     course.ends = c(
-      'S-BIOG-025' = !"{W[9]+3} 18:00:00",
-      'sdd3late'   = !"{W[9]+3} 18:00:00"),
+      'S-BIOG-025' = !"{mod['C03', 'challenge']} 11:30:00",
+      'sdd3late'   = !"{mod['C03', 'challenge']} 11:30:00"),
     level = 4, n = 1,
     toc = "Challenge machine learning (vins)")
 ```
@@ -599,7 +599,7 @@ Vous pouvez soumettre vos résultats pendant une période de temps précise via 
 
 -   [Torch for R](https://torch.mlverse.org/), une autre librairie de fonctions dédiée à l'apprentissage profond (torch est réputé pour être plus facile et plus intuitif que Tensorflow). En anglais.
 
-## Récapitulatif des exercices
+## Récapitulatif des exercices {#recapitulatifC03}
 
 Dans ce module 3, vous aviez à réaliser les exercices suivants :
 
