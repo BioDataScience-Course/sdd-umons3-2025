@@ -215,7 +215,7 @@ europe_map <- st_read("data/europe.shp")
 ```
 
 ```{block, type = 'note'}
-Les fichiers au format **shapefile** sont souvent assez volumineux. La précision de la carte aura une très grande importance sur la taille du fichier. Le tableau ci-dessous met en avant la différence de la taille du fichier en fonction de l'échelle de la carte des pays d'Europe <https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/countries#countries20> 
+Les fichiers au format **shapefile** sont souvent assez volumineux. La précision de la carte aura une très grande importance sur la taille du fichier. Le tableau ci-dessous met en avant la différence de la taille du fichier en fonction de l'échelle de la carte des pays d'Europe <https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries> 
 
 Cartes de l'Europe au format **shapefile** en fonction de l'échelle de la carte.
 
@@ -314,7 +314,7 @@ Nous pouvons superposer plusieurs objets **sf** sur une même carte pour rendre 
 
 À titre d'illustration, nous allons ajouter une couche à la carte de l'Afrique du Sud qui localise les capitales des différents pays. Les capitales ainsi que leurs latitudes et longitudes en coordonnées de degrés décimaux[^06-spatial-1]. Les capitales des pays d'Afrique australe sont d'abord encodées dans un tableau classique et nommé `s_capitals` :
 
-[^06-spatial-1]: Les coordonnées latitude et longitudes sont d'habitude exprimées en degrés minutes secondes. Par contre, sur ordinateur, la forme de degrés décimaux est plus pratique. Les fractions de degrés sont représentées sous forme décimale, ce qui fait que la coordonnée peut être stockée dans un objet **numeric** classique (voir [ici](https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=fr)). Des [convertisseurs en ligne](https://www.presqu-ile-de-crozon.com/conversion-des-coordonnees-gps.php) existent pour transformer les coordonnées d'un système à l'autre.
+[^06-spatial-1]: Les coordonnées latitude et longitudes sont d'habitude exprimées en degrés minutes secondes. Par contre, sur ordinateur, la forme de degrés décimaux est plus pratique. Les fractions de degrés sont représentées sous forme décimale, ce qui fait que la coordonnée peut être stockée dans un objet **numeric** classique (voir [ici](https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=fr)). Des [convertisseurs en ligne](https://latlongdata.com/lat-long-converter/) existent pour transformer les coordonnées d'un système à l'autre.
 
 ```{r}
 s_capitals <- dtx(
@@ -684,7 +684,7 @@ De nombreuses ressources existent sur Internet pour la cartographie avec R. En v
 
 -   Le [chapitre 6](https://ggplot2-book.org/maps.html) de "ggplot2: elegant graphics for data analysis" est exclusivement consacré à la réalisation de cartes avec `ggplot()` (en anglais). Vous pouvez sans problèmes lui substituer `chart()` et utiliser pour le reste le code présenté ici.
 
--   Introduction rapide à [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html), en anglais.
+-   Documentation de [tmap](https://r-tmap.github.io/tmap/), en anglais.
 
 -   [Article originel](https://www.jstatsoft.org/article/view/v084i06) décrivant {tmap} (en anglais). Vue d'ensemble, mais attention : certaines parties ne sont plus d'actualité par rapport à la dernière version du package.
 

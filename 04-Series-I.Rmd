@@ -669,7 +669,7 @@ Ceci nous indique que la première série est *avancée* sur la seconde de 5 moi
 
 -   [Manuel en ligne de {pastecs}](https://github.com/phgrosjean/pastecs/blob/master/manual/pastecs_manuel_utilisateur.pdf), en français. La section consacrée à l'analyse harmonique et spectrale (croisée) est suivie d'explications concernant les points de retournement et de leur application via le tournogramme pour identifier le pas de temps qui maximise l'information dans la série, ainsi que le variogramme et le distogramme qui fournissent des outils complémentaires potentiellement utiles.
 
--   [Explication du périodogramme](https://online.stat.psu.edu/stat510/lesson/6/6.1), en anglais.
+-   [Explication du périodogramme](https://online.stat.psu.edu/stat510/Lesson06), en anglais.
 
 -   Une autre présentation de l'[analyse spectrale](https://bookdown.org/rdpeng/timeseriesbook/spectral-analysis.html), théorie et application dans R, en anglais.
 
