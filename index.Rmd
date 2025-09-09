@@ -49,7 +49,7 @@ sessioninfo::session_info()
 
 ## Vue générale des cours {#vuegenerale .unnumbered}
 
-Cet ouvrage interactif est le troisième volume d'une série de trois ouvrages traitant de la science des données biologiques. L'écriture de cette suite de livres a débuté au cours de l'année académique 2018-2019. Pour l'année académique `r !'{acad_year}'`, cet ouvrage interactif est le support des cours suivants :
+Cet ouvrage interactif est le troisième volume d'une série de trois ouvrages traitant de la science des données biologiques. L'écriture de cette suite de livres a débuté au cours de l'année académique 2018-2019. Pour l'année académique `r !'{acad_year}'`, ceci est le support des cours suivants :
 
 -   `r !'[Science des données III : exploration et prédiction](https://webcontent.umons.ac.be/web/fr/pde/{acad_year}/ue/US-M1-BIOL60-004-M.htm)'` (SDD III) aux premiers Masters BBMC (Biochimie, Biologie Moléculaire et Cellulaire) et BOE (Biologie des Organismes et Écologie) en Faculté des Sciences de l'Université de Mons, et dont le responsable est Philippe Grosjean
 
@@ -85,7 +85,7 @@ Le matériel pédagogique, rassemblé dans ce syllabus interactif, est aussi var
 
 -   des renvois vers des documents externes en ligne, des vidéos [Youtube](https://www.youtube.com/) ou [Vimeo](https://vimeo.com/), des ouvrages en ligne en anglais ou en français, des blogs, des tutoriels, des questions sur des sites comme [Stackoverflow](https://stackoverflow.com/) ou dans des [mailing lists R](https://www.r-project.org/mail.html), de [X (ex Twitter)](https://twitter.com/)...
 
--   des diapositives de présentations distribuées via le dépôt [sdd_lessons sur BioDataScience-Course](https://github.com/BioDataScience-Course/sdd_lessons/tree/{acad_year})'`.
+-   des diapositives de présentations distribuées via le dépôt `r !'[sdd_lessons sur BioDataScience-Course](https://github.com/BioDataScience-Course/sdd_lessons/tree/{acad_year})'`.
 
 ```{block, type='info'}
 ::: {.nocourse}
@@ -127,8 +127,7 @@ Les cours de science des données utilisent une autre approche et se donnent en 
 
 ![](images/00-preambule/organisation2.png)
 
-Une présentation des changements introduits par rapport à l'année précédente vous est faite durant la première séance introductive. La présentation correspondante est disponible au format PDF 
-`r !'[ici](https://github.com/BioDataScience-Course/sdd_lessons/raw/{acad_year}/C00/presentations/C00Pa_intro.pdf)'`.
+Une présentation des changements introduits par rapport à l'année précédente vous est faite durant la première séance introductive. La présentation correspondante est disponible au format PDF `r !'[ici](https://github.com/BioDataScience-Course/sdd_lessons/raw/{acad_year}/C00/presentations/C00Pa_intro.pdf)'`.
 
 ### Quatre niveaux d'exercices {.unnumbered}
 
@@ -153,7 +152,7 @@ Les notes des exercices plus faciles de niveau 1, 2 et 3 sont comptabilisées s�
 L'évaluation est **continue** tout au long de l'année. Il n'y a pas d'examen en fin d'année et il n'y a pas moyen non plus de repasser un examen en seconde session. La présence aux séances est **obligatoire** pour cette raison et toute absence injustifiée vous coûtera un zéro pour la matière concernée.
 ```
 
-### Plan du cours {.unnumbered}
+### Plan du cours {#plancours .unnumbered}
 
 Le plan du cours est une forme de contrat entre l'étudiant et les enseignants. Ce document structure les attentes de vos encadrants. Veuillez consulter ce document attentivement.
 
@@ -168,9 +167,9 @@ if (exists("assignment2"))
   assignment2("C00Qa_issues", part = NULL, clone = FALSE,
     url = "https://github.com/BioDataScience-Course/C00Qa_25M_issues-c25",
     course.ids = c(
-      'S-BIOG-025'         = !"C00Qa_{YY}M_issues"),
+      'S-BIOG-025' = !"C00Qa_{YY}M_issues"),
     course.urls = c(
-      'S-BIOG-025'         = !"{assign_url$C00Qa_issues}"),
+      'S-BIOG-025' = !"{assign_url$C00Qa_issues}"),
     course.starts = c(
       'S-BIOG-025' = !"{course_start} 08:00:00"),
     course.ends = c(
@@ -188,9 +187,9 @@ if (exists("assignment2"))
   assignment2("D00Qa_issues", part = NULL, clone = FALSE,
     url = "https://github.com/BioDataScience-Course/D00Qa_25M_issues-d25",
     course.ids = c(
-      'S-BIOG-077'         = !"D00Ga_{YY}C_issues"),
+      'S-BIOG-077' = !"D00Ga_{YY}C_issues"),
     course.urls = c(
-      'S-BIOG-077'         = !"{assign_url$D00Qa_issues}"),
+      'S-BIOG-077' = !"{assign_url$D00Qa_issues}"),
     course.starts = c(
       'S-BIOG-006' = !"{course_start} 08:00:00"),
     course.ends = c(
@@ -211,7 +210,7 @@ Une fois que vous avez rejoint l'équipe **`r !"c{YY}"`** ou **`r !"d{YY}"`**, i
 
 Vous pouvez aussi directement créer une issue depuis RStudio. Voyez le fichier `README.md` dans le dépôt des issues pour les explications.
 
-## Planning des séances {#temps .unnumbered}
+## Planning des séances {#planning .unnumbered}
 
 Ceci est le planning des séances pour SDD III. Pour SDD IV, le planning est plus souple et défini de commun accord avec les étudiants qui se sont inscrits à cette UE pour s'adapter au mieux à leurs contraintes (stages, mémoire...)
 
@@ -220,10 +219,10 @@ Ceci est le planning des séances pour SDD III. Pour SDD IV, le planning est plu
 | **Quadri 1**       |                         |                      |                             |                                 |                            |
 | *(install party)*  | `r !"{mod$start[1]}"`   | `r !"{mod$N3[1]}"`   | `r !"{mod$N4[1]}"`          | **`r !"{mod$challenge[1]}"`**   | **`r !"{mod$test[1]}"`**   |
 | 1 Classif. I       | `r !"{mod$start[2]}"`   | `r !"{mod$N3[2]}"`   | `r !"{mod$N4[2]}"`          | **`r !"{mod$challenge[2]}"`**   | **`r !"{mod$test[2]}"`**   |
-| 2 Classif. II      | `r !"{mod$start[3]}"`   | `r !"{mod$N3[3]}"`   | **fin `r !"{mod$N4[3]}"` ** | **`r !"{mod$challenge[3]}"`**   | **`r !"{mod$test[3]}"`**   |
-| 3 Classif. III     | `r !"{mod$start[4]}"`   | `r !"{mod$N3[4]}"`   | `r !"{mod$N4[4]}"`          | **`r !"{mod$challenge[4]}"`**   | **`r !"{mod$test[4]}"`**   |
+| 2 Classif. II      | `r !"{mod$start[3]}"`   | `r !"{mod$N3[3]}"`   | `r !"{mod$N4[3]}"`          | **`r !"{mod$challenge[3]}"`**   | **`r !"{mod$test[3]}"`**   |
+| 3 Classif. III     | `r !"{mod$start[4]}"`   | `r !"{mod$N3[4]}"`   | **fin `r !"{mod$N4[4]}"`**  | **`r !"{mod$challenge[4]}"`**   | **`r !"{mod$test[4]}"`**   |
 | 4 Chrono. I        | `r !"{mod$start[5]}"`   | `r !"{mod$N3[5]}"`   | `r !"{mod$N4[5]}"`          | **`r !"{mod$challenge[5]}"`**   | **`r !"{mod$test[5]}"`**   |
-| 5 Chrono. II       | `r !"{mod$start[6]}"`   | `r !"{mod$N3[6]}"`   | **fin `r !"{mod$N4[6]}"` ** | **`r !"{mod$challenge[6]}"`**   | **`r !"{mod$test[6]}"`**   |
+| 5 Chrono. II       | `r !"{mod$start[6]}"`   | `r !"{mod$N3[6]}"`   | **fin `r !"{mod$N4[6]}"`**  | **`r !"{mod$challenge[6]}"`**   | **`r !"{mod$test[6]}"`**   |
 
 : Dates importantes pour les activités de science des données biologiques III (à 23:59:59 pour les fins de projets N3 ou N4, à l'heure de la séance en présentiel pour les autres dates).
 

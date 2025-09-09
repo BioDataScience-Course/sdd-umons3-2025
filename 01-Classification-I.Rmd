@@ -20,7 +20,7 @@ SciViews::R # We don't add "ml" here to show later on what it gives
 
 Avant de vous lancer tête baissée dans de la matière nouvelle, assurez-vous d'avoir installé la SciViews Box `r learnitdown$svbox`. Si ce n'est pas encore fait, retournez à la [page d'accueil pour bien débuter](https://wp.sciviews.org).
 
-Vous devez être à l'aise dans l'utilisation de R, RStudio, (R) Markdown/Quarto, ainsi que Git et GitHub. Si ce n'est pas le cas, l'`r course_link("annexe B du cours de Science des données I", page = "prise")` devraient vous aider à vous remettre à niveau.
+Vous devez être à l'aise dans l'utilisation de R, RStudio, (R) Markdown/Quarto, ainsi que Git et GitHub. Si ce n'est pas le cas, l'`r course_link("annexe B du cours de Science des données I", course = 1, "prise")` devraient vous aider à vous remettre à niveau.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -34,13 +34,13 @@ Vous devez maîtriser les bases de Git et de GitHub (avoir un compte GitHub, êt
 
 L'utilisation de tous ces outils a été expliquée dans les cours précédents [SDD I](https://wp.sciviews.org/sdd-umons) et [SDD II](https://wp.sciviews.org/sdd-umons2). Nous ne reviendrons pas dessus et cette matière est considérée comme acquise.
 
-Outre les outils, ce cours s'appuie sur des notions que nous avons déjà abordées dans le cours de `r course_link("science des données biologiques 2", 2,page = "cah-kmeans-div")` la notion de **classification non supervisée**. De même, la modélisation (via les **régressions**) a aussi fait l'objet d'une attention particulière dans le `r course_link("cours précédent", 2,page = "lm")`. Toutes ces connaissances vont servir de pilier de base pour ce que nous étudierons ensemble dans ce module, ainsi que dans les deux suivants concernant la classification supervisée.
+Outre les outils, ce cours s'appuie sur des notions que nous avons déjà abordées dans le cours de `r course_link("science des données biologiques 2", course = 2, "cah-kmeans-div")` la notion de **classification non supervisée**. De même, la modélisation (via les **régressions**) a aussi fait l'objet d'une attention particulière dans le `r course_link("cours précédent", course = 2, "lm")`. Toutes ces connaissances vont servir de pilier de base pour ce que nous étudierons ensemble dans ce module, ainsi que dans les deux suivants concernant la classification supervisée.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(161, height = 270, toc = NULL)`
 
-Assurez-vous que vous possédez encore bien les bases de l'utilisation de R pour importer, remanier, visualiser des données, pour réaliser un test d'hypothèse, une régression linéaire et une analyse multivariée. Prenez également connaissance des **nouveautés** introduites dans la `r !{"SciViews Box {YYYY}"}` au travers du learnr suivant.
+Assurez-vous que vous possédez encore bien les bases de l'utilisation de R pour importer, remanier, visualiser des données, pour réaliser un test d'hypothèse, une régression linéaire et une analyse multivariée. Prenez également connaissance des **nouveautés** introduites dans la `r !{"SciViews Box {svbox}"}` au travers du learnr suivant.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -60,9 +60,9 @@ if (exists("assignment"))
     toc = "Débogage de code et ADL (partie I)")
 ```
 
-`r learnr("C00La_refresh", title = "Rappels et nouveautés de la SciViews Box 2024", toc = NULL)`
+`r learnr("C00La_refresh", title = "Rappels et nouveautés de la SciViews Box", toc = NULL)`
 
-## Principes de base
+## Principes de base {#base}
 
 Rappelez-vous, la **classification** sert à regrouper les individus d'un jeu de données en différents groupes ou **classes**. Lorsque vous avez utilisé la classification hiérarchique ascendante ou le dendrogramme, vous avez réalisé de la classification *non* supervisée. La classification *non* supervisée permet de choisir des classes librement sur base de l'information de similitude ou différence entre les individus contenus dans le jeu de données.
 
@@ -130,7 +130,7 @@ En pratique, ces conditions d'application ne sont *pas* remplies strictement dan
 
 `r h5p(164, height = 270, toc = "Condition d'application")`
 
-## Mesure de performances
+## Mesure de performances {#perf}
 
 Avant de nous lancer dans la découverte de différents algorithmes, nous devons nous intéresser aux outils et métriques qui permettent d'évaluer la qualité d'un classifieur dans l'étape de test. C'est, en effet, à travers eux que vous pourrez juger de la pertinence ou non de votre classifieur.
 
@@ -387,7 +387,7 @@ if (exists("assignment2"))
     course.starts = c(
       'S-BIOG-025'         = !"{class2_start(mod, 'C01')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{n4_end(mod, 'C01')}"),
+      'S-BIOG-025'         = !"{n4_end(mod, 'C03')}"),
     term = "Q1", level = 0, n = 4,
     toc = "Aide-mémoire sur les métriques et optimisation (partie I)",
     clone = TRUE)
@@ -397,11 +397,11 @@ if (exists("assignment2"))
 
 Il existe de nombreux algorithmes de classification supervisée. Nous allons commencer notre exploration de ces outils statistiques avec l'**analyse discriminante linéaire**. Cette analyse recherche la meilleure discrimination possible des groupes par rotation des axes, en diagonalisant la **matrice variance-covariance inter-groupe**, ce qui revient à calculer les combinaisons linéaires des variables initiales qui séparent le mieux ces groupes.
 
-```{block, type = 'note'}
+```{block, type='note'}
 Le principe de cet algorithme ne vous rappelle rien ? Evidemment que oui, cet algorithme se base sur les mêmes principes que l'ACP.
 ```
 
-Il n'est pas utile ici de rentrer dans les détails mathématiques. Comme vous connaissez déjà les variances inter/intra-groupes (cf. `r course_link("ANOVA", page = "anova-%25C3%25A0-un-facteur")`) d'une part, et le principe de rotation des axes de l'`r course_link("ACP", 2, "analyse-en-composantes-principales")`
+Il n'est pas utile ici de rentrer dans les détails mathématiques. Comme vous connaissez déjà les variances inter/intra-groupes (cf. `r course_link("ANOVA", course = 1, "anovaunfacteur")`) d'une part, et le principe de rotation des axes de l'`r course_link("ACP", course = 2, "acp")`
  d'autre part, vous êtes à même de comprendre la logique derrière l'ADL en combinant ces deux notions. Pour **quantifier la séparation des différentes classes**, nous allons donc réutiliser encore une fois la séparation de la variance totale en variance inter-groupe et variance intra-groupe que nous avons déjà employée dans l'ANOVA. Sauf qu'ici, nous travaillons en multivarié avec des matrices ayant potentiellement un grand nombre de dimensions. Du point de vue purement mathématique, cela ne change rien, car le partitionnement de la variable s'applique tout aussi bien à *N* \> 2 dimensions. Ensuite, nous nous intéressons aux **distances inter-groupes**. Notez que, plus ces distances sont importantes, mieux nous séparons les classes.
 
 Pour rappel, l'ACP est une technique qui effectue la **diagonalisation d'une matrice** (matrice variance-covariance, ou matrice de corrélation des données). D'un point de vue géométrique, nous avons vu que diagonaliser une matrice revient en fait à effectuer une **rotation du système d'axes** représenté par cette matrice, de sorte que les nouveaux axes ainsi obtenus correspondent à une **maximisation de la variance** sur les premiers nouveaux axes. En ACP, on cherchait à "étaler" les données le plus possible sur les deux ou trois premiers axes afin de visualiser comment les points (les individus) se répartissent. Cela correspond donc bien à obtenir la part de variance maximale du jeu de données exprimée sur ces axes.
@@ -613,9 +613,7 @@ summary(penguins_conf)
 
 ##### Pièges et astuces {.unnumbered}
 
-
-
-Tout comme cela avait déjà été expliqué lors de la présentation de l' `r course_link("ACP", 2, "analyse-en-composantes-principales")`, il est crucial de bien nettoyer son jeu de données avant de réaliser une ADL. Il est également très important de vérifier que les relations entre les variables prédictives (les attributs) sont linéaires dans le cas de l'analyse discriminante *linéaire*. Sinon, il faut transformer les données de manière appropriée. Il existe d'autres variantes, comme l'analyse discriminante quadratique qui permet de traiter d'autres cas de figure, [voir ici](https://lemakistatheux.wordpress.com/2015/09/04/lanalyse-discriminante-de-fisher/).
+Tout comme cela avait déjà été expliqué lors de la présentation de l'`r course_link("ACP", course = 2, "acp")`, il est crucial de bien nettoyer son jeu de données avant de réaliser une ADL. Il est également très important de vérifier que les relations entre les variables prédictives (les attributs) sont linéaires dans le cas de l'analyse discriminante *linéaire*. Sinon, il faut transformer les données de manière appropriée. Il existe d'autres variantes, comme l'analyse discriminante quadratique qui permet de traiter d'autres cas de figure, [voir ici](https://lemakistatheux.wordpress.com/2015/09/04/lanalyse-discriminante-de-fisher/).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -626,11 +624,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C01Ia_{YY}M_debug"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/j8zZrT-k"),
+      'S-BIOG-025'         = !"{assign_url$C01Ia_debug}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[4]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C01')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[6]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C01')}"),
     term = "Q1", level = 3,
     toc = "Débogage de code et ADL (partie II)")
 ```
@@ -652,11 +650,11 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-025'         = !"C01Ib_{YY}M_lda"),
     course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/RRDC_CA1"),
+      'S-BIOG-025'         = !"{assign_url$C01Ib_lda}"),
     course.starts = c(
-      'S-BIOG-025'         = !"{W[5]+1} 08:00:00"),
+      'S-BIOG-025'         = !"{class1_start(mod, 'C01')}"),
     course.ends = c(
-      'S-BIOG-025'         = !"{W[6]+1} 23:59:59"),
+      'S-BIOG-025'         = !"{n3_end(mod, 'C01')}"),
     term = "Q1", level = 3,
     toc = "Analyse discriminante linéaire")
 ```

@@ -4,21 +4,7 @@
 SciViews::R
 ```
 
-Le cours SDD IV, comme son nom l'indique, est essentiellement axé vers le développement de pratiques qui rendront vos analyses reproductibles. Cela signifie que quelqu'un d'autre pourra reprendre vos analyses et générer exactement les mêmes résultats, tableaux et graphiques.
-
-Nous abordons plusieurs modules supplémentaires par rapport à la matière des 3 premiers cours.
-
--   Le premier module (celui-ci) s'intéresse aux données particulières : dates, données textuelles, données circulaires que vous rencontrerez certainement durant votre carrière de biologiste.
-
--   Le second module du cours (module 8) vous préparera à l'élaboration d'un gros projet scientifique qui diffère des projets que vous avez traités jusqu'ici par le nombre d'étapes et de fichiers plus importants.
-
--   Le module 9 s'intéressera à la modularisation de votre code pour le rendre plus compréhensible et maintenable.
-
--   Le module 10 s'attaquera aux questions d'optimisation et de test de vos analyses et de votre code.
-
--   Le module 11 rentrera plus en profondeur dans l'accès aux bases de données.
-
--   Enfin, le module 12 vous proposera de placer l'ensemble de vos fichiers relatifs à une analyse dans un package R pour en faciliter la diffusion.
+Dans ce module, nous traiterons de données particulières telles que les dates, les variables circulaires et le texte. Il n'est pas toujours évident de manipuler de telles données et vous apprendrez quelques outils et astuces qui vont vous faciliter le travail.
 
 ##### Objectifs {.unnumbered}
 
@@ -32,23 +18,9 @@ Nous abordons plusieurs modules supplémentaires par rapport à la matière des 
 
 ##### Prérequis {.unnumbered}
 
-Avant de vous lancer dans ce cours, vous devez installer et vous familiariser avec la SciViews Box `r learnitdown$svbox`. Si ce n'est pas encore fait, retournez à la [page d'accueil pour bien débuter](https://wp.sciviews.org/rstudio/).
+Vous devez être à l'aise dans l'utilisation de R et de RStudio pour des tâches courantes (importer et manipuler des données numériques ou qualitatives, utiliser les projets RStudio, git et GitHub, réaliser des analyses reproductibles avec Quarto et R Markdown).
 
-L'utilisation d'un ordinateur, de RStudio et de (R) Markdown ne doit plus avoir de secret pour vous ou presque.
-
-##### À vous de jouer ! {.unnumbered}
-
-`r h5p(150, height = 270, toc = NULL)`
-
-Vous devez aussi maîtriser les bases de Git et de GitHub (avoir un compte GitHub, savoir cloner un dépôt localement, travailler avec GitHub Desktop pour faire ses "commits", "push" et "pull").
-
-##### À vous de jouer ! {.unnumbered}
-
-`r h5p(149, height = 270, toc = NULL)`
-
-L'ensemble de ces outils a été abordé dans les cours précédents `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les six premiers modules du présent cours) que vous devez avoir réalisé avant d'entamer la matière du cours SDD IV : pratique.
-
-## Dates
+## Dates {#dates}
 
 La gestion du temps et les variables de temps peuvent sembler simples d'apparence. Nous pouvons facilement déterminer la date et l'heure qu'il est en regardant un calendrier et une montre.
 
@@ -254,7 +226,7 @@ Lorsque l'on étudie le temps perdu dans les bouchons à Bruxelles. Il sera trè
 
 Lorsque l'on étudie des séries temporelles en écologie, on ne s'intéresse pas aux années bissextiles, ou aux mois de 29 ou 31 jours.
 
-Dans R avec les objets **ts** et **mts** nous avions vu au `r course_link("module 4", 3,page = "series1")` et `r course_link("module 5", 3,page = "series2")` du cours de science des données 3. Avec ces objets, le temps est décompté de manière décimale dans une unité arbitraire que vous avez décidée. Le package {pastecs} reprend ce principe. Ainsi, si vous étudiez un phénomène saisonnier, vous allez naturellement choisir l'année comme unité. Par contre, décompter le temps en années de manière décimale n'est pas très conforme au calendrier grégorien, aux mois de durées différentes et aux années bissextiles. Par contre, la plupart des phénomènes biologiques (naturels) que vous étudiez se soucient assez peu du calendrier grégorien. Leurs rythmes sont calqués plutôt sur les saisons, les journées, les cycles lunaires ou de marées, etc. L'utilisation de valeurs numériques, quitte à tordre un peu les choses par rapport calendrier grégorien (donc à avoir des années ou des mois qui commencent et finissent jusqu'à un jour plus tôt ou plus tard) est alors pratique ici. Ainsi, considérer une année moyenne (considérant les années bissextiles) comme étant égale à 365,25 jours et un mois comme étant 365,25/12 est bien plus pratique ici. Le tableau ci-dessous représente le temps dans ce système.
+Dans R avec les objets **ts** et **mts** nous avions vu au `r course_link("module 4", course = 3, "series1")` et `r course_link("module 5", course = 3, "series2")` du cours de science des données 3. Avec ces objets, le temps est décompté de manière décimale dans une unité arbitraire que vous avez décidée. Le package {pastecs} reprend ce principe. Ainsi, si vous étudiez un phénomène saisonnier, vous allez naturellement choisir l'année comme unité. Par contre, décompter le temps en années de manière décimale n'est pas très conforme au calendrier grégorien, aux mois de durées différentes et aux années bissextiles. Par contre, la plupart des phénomènes biologiques (naturels) que vous étudiez se soucient assez peu du calendrier grégorien. Leurs rythmes sont calqués plutôt sur les saisons, les journées, les cycles lunaires ou de marées, etc. L'utilisation de valeurs numériques, quitte à tordre un peu les choses par rapport calendrier grégorien (donc à avoir des années ou des mois qui commencent et finissent jusqu'à un jour plus tôt ou plus tard) est alors pratique ici. Ainsi, considérer une année moyenne (considérant les années bissextiles) comme étant égale à 365,25 jours et un mois comme étant 365,25/12 est bien plus pratique ici. Le tableau ci-dessous représente le temps dans ce système.
 
 | Temps     | Période | Longueur (j)      |
 |-----------|---------|-------------------|
@@ -498,7 +470,7 @@ Les variables facteurs sont utiles, mais il faut toujours prendre le temps de bi
 
 -   [Introduction to forcats](https://forcats.tidyverse.org/articles/forcats.html), une introduction en anglais au package {forcats}.
 
-## Variables circulaires
+## Variables circulaires {#varcirculaires}
 
 Les variables circulaires se rencontrent de temps en temps en biologie. Lorsque c'est le cas, il est crucial de les reconnaître et de les traiter correctement. Imaginez que vous travaillez sur l'écophysiologie de végétaux. Les conditions météorologiques sont importantes à leur croissance : température, humidité, force et direction du vent. Prenons cette dernière variable, direction du vent. Elle peut s'exprimer en degrés de 0 à 360°, 0° correspondant au vent du nord et 180° au vent du sud. Vous enregistrez les données suivantes sur huit jours consécutifs pour la direction du vent en degrés :
 
@@ -726,3 +698,7 @@ if (exists("assignment"))
 Ce module vous a permis de prendre connaissance des principes de bases des données temporelles, des données textuelles et des variables circulaires. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
+
+##### Progression {.unnumbered}
+
+`r launch_report("07", height = 800)`

@@ -16,11 +16,9 @@ Ce second module du cours SDD IV : recherche reproductible vous prépare à l'a
 
 ##### Prérequis {.unnumbered}
 
-Dans ce module, nous traiterons de RStudio et des projets RStudio, de R Markdown, de git et GitHub, ainsi que de divers outils de R pour importer, remanier, décrire et analyser des données biologiques. Toutes ces notions doivent être parfaitement connues avant d'aborder le présent module qui va vous emmener un niveau plus loin vers un gros projet constitué de plusieurs étapes successives dans l'analyse. Toutes ces notions ont été utilisées en routine dans les trois cours précédents, `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les six premiers modules du présent cours). Ainsi, si vous avez bien suivi ces trois cours-là, vous êtes en principe parfaitement préparé pour aborder cette matière.
+Dans ce module, nous traiterons de RStudio et des projets RStudio, de R Markdown, de git et GitHub, ainsi que de divers outils de R pour importer, remanier, décrire et analyser des données biologiques. Toutes ces notions doivent être parfaitement connues avant d'aborder le présent module qui va vous emmener un niveau plus loin vers un gros projet constitué de plusieurs étapes successives dans l'analyse. Toutes ces notions ont été utilisées en routine dans les trois cours précédents, `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les cinq premiers modules du présent cours). Ainsi, si vous avez bien suivi ces trois cours-là, vous êtes en principe parfaitement préparé pour aborder cette matière.
 
-
-
-## Structurer un projet
+## Structurer un projet {#structurer}
 
 Un **projet dans RStudio** est un dossier particulier contenant un fichier `.Rproj` de paramétrage du projet, ainsi qu'un ou plusieurs sous-dossiers et fichiers. Il coïncide également avec un dépôt git pour la gestion de version si vous avez activé cette option, et peut aussi correspondre à un dépôt GitHub pour sa sauvegarde dans le cloud et pour collaborer à plusieurs dans le projet.
 
@@ -71,23 +69,21 @@ Ce module ne s'attarde pas sur le contenu en dehors de sa cohérence. La pertine
 
 La suite reprend et détaille les trois éléments principaux de votre projet : ses données, ses carnets de notes et ses documents de synthèse. Enfin, ce module se clôturera sur quelques astuces et vous aurez un projet GitHub Classroom qui vous permettra de mettre en pratique toute cette théorie.
 
-## Données {donnees}
+## Données {#donnees}
 
 Nous avons à plusieurs reprises déjà abordé les points importants à prendre en compte pour représenter ses données sous un format informatique exploitable ensuite. Avant d'aller plus loin, relisez attentivement les sections suivantes :
 
--   `r course_link("Acquisition de données", 1,page = "acquisition")`
+-   `r course_link("Acquisition de données", course = 1, "acquisition")`
 
--   `r course_link("Encodage des données dans un tableau cas par variables", 1, page = "tableaudonnees", anchor = "tableaux-cas-par-variables" )`
+-   `r course_link("Encodage des données dans un tableau cas par variables", course = 1, "tableaudonnees", anchor = "tableaux-cas-par-variables" )`
 
--   `r course_link("Ajout de métadonnées", 1, page = "tableaudonnees",anchor = "m%C3%A9tadonn%C3%A9es" )` avec utilisation d'un `r course_link("dictionnaire des données", 1, page = "tableaudonnees",anchor = "dictionnaire-des-donn%C3%A9es" )`
+-   `r course_link("Ajout de métadonnées", course = 1, "tableaudonnees", anchor = "m%C3%A9tadonn%C3%A9es" )` avec utilisation d'un `r course_link("dictionnaire des données", course = 1, "tableaudonnees", anchor = "dictionnaire-des-donn%C3%A9es" )`
 
-Il est de plus intéressant de pouvoir rendre les données de sa recherche accessibles en respectant les normes et les règles de l'`r course_link("Open Data", 2, page = "donneesouvertes")`.
-
-
+Il est de plus intéressant de pouvoir rendre les données de sa recherche accessibles en respectant les normes et les règles de l'`r course_link("Open Data", course = 2, "donneesouvertes")`.
 
 Comme vous le voyez, toutes les grandes règles ont déjà été abordées dans le cadre des cours de sciences de données. La documentation précise et riche des données est une étape longue et fastidieuse. En pratique, elle est très souvent bâclée... et c'est dommage, car c'est leur **réutilisabilité** qui est impactée au final.
 
-```{block, type = 'note'}
+```{block, type='note'}
 En résumé, des données sans documentation sont des données inutilisables.  Elles seront perdues avec le temps. Votre objectif sera de permettre à une personne externe de comprendre vos données, et si possible, de pouvoir les réutiliser dans son propre contexte (en respect des droits de la licence que vous leurs associerez, bien entendu).
 
 Ne perdez jamais de vue l'importance des données. Cette importance est à placer au même niveau qu'une bonne publication scientifique. Malheureusement, l'évaluation du curriculum d'un scientifique ne mets pas encore assez l'accent sur les données, et c'est dommage, car cela n'insite pas à les rendre réutilisables. Mais la mouvance de science ouverte, et dans son sillage, de données ouvertes (Open Data) est en train de recentrer l'intérêt sur les jeux de données de qualité. A noter d'ailleurs que la même remarque peut être faite pour les logiciels et codes informatiques qui mériteraient aussi d'être mieux valorisés dans une carrière scientifique.
@@ -124,13 +120,13 @@ Si les données sont très volumineuses, pensez bien à les exclure (aussi bien 
 
 Si vous devez travailler sur des sous-ensembles de vos données, ou si vos données sont trop volumineuses pour se charger intégralement en mémoire vive, vous les convertirez plutôt en une base de données ou un autre format qui vous permet de récupérer des sous-tableaux sans devoir passer par l'ouverture du jeu de données complet. Le plus simple (mais pas le plus performant) consiste à utiliser le moteur de base de données SQLite et d'accéder à vos données via des requêtes SQL, ou via le package [{dbplyr}](https://dbplyr.tidyverse.org). SQLite ne nécessite pas d'installer un serveur de base de données, car son code est contenu directement dans le package {RSQLite} qui permet d'y accéder depuis R.
 
-```{block, type = 'note'}
+```{block, type='note'}
 Lors du choix du format de stockage de vos données retravaillées, vous devez sélectionner le format qui convient le mieux à vos données (taille du fichier de stockage, vitesse d'importation, interopérabilité et requêtes sous-tableaux possibles ou non). Préférez les formats les plus universels aux formats spécifiques. Gardez toujours à l'esprit que des logiciels de niche avec des formats propriétaires peuvent être problématiques dans quelques années s'ils ne fonctionnement plus sur des systèmes informatiques plus récents. Par contre, R, Python, ou Java, par exemple, sont des langages qui ont toutes les chances de perdurer et sont donc sains comme choix.
 
 Pour les données brutes, la question d'interopérabilité est encore plus cruciale si vous voulez ouvrir vos données au maximum. Actuellement, le CSV est le format le plus universel, et donc, le plus sûr pour assurer une réutilisabilité maximale de vos données brutes.
 ```
 
-## Carnet de notes
+## Carnet de notes {#carnetdenotes}
 
 Après avoir collecté et remanié vos données, l'étape suivante consiste à explorer et décrire vos données. Ensuite, vous envisagerez diverses pistes d'analyses probablement, et vous serez amené à adopter un processus itératif où vous explorez une idée, celle-ci vous livre de nouvelles informations, ce qui vous conduit à une nouvelle idée, que vous étudiez, et ainsi de suite.
 
@@ -174,9 +170,9 @@ Pour des projets conséquents, le format {bookdown} est particulièrement intér
 
 ##### À vous de jouer ! {.unnumbered}
 
-```{r assign_D08Ga_project, echo=FALSE, results='asis'}
+```{r assign_D08Ga_project_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("D08Ga_project", part = NULL,
+  assignment("D08Ga_project", part = "I",
     url = "https://github.com/BioDataScience-Course/D08Ga_project",
     course.ids = c(
       'S-BIOG-043'         = !"D08Ia_{YY}M_project"),
@@ -186,11 +182,11 @@ if (exists("assignment"))
       'S-BIOG-043'         = !"{class1_start(mod, 'D08')}"),
     course.ends = c(
       'S-BIOG-043'         = !"{n4_end(mod, 'D10')}"),
-    term = "Q1", level = 3,
-    toc = "Organisation d'un projet dans RStudio")
+    term = "Q1", level = 4, n = 1,
+    toc = "Organisation d'un projet (partie I)")
 ```
 
-## Astuces
+## Astuces {#astuces}
 
 Cette section propose quelques astuces pour améliorer encore vos projets.
 
@@ -242,13 +238,13 @@ Il existe plusieurs outils pour gérer sa bibliographie comme [Mendeley](https:/
 
 Toutes les informations nécessaires sont ainsi ajoutées dans la base de données bibliographique de Mendeley. Il est également possible d'ajouter le fichier PDF d'un article scientifique. Dans ce cas, l'application va analyser le fichier pour extraire les informations pertinentes pour le citer ensuite. Il faut cependant vérifier les informations que l'on peut modifier facilement (la partie à droite dans la copie d'écran présentée ci-dessus).
 
-```{block, type = 'note'}
+```{block, type='note'}
 Mendeley propose une fonction de veille automatique. Sur base des articles que vous avez déjà ajouté à votre gestionnaire de bibliographie, Mendeley propose des nouveaux articles en lien avec ceux-ci.
 ```
 
 Il est possible d'utiliser les informations présentes dans votre bibliographie dans les documents R Markdown. Dans Mendeley Desktop, vous pouvez extraire vos citations en cliquant sur `File > Export...`. Vous choisirez alors le format `.bib`. Vous placez ce fichier dans votre projet. Enfin, dans l'entête YAML de votre document R Markdown, vous vous référez à ce même fichier `.bib` dans l'entrée `bibliography:`. Vous pourrez alors ajouter des citations issues de ce fichier dans votre texte. Le plus simple étant d'utiliser l'addin "Insert citation" du package {citr}.
 
-## Votre projet
+## Votre projet {#votreprojet}
 
 Maintenant que vous maîtrisez les principaux types de variables rencontrées en Science des Données Biologiques (module 7) et les gros projets (module 8), vous êtes prêt pour analyser vos données liées à votre mémoire de fin d'études dans les règles de l'art. Nous vous proposons un **template** pour initier votre projet. Nous n'utiliserons pas, ici, GitHub Classroom pour initier votre projet. **Vous allez devoir le créer par vous-même** en partant de [ce template](https://github.com/BioDataScience-Course/D08Gb_project).
 
@@ -260,7 +256,7 @@ Maintenant que vous maîtrisez les principaux types de variables rencontrées en
 
 -   Décidez si vous voulez que votre dépôt soit **public** ou **privé**. Si vos recherches sont confidentielles, choisissez **privé** (si vous ne pouvez répondre à cette question, choisissez aussi **privé** par défaut).
 
-```{block, type = 'info'}
+```{block, type='info'}
 Rendre votre dépôt public permet de montrer ce que vous savez faire en matière d'analyse de données. Vous pouvez alors indiquer un lien vers ce dépôt dans votre curriculum vitae... un gros plus si naturellement, cela démontre des capacités intéressantes ! Par contre, gardez à l'esprit que vos données de mémoire **ne vous appartiennent pas**. Rendre votre dépôt **public** ne peut se faire qu'avec l'accord de votre promoteur, du chef de labo, du ou des resposables de projet et collaborateurs, et éventuellement aussi, des financeurs. Si, par exemple, un brevet est prévu sur ces données, alors elles **ne peuvent pas** être divulguées prématurément ! Discutez-en avec toutes les personnes concernées au préalable.
 ```
 
@@ -273,3 +269,7 @@ Enfin, prenez connaissance des différentes instructions, et explorez les dossie
 Ce module vous a permis de revoir un ensemble de notions sur la gestion d'un projet scientifiques dans le cadre de travaux de plus grande envergure. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
+
+##### Progression {.unnumbered}
+
+`r launch_report("08", height = 800)`

@@ -16,6 +16,15 @@ bookdown::gitbook:
     edit: https://github.com/BioDataScience-Course/sdd-umons3-2025/edit/master/%s
     view: https://github.com/BioDataScience-Course/sdd-umons3-2025/blob/master/%s
     #download: ["pdf", "epub"]
+    sharing:
+      facebook: no
+      github: no
+      twitter: yes
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no
+      all: ['github', 'linkedin', 'facebook', 'instapaper']
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

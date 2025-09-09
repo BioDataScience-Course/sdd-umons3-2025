@@ -16,7 +16,7 @@ SciViews::R("ts", lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la `r course_link("visualisation", 1,page = "introvisu")` et le `r course_link("visualisation", 1,page = "import")`) doivent être acquis. La notion de corrélation (`r course_link("partie du module 6 du cours 1", 1,page = "correlation")`) doit également être bien comprise au départ.
+Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la `r course_link("visualisation", course = 1, "introvisu")` et l'`r course_link("importation des données", course = 1, "importation")`) doivent être acquis. La notion de (`r course_link("corrélation", course = 1, "correlation")`) doit également être bien comprise au départ.
 
 ```{block, type='note'}
 Nous utiliserons ici essentiellement le package R {pastecs} qui est une réécriture entre autres par l'un des auteurs de ce cours du logiciel PASSTEC 2000, un programme écrit initialement en Visual Basic par le [Prof. Frédéric Ibañez](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4247415/) dans les années 1980, sous la direction de ce dernier. C'est au Prof. Ibañez que l'on doit d'avoir rassemblé un grand nombre de techniques utiles en écologie et en biologie en général en matière d'analyse de séries spatio-temporelles, et d'en avoir démontré l'utilité quelque fois pour la première fois.
@@ -206,7 +206,7 @@ Après avoir effectué un décalage (*lag* en anglais) d'un pas de temps, et moy
 
 $$L X_t = X_{t-1}$$
 
-Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman) entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir `r course_link("module 6 du cours SDD I", 1,page = "correlation")`) :
+Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman) entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir `r course_link("module 6 du cours SDD I", course = 1, "correlation")`) :
 
 $$r_{X_t,LX_t} = \frac{cov_{X_t,LX_t}}{\sqrt{S^2_{X_t} + S^2_{LX_t}}}$$
 
@@ -349,7 +349,7 @@ De manière générale, nous avons toujours intérêt à réaliser une série r�
 
 -   Le [chapitre 2 de "Forecasting: Principles and Practice"](https://otexts.com/fpp2/graphics.html) présente en anglais les objets **ts** et les graphiques descriptifs utiles pour les séries temporelles. Il va plus loin dans ce domaine que notre cours... et naturellement, c'est aussi une "bible" en ce qui concerne la **prédiction** à partir de séries temporelles, tout un pan de cette discipline que nous n'abordons pas ici.
 
-## Manipulation et description
+## Manipulation et description {#manipdesc}
 
 Tout comme pour les statistiques plus classiques, nous commençons toujours notre exploration de séries chronologiques par une partie purement descriptive, soit numérique, soit graphique. De plus, nous savons que nous ne devons pas espérer obtenir d'emblée des données qui se présentent de manière parfaite. Un petit peu de **manipulation de données** est parfois nécessaire... Nous allons découvrir quelques fonctions utiles dans ce contexte pour les séries chronologiques.
 
@@ -879,32 +879,6 @@ Nous avons identifié deux phases. La première commence à la première observa
 
 Si vous avez affaire à un objet **mts**, n'oubliez pas d'extraire la série que vous voulez traiter avec `local.trend()` à l'aide de l'opérateur `[,]`.
 
-<!--
-##### À vous de jouer ! {.unnumbered}
-
-TODO: ce learnr doit encore être écrit !
-r learnr("C04Lb_ts_analysis", title = "Analyse des séries chronologiques", toc = "Analyse des séries chronologiques")
--->
-
-```{=html}
-<!--{r assign_C04Ga_ts_cheatsheet, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("C04Ga_ts_cheatsheet", part = "I",
-    url = "https://github.com/BioDataScience-Course/C04Ga_ts_cheatsheet",
-    course.ids = c(
-      'S-BIOG-025'         = !"C04Ga_{YY}M_ts_cheatsheet"),
-    course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-025'         = !"{W[11]+1} 08:00:00"),
-    course.ends = c(
-      'S-BIOG-025'         = !"{W[13]+5} 23:59:59"),
-    term = "Q1", level = 4, n = 4,
-    toc = "Aide-mémoire sur les séries chronologiques",
-    clone = TRUE)
--->
-```
-
 ##### Exercez-vous {.unnumbered}
 
 Appliquez la technique des sommes cumulées sur les diverses séries d'exemples pour vous familiariser avec son utilisation, en particulier la partie interactive avec `identify()` dans la console R de RStudio :
@@ -945,7 +919,7 @@ if (exists("assignment2"))
     course.ends = c(
       'S-BIOG-025'         = !"{n4_end(mod, 'C05')}"),
     term = "Q1", level = 4, n = 4,
-    toc = "Analyse libre de séries spatio-temporelles (partie 1)")
+    toc = "Analyse libre de séries spatio-temporelles (partie I)")
 ```
 
 ## Récapitulatif des exercices {#recapitulatifc04}

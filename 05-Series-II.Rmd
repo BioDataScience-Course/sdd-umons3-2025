@@ -593,24 +593,6 @@ Enfin, terminons en signalant que si la méthode est prévue pour traiter unique
 
 `r learnr("C05Lb_ts_decomp", title = "Décomposition de séries chronologiques", toc = "Décomposition de séries chronologiques")`
 
-<!--{r assign_C04Ga_ts_cheatsheet, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("C04Ga_ts_cheatsheet", part = "II",
-    url = "https://github.com/BioDataScience-Course/C04Ga_ts_cheatsheet",
-    course.ids = c(
-      'S-BIOG-025'         = !"C04Ga_{YY}M_ts_cheatsheet"),
-    course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-025'         = !"{W[11]+1} 08:00:00"),
-    course.ends = c(
-      'S-BIOG-025'         = !"{W[13]+5} 23:59:59"),
-    term = "Q1", level = 3,
-    toc = "Aide-mémoire sur les séries chronologiques (suite)")
--->
-
-##### À vous de jouer ! {.unnumbered}
-
 ```{r assign_C05Ia_tsd, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("C05Ia_tsd", part = NULL,
@@ -640,7 +622,7 @@ if (exists("assignment2"))
     course.ends = c(
       'S-BIOG-025'         = !"{n4_end(mod, 'C05')}"),
     term = "Q1", level = 4, n = 4,
-    toc = "Analyse libre de séries spatio-temporelles (partie 2)")
+    toc = "Analyse libre de séries spatio-temporelles (partie II)")
 ```
 
 

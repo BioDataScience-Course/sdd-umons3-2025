@@ -6,6 +6,20 @@
 SciViews::R("spatial", lang = "fr")
 ```
 
+Le cours SDD IV, comme son nom l'indique, est essentiellement axé vers le développement de pratiques qui rendront vos analyses reproductibles. Cela signifie que quelqu'un d'autre pourra reprendre vos analyses et générer exactement les mêmes résultats, tableaux et graphiques.
+
+Nous abordons plusieurs modules supplémentaires par rapport à la matière des 3 premiers cours.
+
+-   Le premier module (celui-ci, module 6) se focalise sur l'analyse de données spatialisées et la réalisation de cartes directement dans R.
+
+-   Le second module (numéroté 7) s'intéresse aux données particulières : dates, données textuelles, données circulaires que vous rencontrerez certainement durant votre carrière de biologiste.
+
+-   Le second module du cours (module 8) vous préparera à l'élaboration d'un gros projet scientifique qui diffère des projets que vous avez traités jusqu'ici par le nombre d'étapes et de fichiers plus importants.
+
+-   Le module 9 s'intéressera à la modularisation de votre code pour le rendre plus compréhensible et maintenable.
+
+-   Enfin, le module 10 s'attaquera aux questions d'optimisation et de test de vos analyses et de votre code et abordera rapidement le calcul parallèle et sur le cloud.
+
 Les statistiques spatiales, également en connexion avec les systèmes d'information géographique (SIG), représentent un très large sujet. Il intéresse potentiellement tout biologiste qui travaille avec des données spatialisées, qu'elles soient à 2, 3 ou 4 dimensions (écologie, environnement, épidémiologie, dynamique des populations, biodiversité, etc.) Il est impossible de l'aborder de manière exhaustive en un seul module. Il s'agit donc ici d'une première approche qui vise à vous montrer que R aussi peut être utile dans ce domaine. Voyez les liens dans les sections "pour en savoir plus" si vous voulez approfondir ce sujet.
 
 ##### Objectifs {.unnumbered}
@@ -18,9 +32,25 @@ Les statistiques spatiales, également en connexion avec les systèmes d'informa
 
 ##### Prérequis {.unnumbered}
 
-Ce module fait suite aux modules 4 et 5 consacrés aux séries spatio-temporelles. Diverses notions, comme l'autocorrélation, sont également utiles ici. La section concernant la cartographie fait appel aux graphiques dans R qui constituent les modules 2 à 4 du cours SDD I.
+Avant de vous lancer dans ce cours, vous devez installer et vous familiariser avec la SciViews Box `r !"{svbox}"`. Si ce n'est pas encore fait, retournez à la [page d'accueil pour bien débuter](https://wp.sciviews.org/rstudio/).
 
-## Réalisation de cartes
+L'utilisation d'un ordinateur, de RStudio et de (R) Markdown ne doivent plus avoir de secret pour vous ou presque.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(150, height = 270, toc = NULL)`
+
+Vous devez aussi maîtriser les bases de Git et de GitHub (avoir un compte GitHub, savoir cloner un dépôt localement, travailler avec GitHub Desktop pour faire ses "commits", "push" et "pull").
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(149, height = 270, toc = NULL)`
+
+L'ensemble de ces outils a été abordé dans les cours précédents `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les cinq premiers modules du présent document) que vous devez avoir réalisé avant d'entamer la matière du cours SDD IV : pratique.
+
+Ce module est dans la continuité des modules 4 et 5 (fin du cours de SDD III) consacrés aux séries spatio-temporelles. Diverses notions, comme l'autocorrélation, sont également utiles ici. La section concernant la cartographie fait appel aux graphiques dans R qui constituent les modules 2 à 4 du cours SDD I.
+
+## Réalisation de cartes {#cartes}
 
 Les cartes sont des outils de présentation très utiles dès lors que les données à représenter sont liées à des coordonnées géographiques. Des logiciels spécialisés dans le traitement de ce type de données et dans la réalisation de cartes existent : ce sont les logiciels de SIG (Systèmes d'Information Géographique, ou GIS en anglais). Le plus connu est sans aucun doute [ArcGIS](https://www.esri.com/en-us/arcgis/about-arcgis/overview). Des alternatives Open source existent comme [GRASS](https://grass.osgeo.org) ou [QGIS](https://www.qgis.org/en/site/). Ces outils sont assez complexes et requièrent une formation minimale non négligeable pour pouvoir les utiliser.
 
@@ -254,7 +284,7 @@ chart(data = africa_sa, ~ 0 %fill=% austral) +
 
 La carte dont le système géodésique est adapté à la zone étudiée est plus intéressante, visuellement parlant et aussi parce que les distances et les surfaces dans cette zone sont mieux respectées. En effet, cette zone est moins déformée par la projection en deux dimensions.
 
-## Annotation de carte
+## Annotation de carte {#annotation}
 
 L'annotation de carte consiste à ajouter des couches d'information par-dessus le fond de carte. C'est bien évidemment ces fonctions d'annotation qui font tout l'intérêt des SIG, ainsi que des cartes générées dans R.
 
@@ -354,7 +384,7 @@ chart(data = africa_sa) +
   scale_fill_viridis_d()
 ```
 
-## Les couches "raster"
+## Les couches "raster" {#raster}
 
 Jusqu'ici, nous avons travaillé exclusivement avec des **données vectorielles**, c'est-à-dire, des données représentées par des points, des traits, des polygones dont les sommets sont définis par des positions géographiques. Tous ces objets sont matérialisés en R sous forme **sf** et nous avons vu que `geom_sf()` permet de manipuler tout cela pratiquement comme d'habitude à l'aide de `chart()` et le moteur graphique {ggplot2}. Toutefois, il y a une autre catégorie de données que sont les **raster**s. Il s'agit ici de données (numériques la plupart du temps) présentées sur une grille rectangulaire. Le principe est le même que pour les images numériques. La scène est découpée en petits carrés appelés pixels et une valeur est associée à chaque pixel.
 
@@ -520,7 +550,7 @@ Si vous exécutez ce code, vous vous rendrez compte qu'il faut un temps **énorm
 
 **Clairement, la combinaison de rasters avec sf sur des graphiques {ggplot2}, si elle est techniquement possible, doit être strictement limitée à des rasters de très basse résolution.** Dans la section suivante, nous découvrirons un moteur de cartographie dans R qui ne présente pas ces limitations et qui reste assez semblable à {ggplot2} du point de vue de son interface : {tmap}.
 
-## Cartes avec {tmap} et autres
+## Cartes avec {tmap} et autres {#tmap}
 
 De nombreux packages R permettent de réaliser des cartes. Nous avons utilisé jusqu'à présent {ggplot2} pour visualiser nos objets **sf**. Mais d'autres moteurs graphiques peuvent aussi être employés pour générer des cartes statiques ou dynamiques et interactives.
 
@@ -664,7 +694,7 @@ De nombreuses ressources existent sur Internet pour la cartographie avec R. En v
 
 -   [Cartographie interactive : comment visualiser mes données spatiales de manière dynamique avec {leaflet}](https://thinkr.fr/cartographie-interactive-comment-visualiser-mes-donnees-spatiales-de-maniere-dynamique-avec-leaflet/) est une introduction rapide en français à {leaflet} dans R et Shiny.
 
-## Interpolation spatiale
+## Interpolation spatiale {#interpolationspatiale}
 
 Parmi les nombreuses techniques statistiques appliquées aux données géoréférencées ([autocorrélation spatiale](https://mgimond.github.io/Spatial/spatial-autocorrelation.html), [analyse de motifs de points](https://mgimond.github.io/Spatial/chp11_0.html), [modélisation spatiale et spatio-temporelle](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplespatial.html), [classification et segmentation de zones géographiques](https://www.r-bloggers.com/2020/03/analyzing-remote-sensing-data-using-image-segmentation/) ...) nous nous attarderons sur l'une des plus utiles : l'[**interpolation spatiale**](https://mgimond.github.io/Spatial/spatial-interpolation.html). Son principe consiste à interpoler la variation d'une mesure quantitative dans une zone géographique donnée à partir de mesures éparses. Cette interpolation spatiale permet de construire ensuite des cartes bien plus percutantes.
 
@@ -1037,7 +1067,7 @@ if (exists("assignment"))
 
 -   [Chapitre consacré aux données spatiales de "Data Science with R: A resource compendium"](https://bookdown.org/martin_monkman/DataScienceResources_book/spatial-data.html), en anglais. Un document qui oriente dans l'écosystème riche des packages R.
 
-## Récapitulatif des exercices {#recapitulatifc06}
+## Récapitulatif des exercices {#recapitulatifd06}
 
 Dans ce module 6, vous aviez à réaliser les exercices suivants :
 

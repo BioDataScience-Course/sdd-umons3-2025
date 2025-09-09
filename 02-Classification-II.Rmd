@@ -142,7 +142,7 @@ Nous avons déjà étudié l'analyse discriminante linéaire dans le précédent
 
 ### Indiens diabétiques {#indiensdiabetiques}
 
-Afin d'explorer et comparer l'utilisation de différents algorithmes de classification supervisée, nous reprendrons notre jeu de données `pima` concernant une population d'Amérindiens qui sont connus pour compter un haut taux d'obèses et de diabétiques. Nous avions déjà utilisé ces données pour `r course_link("illustrer l'ACP dans le cours de Science des Données biologiques II", 2, "analyse-en-composantes-principales")`. Pour rappel, le jeu de données se présente comme suit :
+Afin d'explorer et comparer l'utilisation de différents algorithmes de classification supervisée, nous reprendrons notre jeu de données `pima` concernant une population d'Amérindiens qui sont connus pour compter un haut taux d'obèses et de diabétiques. Nous avions déjà utilisé ces données pour `r course_link("illustrer l'ACP dans le cours de Science des Données biologiques II", course = 2, "acp")`. Pour rappel, le jeu de données se présente comme suit :
 
 
 
@@ -224,7 +224,7 @@ nrow(pima2)
 
 
 
-Dans ce second jeu de données, nous avons pu tout de même conserver `r nrow(pima2)` cas. `r course_link("L'ACP que nous avions réalisée sur ces données", 2, "analyse-en-composantes-principales")`
+Dans ce second jeu de données, nous avons pu tout de même conserver `r nrow(pima2)` cas. `r course_link("L'ACP que nous avions réalisée sur ces données", course = 2, "acp")`
 nous montrait que la variance se répartir à 53% sur deux axes, mais qu'il faut considérer cinq axes pour capturer 90% de cette variance. Ceci suggère, comme la matrice de corrélation, que les différentes variables apportent chacune une information complémentaire. Au final, nous n'observions pas de séparation nette sur le graphique des individus de l'ACP entre la sous-population diabétique et celle qui ne l'est pas. Nous allons reconsidérer la question ici à l'aide de techniques plus spécifiques visant à *prédire* qui est diabétique ou non en fonction des huit (`pima1`) ou six (`pima2`) attributs à disposition, et ce, à l'aide de différents algorithmes de classification supervisée. Commençons par voir ce que cela donne avec l'ADL que nous connaissons maintenant bien, en utilisation, une validation croisée dix fois.
 
 ```{r}
@@ -247,7 +247,7 @@ summary(pima2_lda_conf, type = c("Fscore", "Recall", "Precision"))
 
 Nous avons 22% d'erreur avec `pima1` et 23% d'erreur avec `pima2`. Ces résultats se tiennent dans le cas présent. Ce n'est évidemment pas toujours le même résultat. Nous allons voir ce que cela donne avec d'autres algorithmes de classification dans la suite.
 
-## K plus proches voisins
+## K plus proches voisins {#kmeans}
 
 K plus proches voisins (*k-nearest neighbours* en anglais ou k-NN en abrégé) est certainement la technique la plus intuitive en classification supervisée. Malgré sa simplicité inhérente, elle offre de bonnes prestations. La classification supervisée s'effectue par une analyse de la matrice de [distances de Mahalanobis](https://qastack.fr/stats/62092/bottom-to-top-explanation-of-the-mahalanobis-distance) (équivalente à la distance euclidienne ou géométrique appliquée sur des données réduites de variance unitaire) entre un individu d'intérêt à reconnaître et les individus du set d'apprentissage.
 
@@ -287,7 +287,7 @@ summary(pima2_knn_conf, type = c("Fscore", "Recall", "Precision"))
 
 Avec 27% d'erreur, nous avons un résultat similaire encore une fois, mais toujours légèrement moins bon que l'ADL.
 
-## Quantification vectorielle
+## Quantification vectorielle {#lvq}
 
 Un des désavantages de la méthode des k plus proches voisins est que l'on doit conserver *toutes* les données du set d'apprentissage et confronter systématiquement tout nouvel individu à l'ensemble des cas de ce set. L'idée derrière la quantification vectorielle (*learning vector quantization* en anglais, LVQ en abrégé) est que les données initiales peuvent sans doute être synthétisées : des individus proches dans l'espace de Malahanobis peuvent être remplacés par des "individus moyens ou centroïdes" tout en apportant à peu près le même effet. Du coup, nous réduisons la quantité d'information à conserver et nous accélérons les calculs dans les phases de test et déploiement.
 
@@ -507,29 +507,6 @@ Maintenant que vous avez découvert différents algorithmes de classification su
 -   La répartition des individus entre les classes va influer les performances du classifieur. Il est souvent souhaitable d'avoir à peu près le même nombre de cas dans chaque classe. Mais dans une classification où le résultat global compte, une distribution proche de celle qui sera rencontrée dans les échantillons en test et en déploiement donne de meilleurs résultats pour, par exemple, l'erreur globale. **Attention !** Le point de référence dépend largement de la répartition des individus. Pour un classifieur binaire, si nous avons 50% des cas dans chaque classe, un classifieur naïf qui classerait tout le monde dans la classe la plus abondante ferait 50% d'erreur. C'est donc notre point de référence et le classifieur que nous construisons doit faire mieux que cela. S'il ne produit que 20% d'erreur, c'est donc une amélioration très nette des performances. Par contre, si nous avons une répartition 90% / 10% des individus entre les deux classes, notre classifieur naïf qui classe tout le monde dans la classe la plus abondante ne ferait déjà plus que 10% d'erreur. Dans ce dernier cas, notre classifieur doit donc faire mieux que cela. Ainsi, un classifieur qui montre les mêmes 20% d'erreur sera ici considéré comme très mauvais !
 
 **Préparez un schéma qui explicite votre méthode d'optimisation d'un classifieur, ainsi qu'une liste des éléments à prendre en compte sur base de tout ce que vous avez appris jusqu'ici. Ces aspects importants seront discutés en présentiel et seront cruciaux lorsque vous aurez à relever le challenge au module suivant.**
-
-```{=html}
-<!-- À vous de jouer ! {.unnumbered}
-
-Vous allez maintenant discuter par équipe ces différents aspects. **Les équipes seront désignées par vos encadrants. Ne créez encore aucun projet avant qu'il ne vous soit dit de le faire. Au sein de chaque équipe, un responsable de la création du "team" sera désigné, et ensuite, les autres participants se placeront dans ce même "team".**
-
-{r assign_C02Ga_optimisation_I, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("C02Ga_optimisation", part = "I",
-    url = "https://github.com/BioDataScience-Course/C02Ga_optimisation",
-    course.ids = c(
-      'S-BIOG-025'         = !"C02Ga_{YY}M_optimisation"),
-    course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-025'         = !"{W[7]+1} 9:00:00"),
-    course.ends = c(
-      'S-BIOG-025'         = !"{W[9]+4} 23:59:59"),
-    term = "Q1", level = 4, n = 4,
-    toc = "Optimisation de classifieur",
-    clone = TRUE)
--->
-```
 
 ##### À vous de jouer ! {.unnumbered}
 

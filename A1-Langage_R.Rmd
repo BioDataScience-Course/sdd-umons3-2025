@@ -19,7 +19,7 @@ La meilleure façon d'étudier R, **c'est en l'utilisant**. Les ingrédients pou
 
 Bien que cette approche de l'autoapprentissage soit certainement la plus efficace, il est quand même très difficile d'aborder un système aussi complexe que R tout seul depuis le début. Ce cours introductif est là pour vous mettre le pied à l'étrier, en vous familiarisant avec les notions clefs à comprendre pour pouvoir comprendre et décrypter l'abondante littérature sur R.
 
-## Introduction au langage de R
+## Introduction au langage de R {#intror}
 
 > L'expérience montre que l'interface graphique, si elle facilite les premiers pas, est bien souvent contre-productive parce que l'utilisateur guidé par les menus et les boites de dialogues se lance moins volontiers dans l'écriture de scripts et dans l'exploration des nombreuses fonctions qui ne sont pas reprises dans ces menus. Ne vous laissez donc pas intimider, et dites-vous bien que vous allez largement rattraper le temps passé à apprendre le langage S, grâce aux habitudes de travail efficaces que vous aurez acquises en même temps !
 
@@ -109,7 +109,7 @@ Il est impossible de connaître par cœur la syntaxe des milliers de fonctions q
 
 > La rubrique "**See also**" est extrêmement pratique pour en apprendre plus sur les fonctions apparentées à celles que l'on utilise... et donc, de proche en proche, pour en apprendre plus sur le langage de R tout entier !
 
-## Les packages
+## Les packages {#lespackages}
 
 R est modulaire (on peut lui rajouter des fonctions). De plus, comme il contient un très grand nombre de fonctions, toutes ne sont pas chargées en mémoire par défaut. Les fonctions optionnelles sont installables à l'aide de **packages** que l'on peut également charger à partir du site de R à [*http://cran.r-project.org*](http://cran.r-project.org/). Les packages de R sont équivalents aux toolboxes de Matlab (pour ceux qui connaissent ce dernier logiciel)... Sauf que... les toolboxes de Matlab sont payantes (et chères) et que les packages de R sont, eux, gratuits !
 
@@ -133,13 +133,13 @@ R est modulaire (on peut lui rajouter des fonctions). De plus, comme il contient
 
 > Remarque : il est évidemment idiot, et donc interdit, de décharger le package {base} de la mémoire, car celui-ci contient les fonctions de ... base de R, sans lesquelles ce dernier ne peut pas fonctionner, et donc même pas se refermer proprement (c'est-à-dire, en sauvegardant les variables courantes, sic !). Pour la petite histoire, l'idée de décharger la package de base de R n'avait tellement pas effleuré l'esprit de ses programmeurs qu'ils n'avaient même pas pensé à interdire cette opération dans les premières versions de R. Ce n'est qu'après plusieurs années qu'un petit malin a découvert la faille... qui a été très rapidement corrigée.
 
-## Petite démo
+## Petite démo {#petitedemo}
 
 -   Il est temps de découvrir un peu différentes possibilités de R tout en faisant une petite pose typographique. Entrez `demo()`. Vous obtenez la liste des démos disponibles. Faites ensuite `demo(graphics)` (passez de la fenêtre graphique à la console alternativement et tapez `{enter}` dans la fenêtre console pour progresser dans la démo), puis `demo(image)`. Comme vous pouvez le constater, R a des possibilités graphiques très poussées, y compris le formatage des équations mathématiques dans les figures, chose peu courante, mais très utile pour obtenir des graphiques de qualité publication.
 
 -   Pour avoir une impression du type de sorties pour les résultats statistiques, entrez `demo(lm.glm)` pour les modèles linéaires et linéaires généralisés (ANOVA, régression...) et `demo(nlm)` pour des exemples de modèles non linéaires. Vous ne devez pas nécessairement tout comprendre, mais examinez les sorties textuelles pour vous faire une idée de la puissance de R. Testez aussi les autres démos si cela vous amuse...
 
-## Bases du langage R
+## Bases du langage R {#basedulangager}
 
 ### Quelques notions sur les variables
 

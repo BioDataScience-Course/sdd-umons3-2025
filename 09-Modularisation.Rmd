@@ -14,7 +14,7 @@
 
 Pour comprendre les notions dans ce module, vous devez être capables de travailler dans RStudio et d'être familiarisés avec les scripts R et les fichiers R Markdown. Les fonctions sont, dans R, les briques de construction.
 
-## Les fonctions
+## Les fonctions {#fonctions}
 
 À chaque fois que vous utilisez R vous employez des fonctions sans plus y porter attention comme la fonction `mean()` par exemple. Vous pouvez cependant écrire vos propres fonctions qui seront adaptées à votre problématique. La règle est assez simple : **si vous répétez des blocs de codes plus de deux ou trois fois, il faut réaliser une fonction**.
 
@@ -42,26 +42,26 @@ Plusieurs fonction portant sur une même problématique se regroupe dans un pack
 
 S'il y a bien une question qui va vous prendre la tête et qui requiert généralement un certain temps de réflexion c'est le nom de votre fonction et de ses arguments. Un nom mal choisi et/ou farfelu voue votre fonction à l'oubli. Il faut essayer d'avoir un nom court et évoquant le rôle de la fonction. Essayez de respecter la convention suivante qui veut que le nom d'une fonction soit un verbe et que ses arguments soient des noms. De plus, il est de plus en plus courant de respecter le "snake_case" (tout est en minuscule séparé par des sous-tirets)
 
-```{block, type = "warning"}
-Au final, vous verrez que R n'est pas homogène. R est un language qui évolue au cours du temps et ce depuis 1993, ce qui explique ce manque d'homogénéité. Cependant, restez cohérent, fixez vous vos propres conventions et respectez-les. 
+```{block, type="warning"}
+Au final, vous verrez que R n'est pas homogène. R est un langage qui évolue au cours du temps et ce depuis 1993, ce qui explique ce manque d'homogénéité. Cependant, restez cohérent, fixez vous vos propres conventions et respectez-les. 
 
 Imaginons que vous écrivez plusieurs fonctions : 
 
-- CV()
+- `CV()`
 
-- Rescale01()
+- `Rescale01()`
 
-- reg_lin()
+- `reg_lin()`
 
-- TriMesTer()
+- `TriMesTer()`
 
-- MonIncroyable.fonction()
+- `MonIncroyable.fonction()`
 
 Ne faites pas cela ! Soyez cohérent dans le nommage et préférez soit le "snake_case" (tout en minuscule avec les mots séparés par des traits soulignés), soit le "camelCase" (mots accolés dont la première lettre est en majuscule, à l'exception du premier mot) sans mélanger ces deux formes.
 
-- ceci_est_du_snake_case
+- `ceci_est_du_snake_case`
 
-- ceciEstDuCamelCase
+- `ceciEstDuCamelCase`
 ```
 
 Tout comme pour le nom des fonctions, le nom des arguments est important. Les arguments se doivent d'être clairs. Il existe néanmoins des conventions d'usage.
@@ -82,7 +82,7 @@ Tout comme pour le nom des fonctions, le nom des arguments est important. Les ar
 
 Vous retrouverez en plus des arguments comme `na.rm=`. Il s'agit également d'arguments conventionnels. Si vous avez le besoin d'éliminer les valeurs manquantes de vos calculs dans la fonction, ajoutez-lui cet argument. Ne le nommez pas autrement pour le plaisir, car les autres utilisateurs seront déboussolés par vos choix inhabituels. Par exemple, si vous avez opté pour le snake_case, réfrénez-vous à écrire `na_rm=`. C'est, certes, plus cohérent par rapport à vos propres conventions, mais cela sort de la convention générale et la différence entre `.` et `_` est suffisamment subtile à la lecture du code pour que de nombreuses personnes ne le remarquent même pas et commettent ensuite une erreur !
 
-## Documenter sa fonction
+## Documenter sa fonction {#documenter}
 
 La documentation d'une fonction est une étape souvent négligée. Cependant, une fonction bien documentée est une fonction qui sera employée à l'avenir. Les fonctions mal documentées sont des fonctions qui seront généralement peu employées, souvent mal employées et enfin oubliées. Lorsque l'on souhaite écrire une fonction, il convient de la documenter directement. La documentation se fait par le biais de deux outils principalement que vous pouvez inclure dans un package (voir module 12) : la page d'aide de la fonction et une "vignette".
 
@@ -125,7 +125,25 @@ vignette(package = 'dplyr')
 vignette("dplyr", package = 'dplyr')
 ```
 
-#### Pour en savoir plus {.unnumbered}
+##### À vous de jouer ! {.unnumbered}
+
+```{r assign_D08Ga_project_II, echo=FALSE, results='asis'}
+if (exists("assignment"))
+  assignment("D08Ga_project", part = "II",
+    url = "https://github.com/BioDataScience-Course/D08Ga_project",
+    course.ids = c(
+      'S-BIOG-043'         = !"D08Ia_{YY}M_project"),
+    course.urls = c(
+      'S-BIOG-043'         = !"{assign_url$D08Ga_project}"),
+    course.starts = c(
+      'S-BIOG-043'         = !"{class1_start(mod, 'D08')}"),
+    course.ends = c(
+      'S-BIOG-043'         = !"{n4_end(mod, 'D10')}"),
+    term = "Q1", level = 4, n = 1,
+    toc = "Organisation d'un projet (partie II)")
+```
+
+##### Pour en savoir plus {.unnumbered}
 
 -   [Écrire vos propres fonctions R](http://www.sthda.com/french/wiki/ecrire-vos-propres-fonctions-r) stdah explique l'écriture des fonctions dans R en français.
 
@@ -136,3 +154,14 @@ vignette("dplyr", package = 'dplyr')
 -   [Chapter Functions in Advance R](http://adv-r.had.co.nz/Functions.html) Un autre chapitre consacré à l'écriture de fonctions en anglais. Il permet de compléter vos connaissances suite à la lecture du lien précédent.
 
 -   [Chapter 10: Writing your own functions in An introduction to R](https://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-functions) An introduction to R est le document officiel consacré à R. La section 10 est consacrée à l'écriture de fonctions, en anglais.
+
+## Récapitulatif des exercices {#recapitulatifd09}
+
+Dans ce module 9, vous aviez à réaliser les exercices suivants :
+
+`r show_ex_toc()`
+
+##### Progression {.unnumbered}
+
+`r launch_report("09", height = 800)`
+

@@ -18,7 +18,7 @@ SciViews::R("ml", lang = "fr")
 
 Ce module constitue le troisième volet d'une trilogie consacrée à la classification supervisée. Le niveau de difficulté allant crescendo, assurez-vous d'avoir bien assimilé toutes les notions importantes et les subtilités étudiées dans les deux premiers volets avant d'aborder celui-ci.
 
-## Métriques et proportions {#metriqueproportions}
+## Métriques et proportions {#metriquesproportions}
 
 À partir du moment où la classification ne se fait pas sans erreurs, nous avons la présence de faux positifs et de faux négatifs. Le fait d'être un faux positif ou un faux négatif dépend essentiellement du point de vue, c'est-à-dire, de la classe d'intérêt. Cependant ces erreurs restent des erreurs, quel que soit le point de vue (sauf si nous fusionnons les classes confondues, bien évidemment). Un élément important à considérer est que le taux d'erreur, qu'il soit global ou local tel que mesuré, par exemple, par le rappel ou la précision pour une classe cible **dépend énormément des proportions d'occurrences observées dans les différentes classes**, et ce, aussi bien dans la phase d'apprentissage que de test ou de déploiement.
 
@@ -113,7 +113,7 @@ Enfin, il existe des techniques d'augmentation du nombre d'items par classe via 
 
 Voici comment nous pouvons surpondérer les classes plus rares par duplication, dans le cas de notre jeu de données `pima1`. Nous commençons par définir une fonction `over_undersample()` que vous pouvez réutiliser dans vos projets ou dans le challenge[^03-classification-iii-1]. Vous lui donnez le vecteur de classes dont il faut modifier les proportions. Vous donnez aussi un vecteur de pondérations (1 = garder tout, \< 1 = sous échantillonner la classe dans ces proportions, et \> 1 = suréchantillonner la classe). Une pondération de 2 signifie dupliquer tous les items dans la classe, par exemple. Si vous ne donnez pas de vecteur de pondération, la fonction homogénéisera les proportions dans toutes les classes automatiquement. Un argument `total=` indique la taille souhaitée du jeu de données rééchantillonné. Enfin, l'argument `min_warning` permettra d'imprimer un message d'avis si l'effectif d'un classe est inférieur à cette valeur (10 par défaut). Le résultat renvoyé doit être utilisé pour sélectionner les lignes du tableau (voir exemple d'application ci-dessous).
 
-[^03-classification-iii-1]: La fonction `over_undersample()` sera incluse dans la prochaine version du package {mlearning}, donc pour la SciViews Box 2025.
+[^03-classification-iii-1]: La fonction `over_undersample()` sera incluse dans la prochaine version du package {mlearning}.
 
 ```{r}
 over_undersample <- function(x, weights = NULL,
@@ -243,7 +243,7 @@ if (exists("assignment"))
     toc = "Métriques en fonction des proportions & SVM (partie I)")
 ```
 
-## Courbes ROC
+## Courbes ROC {#roc}
 
 Avant d'aborder les courbes ROC, nous devons nous concentrer sur le **seuil de détection** (*cutoff* en anglais). Dans un classifieur à deux classes avec la forêt aléatoire, un vote à la majorité des arbres revient à dire que plus de la moitié des arbres a voté pour la classe retenue. Ceci correspond donc à un seuil de 50%. Mais qu'est-ce qui vous empêcherait d'utiliser un seuil différent ? Intuitivement, nous réalisons tout de suite que si nous **durcissons** le seuil pour la classe cible (par exemple, un individu ne sera déclaré de cette classe, appelée *A*, qu'à partir du moment où 70% ou plus des arbres ont voté en ce sens), nous aurons au final *moins* d'individus *A* dans notre prédiction. Cela aura probablement pour conséquence d'augmenter la précision (car plus de cas difficiles à discriminer auront été attribués à la classe *B*, or il est possible de montrer qu'une partie importante de l'erreur se situe justement dans ces cas moins nets). En revanche, cela diminue le rappel (car parmi ces cas difficiles, il y a tout de même des *A* qui ne sont plus classés comme tels). Rappelez-vous toujours du fameux compromis rappel - précision. Choisir un seuil moins sensible, par exemple 30%, aura l'effet inverse d'augmenter les prédictions *A*, ainsi que le rappel, mais de diminuer précision et sensibilité. Sachant cela, nous pouvons nous demander s'il existe un seuil optimal. La courbe ROC permet de le déterminer.
 
@@ -485,24 +485,6 @@ Malheureusement, l'apprentissage profond nécessite une quantité importante de 
 
 Le jeu de données [MNIST](http://yann.lecun.com/exdb/mnist/) est un jeu de données ultra-classique et historique dans le développement de l'apprentissage profond. Il s'agit de plusieurs dizaines de milliers de chiffres manuscrits qui ont été numérisés. Le but est de créer un classifieur capable de reconnaître l'écriture manuscrite de nombres en reconnaissance, donc les chiffres de 0 à 9. La résolution de ce problème dans R est présentée [ici](https://tensorflow.rstudio.com/tutorials/beginners/). C'est un excellent point de départ si vous voulez vous lancer dans l'apprentissage profond. Dans le cadre de ce cours, nous n'irons cependant pas plus loin. Sachez toutefois que les meilleurs classifieurs en apprentissage profond sont actuellement capables de faire aussi bien, *voire mieux* dans la lecture de nombres en écriture manuscrite qu'un opérateur humain !
 
-```{=html}
-<!--{r assign_C02Ga_optimisation_II, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("C02Ga_optimisation", part = "II",
-    url = "https://github.com/BioDataScience-Course/C02Ga_optimisation",
-    course.ids = c(
-      'S-BIOG-025'         = !"C02Ga_{YY}M_optimisation"),
-    course.urls = c(
-      'S-BIOG-025'         = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-025'         = !"{W[7]+1} 9:00:00"),
-    course.ends = c(
-      'S-BIOG-025'         = !"{W[9]+5} 23:59:59"),
-    term = "Q1", level = 4, n = 4,
-    toc = "Optimisation de classifieur",
-    clone = TRUE)
--->
-```
 ##### À vous de jouer ! {.unnumbered}
 
 `r learnr("C03Lb_ml3", title = "SVM et réseaux de neurones", toc = "SVM et réseaux de neurones")`
