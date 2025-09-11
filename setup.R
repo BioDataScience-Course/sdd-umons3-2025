@@ -70,9 +70,9 @@ rownames(learnitdown$mod) <- learnitdown$mod$id
 learnitdown$assign_url <- list(
   # SDD3
   C00Qa_issues         = "https://classroom.github.com/a/szP1qZ9s",
-  C01Ia_debug          = "https://classroom.github.com/a/...",
-  C01Ib_lda            = "https://classroom.github.com/a/...",
-  C01Ga_metrics        = "https://classroom.github.com/a/...",
+  C01Ia_debug          = "https://classroom.github.com/a/J8pmAcmX",
+  C01Ib_lda            = "https://classroom.github.com/a/KebgqQXM",
+  C01Ga_metrics        = "https://classroom.github.com/a/6YLX7ccV",
   C02Ia_zoo            = "https://classroom.github.com/a/...",
   C03Ia_cardiovascular = "https://classroom.github.com/a/...",
   C03Ca_ml_wine        = "https://classroom.github.com/a/...",
