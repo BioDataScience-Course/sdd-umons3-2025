@@ -24,13 +24,13 @@ Vous devez être à l'aise dans l'utilisation de R, RStudio, (R) Markdown/Quarto
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(159, height = 270, toc = NULL)`
+`r h5p(159, "C01Aa_tools", height = 270, toc = NULL)`
 
 Vous devez maîtriser les bases de Git et de GitHub (avoir un compte GitHub, être capable de cloner un dépôt localement, travailler avec l'onglet **Git** de RStudio pour faire un "commit", "push" et "pull").
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(160, height = 270, toc = NULL)`
+`r h5p(160, "C01Ab_git_summary", height = 270, toc = NULL)`
 
 L'utilisation de tous ces outils a été expliquée dans les cours précédents [SDD I](https://wp.sciviews.org/sdd-umons) et [SDD II](https://wp.sciviews.org/sdd-umons2). Nous ne reviendrons pas dessus et cette matière est considérée comme acquise.
 
@@ -38,7 +38,7 @@ Outre les outils, ce cours s'appuie sur des notions que nous avons déjà abord�
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(161, height = 270, toc = NULL)`
+`r h5p(161, "C01Ac_classification", height = 270, toc = NULL)`
 
 Assurez-vous que vous possédez encore bien les bases de l'utilisation de R pour importer, remanier, visualiser des données, pour réaliser un test d'hypothèse, une régression linéaire et une analyse multivariée. Prenez également connaissance des **nouveautés** introduites dans la `r !{"SciViews Box {svbox}"}` au travers du learnr suivant.
 
@@ -76,7 +76,7 @@ Un jeu de données est composé d'observations (les lignes du tableau) et de var
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(162, height = 270, toc = "Vocabulaire de la classification supervisée")`
+`r h5p(162, "C01Ha_vocabulaire", height = 270, toc = "Vocabulaire de la classification supervisée")`
 
 En taxonomie assistée par ordinateur, nous cherchons donc à accélérer le dépouillement de gros échantillons en identifiant de manière automatique (ou semi-automatique) la faune et/ou la flore qui les composent. L'approche le plus souvent employée est l'analyse d'image pour mesurer des caractères visuels sur ces photographies. Il s'agit donc d'une classification sur base de critères morphologiques. Les organismes qui composent la faune et/ou la flore sont les items et les critères morphologiques sont les attributs. Vous avez certainement déjà rêvé d'avoir quelqu'un qui fait votre travail à votre place... pourquoi pas votre ordinateur ?
 
@@ -106,7 +106,7 @@ Il faut s'attendre à ce que dans quelques années, des algorithmes plus efficac
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(163, height = 270, toc = "Set d'apprentissage et de test")`
+`r h5p(163, "C01Hb_set_apprentissage", height = 270, toc = "Set d'apprentissage et de test")`
 
 ### Conditions d'application {#condiapplication}
 
@@ -128,7 +128,7 @@ En pratique, ces conditions d'application ne sont *pas* remplies strictement dan
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(164, height = 270, toc = "Condition d'application")`
+`r h5p(164, "C01Hc_condition_application", height = 270, toc = "Condition d'application")`
 
 ## Mesure de performances {#perf}
 
@@ -192,7 +192,7 @@ knitr::kable(conf_mat,
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(165, height = 270, toc = "Vrais et faux positifs ou négatifs")`
+`r h5p(165, "C01Hd_confusion", height = 270, toc = "Vrais et faux positifs ou négatifs")`
 
 ### Métriques de performance {#metriqueperformance}
 
@@ -259,7 +259,7 @@ recallB
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(168, height = 270, toc = "Métriques : rappel")`
+`r h5p(168, "C01He_recall", height = 270, toc = "Métriques : rappel")`
 
 -   **Spécificité** (*specificity*)
 
@@ -318,7 +318,7 @@ Dans d'autres situations, il vaut mieux au contraire, favoriser la précision. S
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(169, height = 270, toc = "Choix de métriques")`
+`r h5p(169, "C01Hf_precision", height = 270, toc = "Choix de métriques")`
 
 Ces deux exemples sont extrêmes. Dans la majorité des cas, nous recherchons plutôt un bon équilibre entre rappel et précision, et ce, pour toutes les classes. Les mesures de **score _F_** tentent de synthétiser rappel et précision, ou rappel et spécificité en un seul nombre pour une classe donnée, afin de représenter au mieux cette recherche d'un compromis entre les deux.
 
@@ -639,7 +639,7 @@ Notre jeu de données ne reprenait que les données du set d'apprentissage et du
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(170, height = 270, toc = "Déploiement d'un classifieur")`
+`r h5p(170, "C01Hg_predict", height = 270, toc = "Déploiement d'un classifieur")`
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -663,7 +663,7 @@ if (exists("assignment"))
 
 Dans ce module 1 vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("01")`
 
 ##### Progression {.unnumbered}
 

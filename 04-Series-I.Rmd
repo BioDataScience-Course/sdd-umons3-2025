@@ -182,7 +182,7 @@ Au travers de ces quatre exemples concrets, nous constatons que les séries spat
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(26, height = 270, toc = "Représentation des séries chronologiques")`
+`r h5p(26, "C04Ha_plot", height = 270, toc = "Représentation des séries chronologiques")`
 
 ## Qu'est-ce qu'une série chronologique ? {#seriechronologique}
 
@@ -305,7 +305,7 @@ N'essayez pas d'utiliser la sélection à l'aide de `[,]` sur un objet **ts** co
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(27, height = 270, toc = "Création d'un objet ts")`
+`r h5p(27, "C04Hb_ts", height = 270, toc = "Création d'un objet ts")`
 
 ### Séries à trous {#seriestrous}
 
@@ -323,7 +323,7 @@ De manière générale, nous avons toujours intérêt à réaliser une série r�
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(28, height = 270, toc = "Type de série chronologique")`
+`r h5p(28, "C04Hc_series", height = 270, toc = "Type de série chronologique")`
 
 ##### À retenir {.unnumbered}
 
@@ -361,7 +361,7 @@ Les descripteurs statistiques tels que la moyenne, la médiane, l'écart type, e
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(249, height = 270, toc = "Statistiques glissantes")`
+`r h5p(249, "C04Hd_statslides", height = 270, toc = "Statistiques glissantes")`
 
 ##### Exemple {.unnumbered}
 
@@ -414,7 +414,7 @@ statsl2$xcut
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(250, height = 270, toc = "Arguments de stat.slide()")`
+`r h5p(250, "C04He_stat.slide", height = 270, toc = "Arguments de stat.slide()")`
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -458,7 +458,7 @@ boxplot(split(tser, tser.cycle), names = month.abb, col = "cornsilk")
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(251, height = 270, toc = "Début d'une série")`
+`r h5p(251, "C04Hf_time", height = 270, toc = "Début d'une série")`
 
 Une autre manipulation courante de l'axe temporel consiste à **agréger** les données en des pas de temps plus longs. `aggregate()` permet de réduire le nombre d'observations en diminuant la fréquence. Par exemple pour transformer la série `tser` qui a un pas de temps d'un mois en une série de pas de temps d'un trimestre, en calculant des **moyennes trimestrielles**, nous ferons (puisqu'il y a quatre trimestres dans une année, nous indiquons 4 ici) :
 
@@ -478,7 +478,7 @@ La fonction `stats::lag()` permet de décaler la série en arrière dans le temp
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(252, height = 270, toc = "Réduction de séries")`
+`r h5p(252, "C04Hg_window", height = 270, toc = "Réduction de séries")`
 
 ##### Exercez-vous ! {.unnumbered}
 
@@ -532,7 +532,7 @@ On retrouve bien une cross-corrélation maximale pour un décalage de cinq entre
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(253, height = 270, toc = "Autocorrélation de séries")`
+`r h5p(253, "C04Hh_acf", height = 270, toc = "Autocorrélation de séries")`
 
 ##### Exercez-vous {.unnumbered}
 
@@ -623,7 +623,7 @@ Parmi nos séries d'exemples, `co2` présente une tendance générale croissante
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(254, height = 270, toc = "Analyse spectrale d'une série")`
+`r h5p(254, "C04Hi_spectrum", height = 270, toc = "Analyse spectrale d'une série")`
 
 #### Analyse spectrale croisée
 
@@ -681,7 +681,7 @@ Selon l'objet de l'étude entreprise, il peut être tout à la fois aussi import
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(255, height = 270, toc = "Tendance générale")`
+`r h5p(255, "C04Hj_trend", height = 270, toc = "Tendance générale")`
 
 Il est possible de tester de manière non paramétrique l'existence d'une tendance. Si nous calculons une corrélation linéaire entre les valeurs successives d'un processus et les dates d'observations (définies par une suite d'entiers croissants), on va pouvoir tester si la tendance générale est significativement linéaire, croissante ou décroissante. Cependant, la tendance générale peut être présente et ne pas correspondre à une droite. C'est pourquoi, pour tester l'existence d'une tendance de forme quelconque, on va remplacer les valeurs observées par leurs *rangs*, puis calculer leur **corrélation non paramétrique de Spearman** $\rho$ avec le temps.
 
@@ -926,7 +926,7 @@ if (exists("assignment2"))
 
 Dans ce module 4, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("04")`
 
 ##### Progression {.unnumbered}
 

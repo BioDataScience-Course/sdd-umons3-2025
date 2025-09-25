@@ -159,7 +159,7 @@ if (exists("assignment"))
 
 Dans ce module 9, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("09")`
 
 ##### Progression {.unnumbered}
 

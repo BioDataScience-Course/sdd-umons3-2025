@@ -84,7 +84,7 @@ if (exists("assignment"))
 
 Dans ce module 10, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("10", finalize = TRUE)`
 
 ##### Progression {.unnumbered}
 

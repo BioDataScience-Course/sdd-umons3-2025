@@ -26,7 +26,7 @@ Ce problème nous ramène, en réalité à des calculs basiques de probabilités
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(239, height = 270, toc = "Dépistage d'une maladie rare")`
+`r h5p(239, "C03Ha_screening", height = 270, toc = "Dépistage d'une maladie rare")`
 
 Pour illustrer une nouvelle fois ce phénomène, prenons un cas extrême. Admettons que notre classifieur soit capable de discerner **sans aucune erreur** une classe parmi deux possibles, disons la classe A. Quel sera le rappel ? Ça, c'est facile, comme tous les individus A seront classés comme A par notre classifieur, nous n'aurons *aucun* faux négatif. Donc, le rappel qui est $TP / (TP + FN)$ vaudra toujours 1 ou 100%, et ce, quelles que soient les proportions relatives de A et de B dans notre échantillon. **En absence d'erreur, il n'y a pas d'ambiguïté ni de dépendance aux proportions relatives.**
 
@@ -38,7 +38,7 @@ Par contre, calculons maintenant la précision pour A, si nous savons que notre 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(240, height = 270, toc = "Calcul de précision")`
+`r h5p(240, "C03Hb_classifiers", height = 270, toc = "Calcul de précision")`
 
 **Dans le second cas, la précision pour la classe A a diminué de manière très nette, rien qu'en changeant les proportions relatives de A et de B dans notre échantillon, les performances de notre classifieur n'ayant absolument pas été modifiées entre les deux situations.** Nous venons de démontrer que certaines métriques, dès qu'il y a la moindre erreur de classification possible, sont très sensibles aux proportions relatives des individus dans les classes. Notons que la diminution de la précision dans le cas (2) est liée à la fois à la diminution des vrais positifs (puisqu'il y a moins de A dans notre set), et à l'augmentation des faux positifs, qui dépendent eux de la quantité de B en augmentation.
 
@@ -56,7 +56,7 @@ Une première conséquence intéressante de ce que nous venons d'observer est qu
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(241, height = 270, toc = "Proportions et taux global de reconnaissance")`
+`r h5p(241, "C03Hc_proportions", height = 270, toc = "Proportions et taux global de reconnaissance")`
 
 Reprenons l'exemple de nos Amérindiens de la tribu Pima confrontés au diabète (en n'utilisant que les cas complets).
 
@@ -101,7 +101,7 @@ Le rappel pour la classe `pos` est monté de 60% (`pima1`) à 80% (`pima1b`). En
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(242, height = 270, toc = "Rappel avec proportions modifiées")`
+`r h5p(242, "C03Hd_recall", height = 270, toc = "Rappel avec proportions modifiées")`
 
 ```{block, type = 'note'}
 Il existe plusieurs approches pour modifier les proportions relatives dans vos classes pour les sets de test et d'apprentissage. Celle que nous venons d'utiliser consiste à **réduire** le nombre d'items des classes les plus abondantes. Ici, nous comprenons intuitivement qu'une perte d'information n'est pas une bonne chose.
@@ -204,7 +204,7 @@ Dans le cas où les probabilités *a priori* ne sont pas calculée à partir des
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(243, height = 270, toc = "Probabilités a priori et set d'apprentissage")`
+`r h5p(243, "C03He_prior", height = 270, toc = "Probabilités a priori et set d'apprentissage")`
 
 De nombreux algorithmes de classification peuvent nous renvoyer des probabilités d'appartenir à une classe (la prédiction de la classe n'est que celle qui a la probabilité la plus élevée, en réalité). L'arbre de probabilités (résolution graphique), ou un calcul simple de probabilités faisant intervenir le théorème de Bayes (résolution numérique) permet de combiner les probabilités *a priori* et les probabilités issues du classifieur pour calculer ce que nous appelons les **probabilités *a posteriori***, c'est-à-dire les probabilités d'être A ou B approchant les valeurs que nous observerons en déploiement de notre classifieur. Ce calcul nous l'avions déjà fait dans le `r course_link("module 6 du cours I", 1,page = "proba", anchor = "th%C3%A9or%C3%A8me-de-bayes")`. Nous ne redéveloppons pas ces calculs ici. Encore une fois, vous êtes invité à relire cette section si vous ne vous en souvenez plus.
 
@@ -255,7 +255,7 @@ La **courbe ROC (pour "Receiver Operating Characteristic")** est une courbe qui 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(244, height = 270, toc = "Courbe ROC")`
+`r h5p(244, "C03Hf_roc", height = 270, toc = "Courbe ROC")`
 
 Tout d'abord, il nous faut obtenir les "probabilités". Selon les algorithmes ce sont réellement des probabilités, ou alors, des nombres entre 0 et 1 qui ont des propriétés similaires. Dans le cas de la forêt aléatoire, c'est la proportion des arbres qui ont voté pour la classe. On parlera alors plus justement d'un nombre qui quantifie l'appartenance à la classe (*membership* en anglais), plutôt que de probabilités. Voici comment nous pouvons obtenir ces appartenances :
 
@@ -366,11 +366,11 @@ Bien qu'il ne semble pas évident au premier abord que SVM ne soit défini que p
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(245, height = 270, toc = "SVM et nombre de classes")`
+`r h5p(245, "C03Hg_svm", height = 270, toc = "SVM et nombre de classes")`
 
 Par exemple pour trois classes A, B, et C, dans l'approche "macro" nous comparerons A avec B + C en un classifieur unique pour décider si l'item appartient à A ou non. Dans l'approche "micro", nous comparerons A avec B d'un côté, puis A avec C d'un autre côté (deux classifieurs différents). Nous établirons ensuite un consensus entre ces deux classifieurs pour décider si l'item appartient à la classe A ou non. Ensuite dans les deux approches, nous faisons de même en ciblant cette fois-ci la classe B, et puis finalement la classe C. En rassemblant tous les résultats et en comparant les probabilités d'appartenance aux différentes classes renvoyées par les classifieurs individuels binaires, nous obtenons finalement un classifieur global multiclasse. C'est ainsi que SVM multiclasse fonctionne.
 
-```{block, type = 'info'}
+```{block, type='info'}
 La décomposition d'un classifieur multiclasses en une série de classifieurs binaire par approche "macro" ou "micro" est utile en SVM. Elle l'est aussi pour établir des métriques de performance globales sur base de métriques qui ne se calculent normalement qu'avec deux classes. Nous l'avons déjà abordé dans le module précédent.
 
 Par exemple, dans le cas du score *F*, nous pouvons calculer un score *F* global pour l'ensemble d'un classifieur multiclasses en moyennant les scores *F* de chaque classe. Par contre, comme deux approches co-existent, nous avons donc deux versions : le score *F* "micro" et le score *F* "macro". Le premier déterminera une balance entre les comparaisons deux à deux (un comparé à un) de toutes les classes, tandis que le second envisagera le problème de manière plus globale (un comparé à tous). Les deux points de vue se complètent plus qu'ils ne s'opposent.
@@ -585,7 +585,7 @@ Vous pouvez soumettre vos résultats pendant une période de temps précise via 
 
 Dans ce module 3, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("03")`
 
 ##### Progression {.unnumbered}
 

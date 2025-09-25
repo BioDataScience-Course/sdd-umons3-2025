@@ -20,13 +20,13 @@ La matrice de confusion et les métriques qui en sont dérivées doivent aussi �
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(181, height = 270, toc = NULL)`
+`r h5p(181, "C02Aa_metriques", height = 270, toc = NULL)`
 
 Enfin, vous devez être également capable de créer un classifieur avec R (en utilisant l'ADL).
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(182, height = 270, toc = NULL)`
+`r h5p(182, "C02Ab_ml_lda", height = 270, toc = NULL)`
 
 S'il subsiste des doutes ou des incompréhensions pour ces aspects clés de la classification supervisée, vous feriez mieux d'approfondir le module \@ref(classif1) *avant* d'aborder celui-ci.
 
@@ -44,13 +44,13 @@ La **validation croisée** permet de résoudre ce dilemme en utilisant en fin de
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(183, height = 270, toc = "Principe de la validation croisée.")`
+`r h5p(183, "C02Ha_validation_croisee", height = 270, toc = "Principe de la validation croisée.")`
 
 Au final, nous aurons utilisé tous les individus à la fois en apprentissage et en test, mais jamais simultanément. Le rassemblement des prédictions obtenues à chaque étape (en sommant les différentes matrices de confusion) nous permet d'obtenir une grosse matrice de confusion qui contient le même nombre d'individus que l'ensemble de notre jeu de données initial. Naturellement, nous n'avons pas le même classifieur à chaque étape, et celui-ci n'est pas aussi bien construit que s'il utilisait véritablement *toutes* les observations. Mais plus le découpage est fin et plus nous nous en approchons. À la limite, pour *n* observations, nous pourrions réaliser *k* = *n* sous-ensembles, c'est-à-dire que chaque sous-ensemble contient un et un seul individu. Nous avons alors à chaque fois le classifieur le plus proche possible de celui que l'on obtiendrait avec véritablement toutes les observations puisqu'à chaque étape nous ne perdons qu'un seul individu en phase d'apprentissage. La contrepartie est un temps de calcul potentiellement très, très long puisqu'il y a énormément d'étapes. **Cette technique porte le nom de validation par exclusion d'une donnée ou *leave-one-out cross-validation* en anglais, LOOCV en abrégé**. À l'autre extrême, nous pourrions utiliser *k* = 2. Mais dans ce cas, nous n'utilisons que la moitié des observations en phase d'apprentissage à chaque étape. C'est le plus rapide, mais le moins exact.
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(184, height = 270, toc = "Principe de la validation par exclusion d'une donnée.")`
+`r h5p(184, "C02Hb_valid_exclusion", height = 270, toc = "Principe de la validation par exclusion d'une donnée.")`
 
 En pratique, un compromis entre exactitude et temps de calcul nous mène à choisir souvent la **validation croisée dix fois** (*ten-fold cross-validation* en anglais). Nous divisons aléatoirement en dix sous-ensembles d'à peu près le même nombre d'individus et nous répétons donc l'opération apprentissage -\> test seulement dix fois. Chacun des dix classifieurs a donc été élaboré avec 90% des données totales, ce qui représente souvent un compromis encore acceptable pour estimer les propriétés qu'aurait le classifieur réalisé avec 100% des données. Toutefois, si nous constatons que le temps de calcul est raisonnable, rien ne nous empêche d'augmenter le nombre de sous-ensembles, voire d'utiliser la version par exclusion d'une donnée, mais en pratique nous observons tout de même que cela n'est pas raisonnable avec de très gros jeux de données et avec les algorithmes les plus puissants, mais aussi les plus gourmands en temps de calcul comme la forêt aléatoire (ou les réseaux de neurones que nous aborderons dans le prochain module).
 
@@ -116,7 +116,7 @@ Le résultat est le même. Donc, nous venons de montrer que, dans le cas de ce j
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(185, height = 270, toc = "Utilisation de la fonction cvpredict().")`
+`r h5p(185, "C02Hc_cvpredict", height = 270, toc = "Utilisation de la fonction cvpredict().")`
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -259,7 +259,7 @@ Un seul paramètre doit donc être défini : *k*, représentant le nombre d'ind
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(186, height = 270, toc = "Principe des K plus proches voisins")`
+`r h5p(186, "C02Hd_knn", height = 270, toc = "Principe des K plus proches voisins")`
 
 ### Pima avec k-NN
 
@@ -299,7 +299,7 @@ En plus du paramètre *k*, il faut donc également définir `size=`, le nombre d
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(187, height = 270, toc = "Principe de la quantification vectorielle")`
+`r h5p(187, "C02He_lvq", height = 270, toc = "Principe de la quantification vectorielle")`
 
 ### Pima avec LVQ
 
@@ -482,7 +482,7 @@ Effectivement, avec un petit peu moins de 22%, c'est l'un des meilleurs scores j
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(188, height = 270, toc = "La fonction mlRforest()")`
+`r h5p(188, "C02Hf_mlRforest", height = 270, toc = "La fonction mlRforest()")`
 
 ##### Trucs et astuces {.unnumbered}
 
@@ -490,7 +490,7 @@ Pour l'instant {mlearning} utilise les fonctions du package {randomForest} qui r
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(189, height = 270, toc = "Les types d'algorithmes")`
+`r h5p(189, "C02Hg_type_algo", height = 270, toc = "Les types d'algorithmes")`
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -533,7 +533,7 @@ if (exists("assignment2"))
 
 Dans ce second module, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("02")`
 
 ##### Progression {.unnumbered}
 

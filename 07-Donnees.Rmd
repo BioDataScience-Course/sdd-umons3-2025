@@ -26,7 +26,7 @@ La gestion du temps et les variables de temps peuvent sembler simples d'apparenc
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(151, height = 270, toc = "Nombre de jours dans une année")`
+`r h5p(151, "D07Ha_date", height = 270, toc = "Nombre de jours dans une année")`
 
 Si l'on tient compte du calendrier grégorien, des fuseaux horaires, du temps universel coordonné, de l'heure d'été .... On s'aperçoit que le temps est complexe.
 
@@ -97,7 +97,7 @@ mdy("01/25/15")
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(152, height = 270, toc = "Fonctions de conversion en dates")`
+`r h5p(152, "D07Hb_conversion_date2", height = 270, toc = "Fonctions de conversion en dates")`
 
 -   Les heures :
 
@@ -116,7 +116,7 @@ ymd_hms("2015-Jan-25 12:25:35")
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(153, height = 270, toc = "Conversion de date avec lubridate")`
+`r h5p(153, "D07Hc_lubridate", height = 270, toc = "Conversion de date avec lubridate")`
 
 Par défaut {lubridate} utilise le temps universel coordonné UTC. Il est cependant possible de définir le fuseau horaire avec l'argument `tz=`.
 
@@ -697,7 +697,7 @@ if (exists("assignment"))
 
 Ce module vous a permis de prendre connaissance des principes de bases des données temporelles, des données textuelles et des variables circulaires. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
-`r show_ex_toc()`
+`r show_ex_toc("07")`
 
 ##### Progression {.unnumbered}
 

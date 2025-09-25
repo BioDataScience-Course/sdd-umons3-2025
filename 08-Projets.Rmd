@@ -268,7 +268,7 @@ Enfin, prenez connaissance des différentes instructions, et explorez les dossie
 
 Ce module vous a permis de revoir un ensemble de notions sur la gestion d'un projet scientifiques dans le cadre de travaux de plus grande envergure. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
-`r show_ex_toc()`
+`r show_ex_toc("08")`
 
 ##### Progression {.unnumbered}
 

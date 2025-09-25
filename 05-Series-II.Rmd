@@ -48,7 +48,7 @@ plot(time, trend2 * cycle2, type = "l", xlab = "Temps", ylab = "Série multiplic
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(35, height = 270, toc = "Stationnarisation d'une série")`
+`r h5p(35, "C05Ha_stationnarisation", height = 270, toc = "Stationnarisation d'une série")`
 
 ### Fonction générale de décomposition {#fctgeneraledecomp}
 
@@ -62,7 +62,7 @@ Une fois qu'une décomposition est réalisée, il est possible d'extraire les di
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(34, height = 270, toc = "La fonction tsd()")`
+`r h5p(34, "C05Hb_tsd", height = 270, toc = "La fonction tsd()")`
 
 ##### Exemple {.unnumbered}
 
@@ -210,7 +210,7 @@ Un autre phénomène qu'il faut connaître est l'**effet Slusky-Yule**. L'applic
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(33, height = 270, toc = "Méthode des moyennes mobiles")`
+`r h5p(33, "C05Hc_but_decaverage", height = 270, toc = "Méthode des moyennes mobiles")`
 
 ##### Exemple {.unnumbered}
 
@@ -250,7 +250,7 @@ Comme vous l'avez certainement deviné, les médianes mobiles fonctionnent comme
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(36, height = 270, toc = "Méthode des médianes mobiles")`
+`r h5p(36, "C05Hd_decmedian", height = 270, toc = "Méthode des médianes mobiles")`
 
 ##### Exemple {.unnumbered}
 
@@ -307,7 +307,7 @@ Nous allons ici récupérer l'opérateur retard $LX_t$ vu tout au début du modu
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(32, height = 270, toc = "Méthode des différences")`
+`r h5p(32, "C05He_but_decdiff", height = 270, toc = "Méthode des différences")`
 
 ##### Exemple {.unnumbered}
 
@@ -723,7 +723,7 @@ Comme nous pouvons le constater, nous avons à présent une série régulière q
 
 Dans ce module 5, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("05")`
 
 ##### Progression {.unnumbered}
 

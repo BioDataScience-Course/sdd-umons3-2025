@@ -210,6 +210,10 @@ Une fois que vous avez rejoint l'équipe **`r !"c{YY}"`** ou **`r !"d{YY}"`**, i
 
 Vous pouvez aussi directement créer une issue depuis RStudio. Voyez le fichier `README.md` dans le dépôt des issues pour les explications.
 
+Enfin, vous avez à disposition un learnr de "feedback" qui vous permet de faire des suggestions sur le contenu de ce cours, module par module, ou de manière générale :
+
+`r learnr("C99La_feedback", title = "Learnr de feedback", toc = NULL, text = "Utilisez le document suivant pour vos suggestions sur le cours :")`
+
 ## Planning des séances {#planning .unnumbered}
 
 Ceci est le planning des séances pour SDD III. Pour SDD IV, le planning est plus souple et défini de commun accord avec les étudiants qui se sont inscrits à cette UE pour s'adapter au mieux à leurs contraintes (stages, mémoire...)

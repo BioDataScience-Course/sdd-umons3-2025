@@ -38,13 +38,13 @@ L'utilisation d'un ordinateur, de RStudio et de (R) Markdown ne doivent plus avo
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(150, height = 270, toc = NULL)`
+`r h5p(150, "D06Aa_tools", height = 270, toc = NULL)`
 
 Vous devez aussi maîtriser les bases de Git et de GitHub (avoir un compte GitHub, savoir cloner un dépôt localement, travailler avec GitHub Desktop pour faire ses "commits", "push" et "pull").
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(149, height = 270, toc = NULL)`
+`r h5p(149, "D06Ab_git_summary", height = 270, toc = NULL)`
 
 L'ensemble de ces outils a été abordé dans les cours précédents `r !{"[SDD I](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons-{YYYY}/)"}`, `r !{"[SDD II](https://wp.sciviews.org/sdd-umons/?iframe=wp.sciviews.org/sdd-umons2-{YYYY}/)"}` et SDD III (les cinq premiers modules du présent document) que vous devez avoir réalisé avant d'entamer la matière du cours SDD IV : pratique.
 
@@ -76,7 +76,7 @@ world
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(57, height = 270, toc = "Objet sf")`
+`r h5p(57, "D06Ha_objet_sf", height = 270, toc = "Objet sf")`
 
 Nous voyons qu'outre les frontières des pays dans la variable `geometry`, {tmap} nous renvoie aussi une série d'autres données utiles, comme la superficie de chaque pays dans `area` (utile pour rapporter des observations par unité de surface, par exemple). De votre côté, vous pourrez donc combiner également vos données avec leur localisation dans un tableau **sf**.
 
@@ -163,7 +163,7 @@ chart(data = world) +
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(58, height = 270, toc = "Cartes avec le package ggplot2")`
+`r h5p(58, "D06Hb_ggplot2", height = 270, toc = "Cartes avec le package ggplot2")`
 
 Là où cela devient intéressant, c'est que nous avons la possibilité d'utiliser les autres variables contenues dans le tableau **sf** pour annoter la carte. Par exemple, nous pouvons remplir les polygones (`%fill=%`) représentant les différents pays à l'aide d'une couleur en fonction de la variable `economy`. Une petite astuce toutefois : une formule doit obligatoirement contenir une variable `x` après le tilde. Or ici, nous ne voulons fournir que `fill`, mais ni `x`, ni `y` dans la formule. Pour cela, nous indiquons `~ 0` qui sera compris par `chart()` comme aucun `x` et aucun `y`. Ensuite, nous pourrons rajouter toutes les autres esthétiques comprises par {ggplot2} à la suite dans la formule sous la forme `%aes=% variable`, donc ici, `%fill=% economy`.
 
@@ -174,7 +174,7 @@ chart(data = world, ~ 0 %fill=% economy) +
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(59, height = 270, toc = "Utiliser chart() pour la cartographie")`
+`r h5p(59, "D06Hc_syntaxe_carte", height = 270, toc = "Utiliser chart() pour la cartographie")`
 
 Pour présenter de l'information sur une carte, nous aurons donc besoin d'une ou plusieurs variables qualitatives ou quantitatives associées à des coordonnées spatiales. Les données et les coordonnées spatiales seront, en pratique, souvent dans deux tableaux différents. Vous aurez donc à les combiner en un tableau unique **sf** avant de pouvoir réaliser la carte voulue.
 
@@ -204,7 +204,7 @@ Les fonds de cartes sont principalement stockés dans des fichiers au format [**
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(60, height = 270, toc = "Fonds de cartes")`
+`r h5p(60, "D06Hd_shp", height = 270, toc = "Fonds de cartes")`
 
 <!-- TODO: les shapefiles sont un format déprécié par rapport à un format base sur SQLite dont j'ai oublié le nom ?  Mais les shapefiles sont tout de même encore très répandus... -->
 
@@ -231,7 +231,7 @@ Cartes de l'Europe au format **shapefile** en fonction de l'échelle de la carte
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(61, height = 270, toc = "Échelles des cartes")`
+`r h5p(61, "D06He_precision", height = 270, toc = "Échelles des cartes")`
 
 ### Systèmes de coordonnées
 
@@ -249,7 +249,7 @@ st_crs(world)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(62, height = 270, toc = "Standard EPSG")`
+`r h5p(62, "D06Hf_epsg", height = 270, toc = "Standard EPSG")`
 
 Intéressons-nous maintenant à l'Afrique australe définie par l'ONU comme constituée des pays suivants : Afrique du Sud, Namibie, Botswana, Lesotho et Swaziland.
 
@@ -704,7 +704,7 @@ Il est en effet plutôt rare d'avoir une couverture dense de mesures sur une gra
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(63, height = 270, toc = "Interpolation spatiale")`
+`r h5p(63, "D06Hg_interpolation_spatiale", height = 270, toc = "Interpolation spatiale")`
 
 ### Où pleut-il au Maroc ? {#pluiemaroc}
 
@@ -742,7 +742,7 @@ L'interpolation spatiale est possible parce que, comme pour les séries chronolo
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(64, height = 270, toc = "Autocorrélation spatiale")`
+`r h5p(64, "D06Hh_autocorrelation", height = 270, toc = "Autocorrélation spatiale")`
 
 ### Interpolation avec DIP
 
@@ -758,7 +758,7 @@ et la valeur par défaut de $p$ est 2. Faire varier $p$ permet d'avoir un effet 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(65, height = 270, toc = "Méthode DIP")`
+`r h5p(65, "D06Hi_dip", height = 270, toc = "Méthode DIP")`
 
 Cette interpolation ne nécessite que les données mesurées de pluviométrie `rain`, donc, la formule correspondante est `rain ~ 1` pour indiquer qu'à part une valeur moyenne de référence (l'équivalent de l'ordonnée à l'origine pour une régression linéaire), nous n'utiliserons pas d'autres variables prédictives. Le modèle se calcule comme suit :
 
@@ -845,7 +845,7 @@ Le krigeage est une technique d'interpolation qui utilise un **modèle statistiq
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(66, height = 270, toc = "Krigeage")`
+`r h5p(66, "D06Hj_krigeage", height = 270, toc = "Krigeage")`
 
 On appelle **variogramme empirique** la représentation de la demi-variance en fonction de la distance entre les points telle qu'observée sur base du réseau de points effectivement mesurés. Nous pouvons le calculer et le visionner à l'aide de `variogram()`.
 
@@ -1071,7 +1071,7 @@ if (exists("assignment"))
 
 Dans ce module 6, vous aviez à réaliser les exercices suivants :
 
-`r show_ex_toc()`
+`r show_ex_toc("06")`
 
 ##### Progression {.unnumbered}
 
