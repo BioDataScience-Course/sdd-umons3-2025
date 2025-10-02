@@ -75,7 +75,7 @@ learnitdown$assign_url <- list(
   C01Ia_debug          = "https://classroom.github.com/a/J8pmAcmX",
   C01Ib_lda            = "https://classroom.github.com/a/KebgqQXM",
   C01Ga_metrics        = "https://classroom.github.com/a/6YLX7ccV",
-  C02Ia_zoo            = "https://classroom.github.com/a/...",
+  C02Ia_zoo            = "https://classroom.github.com/a/3viLYZaN",
   C03Ia_cardiovascular = "https://classroom.github.com/a/...",
   C03Ca_ml_wine        = "https://classroom.github.com/a/...",
   C04Ia_ts             = "https://classroom.github.com/a/...",
