@@ -19,7 +19,7 @@ SciViews::R("ts", lang = "fr")
 Ce module nécessite d'être à l'aise avec R, RStudio et R Markdown. Les cinq premiers modules du cours 1 (en particulier, la `r course_link("visualisation", course = 1, "introvisu")` et l'`r course_link("importation des données", course = 1, "importation")`) doivent être acquis. La notion de (`r course_link("corrélation", course = 1, "correlation")`) doit également être bien comprise au départ.
 
 ```{block, type='note'}
-Nous utiliserons ici essentiellement le package R {pastecs} qui est une réécriture entre autres par l'un des auteurs de ce cours du logiciel PASSTEC 2000, un programme écrit initialement en Visual Basic par le [Prof. Frédéric Ibañez](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4247415/) dans les années 1980, sous la direction de ce dernier. C'est au Prof. Ibañez que l'on doit d'avoir rassemblé un grand nombre de techniques utiles en écologie et en biologie en général en matière d'analyse de séries spatio-temporelles, et d'en avoir démontré l'utilité quelque fois pour la première fois.
+Nous utiliserons ici essentiellement le package R {pastecs} qui est une réécriture entre autres par l'un des auteurs de ce cours du logiciel PASSTEC 2000, un programme écrit initialement en Visual Basic par le [Prof. Frédéric Ibañez](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4247415/) dans les années 1980, sous la direction de ce dernier. C'est au Prof. Ibañez que l'on doit d'avoir rassemblé un grand nombre de techniques utiles en écologie et en biologie en général en matière d'analyse de séries spatio-temporelles, et d'en avoir démontré l'utilité, dans certains cas pour la première fois.
 ```
 
 ## Observations dépendantes du temps {#obstemps}
@@ -40,7 +40,7 @@ Vous vous intéressez au Lynx du Canada (*Lynx canadensis*) du point de vue de l
 
 Il apparaît que le nombre de lynx capturés par les trappeurs de l'époque est la meilleure information que vous puissiez obtenir (observations indirectes, ou "proxy" dans le jargon statisticien). La compilation de données de captures entre 1821 et 1934 en nombre d'individus donne ceci[^04-series-i-1] :
 
-[^04-series-i-1]: Notez que l'on obtient un objet **tbl_ts**, soit un data frame de type tibble spécial qui reconnait la variable temporelle (on l'appelle aussi un **tsibble** comme vous pouvez le constater en imprimant l'objet).
+[^04-series-i-1]: Notez que l'on obtient un objet **tbl_ts**, soit un data frame de type tibble spécial qui reconnait la variable temporelle (on l'appelle aussi un **tsibble**, de classe **tbl_ts**, comme vous pouvez le constater en imprimant l'objet).
 
 ```{r}
 lynx <- read("lynx", package = "datasets")
@@ -77,7 +77,7 @@ Notez bien qu'ici, les données sont dans un autre format, un objet de classe **
 plot(co2)
 ```
 
-Les libellés des axes ne sont pas parfaits, mais les arguments `xlab =` et `ylab =` de la fonction `plot()` nous permettons de les redéfinir. Ici, nous en profitons pour découvrir qu'il est possible de formater ce texte à l'aide de `expression()`. Pour mettre le "2" en indice dans "CO~2~", on écrira `CO[2]`. Pour tous les autres formatages possibles, voir `?plotmath`.
+Les libellés des axes ne sont pas parfaits, mais les arguments `xlab =` et `ylab =` de la fonction `plot()` nous permettent de les redéfinir. Ici, nous en profitons pour découvrir qu'il est possible de formater ce texte à l'aide de `expression()`. Pour mettre le "2" en indice dans "CO~2~", on écrira `CO[2]`. Pour tous les autres formatages possibles, voir `?plotmath`.
 
 ```{r}
 plot(co2, xlab = "Temps [années]", ylab = expression(paste(CO[2], " atmosphérique [ppm]")))
@@ -103,11 +103,11 @@ chart(co2_tsbl, value ~ as.Date(index)) +
   labs(x = "Temps [années]", y = expression(paste(CO[2], " atmosphérique [ppm]")))
 ```
 
-Ici aussi, nous observons très clairement des variations qui se répètent à intervalle régulier, probablement des **variations saisonnières**. Mais par-dessus ces fluctuations, une augmentation à plus long terme est effectivement particulièrement visible. Une fois de plus, les différentes observations ont toutes été réalisées au *même* endroit et une forte interdépendance est à suspecter entre les observations successives.
+Ici aussi, nous observons très clairement des variations qui se répètent à intervalle régulier, probablement des **variations saisonnières**. Mais par-dessus ces fluctuations, une augmentation à plus long terme est particulièrement visible. Une fois de plus, les différentes observations ont toutes été réalisées au *même* endroit et une forte interdépendance est à suspecter entre les observations successives.
 
 ### EEG
 
-L'électro-encéphalogramme consiste à mesurer de manière non invasive l'activité électrique de notre cerveau. L'épilepsie est un dérèglement majeur du fonctionnement cérébral qui se marque particulièrement bien au niveau de l'EEG.
+L'électro-encéphalogramme (EEG) consiste à mesurer de manière non invasive l'activité électrique de notre cerveau. L'épilepsie est un dérèglement majeur du fonctionnement cérébral qui se marque particulièrement bien au niveau de l'EEG.
 
 ![EEG en cours de mesure par [Baburov](https://commons.wikimedia.org/wiki/File:Eeg_registration.jpg).](images/04-series1/eeg.jpg)
 
@@ -135,7 +135,7 @@ chart(data = map_data("france"), lat ~ long %group=% group) +
   labs(x = "", y = "")
 ```
 
-Nous avons ici effectivement un axe qui varie spatialement le long du transect, mais en même temps dans le temps, car les 68 stations ne sont pas échantillonnées *simultanément*, mais *successivement dans le temps* au fur et à mesure que le navire océanographique fait route entre Nice et Calvi en Corse. Nous avons déjà utilisé ces données au cours SDD II pour illustrer les analyses multivariées. Voyons ce que donnent les paramètres physico-chimiques sous forme de séries spatio-temporelles (notez que, comme `marphy` est un objet **data.table**, nous utilisons la fonction `tsibble::as_tsibble()` ou `ts()` pour le transformer en séries spatio-temporelles, plus de détails sur ces dernières fonctions seront donnés plus loin ; ici la colonne `Station` doit être créée d'abord et indiquée comme étant l'index à `tsibble::as_tsibble()`) :
+Nous avons ici un axe qui varie spatialement le long du transect, mais en même temps dans le temps, car les 68 stations ne sont pas échantillonnées *simultanément*, mais *successivement dans le temps* au fur et à mesure que le navire océanographique fait route entre Nice et Calvi en Corse. Nous avons déjà utilisé ces données au cours SDD II pour illustrer les analyses multivariées. Voyons ce que donnent les paramètres physico-chimiques sous forme de séries spatio-temporelles (notez que, comme `marphy` est un objet **data.trame**, nous utilisons la fonction `tsibble::as_tsibble()` ou `ts()` pour le transformer en séries spatio-temporelles, plus de détails sur ces dernières fonctions seront donnés plus loin ; ici la colonne `Station` doit être créée d'abord et indiquée comme étant l'index à `tsibble::as_tsibble()`) :
 
 ```{r}
 read("marphy", package = "pastecs") %>.%
@@ -148,7 +148,7 @@ chart(marphy_tsbl, Temperature ~ Station) +
   ylab("Temperature [°C]")
 ```
 
-Nous avons ici plusieurs variables mesurées aux mêmes stations. La transformation avec `ts()` nous donne alors un objet **mts()** ("multiple time series"), avec un graphique via `plot()` qui est plutôt intéressant :
+Nous avons ici plusieurs variables mesurées aux mêmes stations. La transformation avec `ts()` nous donne alors un objet **mts()** ("multiple time series"), avec un graphique grâce à `plot()` qui est plutôt intéressant :
 
 ```{r, fig.height=10, fig.width=7}
 read("marphy", package = "pastecs") %>.%
@@ -162,7 +162,7 @@ plot(marphy_ts,
   xlab = "Transect Nice - Calvi (stations)")
 ```
 
-Ici, nous avons quatre variables enregistrées : la température (°C), la salinité de l'eau, la fluorescence (de la chlorophylle) qui est une mesure indirecte du contenu en phytoplancton dont l'abondance dépend elle-même du contenu en sels nutritifs (azote, phosphore, silice), et enfin la densité de l'eau en g/L. Nous observons ici des variations importantes et parfois assez abruptes. En fait, le transect croise un front constitué par une remontée d'eaux profondes, froides et riches en nutriments en plein milieu. De même, `marbio` est une "data table" que nous nous empressons de convertir avec `ts()`, mais ici nous choisissons trois séries parmi l'ensemble des 24 séries pour la représentation graphique à l'aide de l'opérateur `[,]` :
+Ici, nous avons quatre variables enregistrées : la température (°C), la salinité de l'eau, la fluorescence (de la chlorophylle) qui est une mesure indirecte du contenu en phytoplancton dont l'abondance dépend elle-même du contenu en sels nutritifs (azote, phosphore, silice), et enfin la densité de l'eau en g/L. Nous observons ici des variations importantes et parfois assez abruptes. En fait, le transect croise un front constitué par une remontée d'eaux profondes, froides et riches en nutriments en plein milieu. De même, `marbio` est un object **data.trame** que nous nous empressons de convertir avec `ts()`, mais ici nous choisissons trois séries parmi l'ensemble des 24 séries pour la représentation graphique à l'aide de l'opérateur `[,]` :
 
 ```{r, fig.height=9, fig.width=7}
 read("marbio", package = "pastecs") %>.%
@@ -186,11 +186,11 @@ Au travers de ces quatre exemples concrets, nous constatons que les séries spat
 
 ## Qu'est-ce qu'une série chronologique ? {#seriechronologique}
 
-Lorsque nous mesurons de manière répétée le *même* individu à des moments différents, nous parlons de **série chronologique**, de **séries temporelles**, ou de **série spatio-temporelle** (*space-time series* en anglais). Ce dernier terme "spatio-temporel" se réfère, en réalité, à un axe unidimensionnel que nous représentons toujours par convention sur l'axe des abscisses sur un graphique et le long duquel nos observations s'étalent. Il peut s'agir du temps, ou d'une dimension spatiale linéaire (mesures le long d'un **transect**, comme nous l'avons vu pour le plancton méditerranéen), ou d'un mélange des deux, c'est-à-dire que le temps se déroule alors que nous progressons dans nos mesures le long du transect. Quoi qu'il en soit, le fait de mesurer toujours le même individu ou la même entité mène à une interdépendance des observations les unes par rapport aux autres.
+Lorsque nous mesurons de manière répétée le *même* individu à des moments différents, nous parlons de **série chronologique**, de **séries temporelles**, ou de **série spatio-temporelle** (*space-time series* en anglais). Ce dernier terme "spatio-temporel" se réfère, en réalité, à un axe unidimensionnel que nous représentons toujours, par convention, sur l'axe des abscisses du graphique et le long duquel nos observations s'étalent. Il peut s'agir du temps, ou d'une dimension spatiale linéaire (mesures le long d'un **transect**, comme nous l'avons vu pour le plancton méditerranéen), ou d'un mélange des deux, c'est-à-dire que le temps se déroule alors que nous progressons dans nos mesures le long du transect. Quoi qu'il en soit, le fait de mesurer toujours le même individu ou la même entité mène à une interdépendance des observations les unes par rapport aux autres.
 
-Cette propriété de corrélation au sein de la série entre les observations est dite **autocorrélation**. C'est la caractéristique principale d'une série temporelle que de contenir une autocorrélation qui est très souvent non nulle (dans le cas contraire, on parle de **bruit blanc**, *white noise* en anglais). C'est cette autocorrélation qui fait que l'hypothèse d'indépendance des observations entre elles n'est pas respectée, et par conséquent, que nous ne pouvons pas utiliser les outils de statistique classique ici.
+Cette propriété de corrélation au sein de la série entre les observations est dite **autocorrélation**. C'est la caractéristique principale d'une série temporelle que de contenir une autocorrélation qui est très souvent non nulle (dans le cas contraire, en absence totale d'autocorrélation, on parle de **bruit blanc**, *white noise* en anglais). C'est cette autocorrélation qui fait que l'hypothèse d'indépendance des observations entre elles n'est pas respectée, et par conséquent, que nous ne pouvons pas utiliser les outils de statistique classique ici.
 
-Donc, nous devons utiliser des outils statistiques spécialisés qui tiennent compte de cette autocorrélation. Il faut aussi noter que si l'autocorrélation est très forte, nous pourrons aussi l'utiliser à notre avantage. En effet, nous pouvons imaginer *prédire* la valeur que prendra la variable mesurée dans la série au temps $t + \Delta t$, connaissant uniquement la valeur qu'elle prend au temps $t$ (et peut-être aussi, au temps $t - \Delta t$, $t - 2 \Delta t$, $t - 3 \Delta t$...). Nous appellerons $\Delta t$, l'intervalle temporel entre deux mesures successives, le **pas de temps** de notre série.
+Donc, nous devons utiliser des outils statistiques spécialisés ici. Il faut aussi noter que si l'autocorrélation est très forte, nous pourrons aussi l'utiliser à notre avantage. En effet, nous pouvons imaginer *prédire* la valeur que prendra la variable mesurée dans la série au temps $t + \Delta t$, connaissant uniquement la valeur qu'elle prend au temps $t$ (et peut-être aussi, au temps $t - \Delta t$, $t - 2 \Delta t$, $t - 3 \Delta t$...). Nous appellerons $\Delta t$, l'intervalle temporel entre deux mesures successives, le **pas de temps** de notre série.
 
 Une autre caractéristique importante des séries temporelles est l'existence de **cycles**. En effet, de nombreux phénomènes sont périodiques dans le temps (cycles circadiens, lunaires, annuels, etc.) et ils influent sur la biologie et l'écologie des êtres vivants. Il n'est donc pas étonnant de retrouver des cycles similaires dans les séries temporelles en biologie. Plusieurs méthodes existent pour étudier et séparer des cycles ou des **tendances à long terme** du bruit de fond contenu dans les séries temporelles. Nous aborderons ici quelques-uns de ces outils.
 
@@ -198,15 +198,15 @@ Au cours de notre exploration des séries temporelles, nous utiliserons les fonc
 
 ### Séries régulières {#seriesregulieres}
 
-Une série régulière est un ensemble de données mesurées sur la même entité (même individu, même unité statistique) avec un **espacement constant dans le temps** (ou le long d'un transect). La série n'a pas de valeurs manquantes. Ce type de série a des avantages énormes, car nous pouvons décaler la série d'un ou plusieurs pas de temps, et les observations après décalage correspondent aux **mêmes dates** que les observations originales, à part aux extrémités bien entendu.
+Une série régulière est un ensemble de données mesurées sur la même entité (même individu, même unité statistique) avec un **espacement constant dans le temps** (ou le long d'un transect) noté $\Delta t$. La série n'a pas de valeurs manquantes. Ce type de série a des avantages énormes, car nous pouvons décaler la série d'un ou plusieurs pas de temps $\Delta t$, et les observations après décalage correspondent aux **mêmes dates** que les observations originales, à part aux extrémités bien entendu.
 
-![Le décalage d'une série régulière d'un pas de temps résulte en des observations aux mêmes dates, mais décalées d'une unité : *x*~1~ est maintenant à la même date que *x*~2~ avant le décalage, *x*~2~ à la même date que *x*~3~ avant, et ainsi de suite...](images/04-series1/lag1.png)
+![Le décalage d'une série régulière d'un pas de temps résulte en des observations aux mêmes dates, mais décalées : *x*~1~ est maintenant à la même date que *x*~2~ avant le décalage sur l'axe du temps, *x*~2~ à la même date que *x*~3~ avant, et ainsi de suite...](images/04-series1/lag1.png)
 
-Après avoir effectué un décalage (*lag* en anglais) d'un pas de temps, et moyennant l'élimination de la première observation *x*~1~ de la série d'origine et la dernière observation *x*~n~ de la série décalée, nous obtenons un tableau de 2 lignes et *n* - 1 colonnes. Nous noterons l'opérateur de décalage ou **opérateur retard** *L*, un opérateur qui effectue exactement ce traitement, c'est-à-dire qu'il associe à tout élément de la série régulière, l'observation précédente.
+Après avoir effectué un décalage (*lag* en anglais) d'un pas de temps, et moyennant l'élimination de la première observation *x*~1~ de la série d'origine et la dernière observation *x*~n~ de la série décalée, nous obtenons un tableau de deux lignes et *n* - 1 colonnes. Nous noterons l'opérateur de décalage ou **opérateur retard** *L*, un opérateur qui effectue exactement ce traitement, c'est-à-dire qu'il associe à tout élément de la série régulière, l'observation précédente.
 
 $$L X_t = X_{t-1}$$
 
-Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman) entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir `r course_link("module 6 du cours SDD I", course = 1, "correlation")`) :
+Nous pouvons calculer la **corrélation** $r$, par exemple à l'aide du coefficient de corrélation de Pearson (ou de Spearman), entre les deux lignes du tableau obtenu en accolant la série de départ $X_t$ et la même série décalée $LX_t$, amputé des extrémités ne comportant pas de paires d'observations (la version de Spearman se calculera sur les rangs des observations, voir `r course_link("module 6 du cours SDD I", course = 1, "correlation")`) :
 
 $$r_{X_t,LX_t} = \frac{cov_{X_t,LX_t}}{\sqrt{S^2_{X_t} + S^2_{LX_t}}}$$
 
@@ -226,7 +226,7 @@ $$L^k X_t = X_{t-k}$$
 
 *L*^0^ est un cas particulier où la série est simplement recopiée aux mêmes dates. Comme la corrélation entre une série et elle-même est toujours parfaite, $r(\tau) = 1$ toujours pour $\tau = 0$. **L'autocorrélation pour un décalage nul vaut toujours un.** Notez que $r(\tau)$ est en fait une fonction dépendant de variations discrètes de $\tau$. On l'appelle donc la **fonction d'autocorrélation** (*autocorrelation function* en anglais). Cette fonction d'autocorrélation est un merveilleux outil pour analyser les caractéristiques de notre série... nous y reviendrons donc dans la partie analyse plus loin.
 
-R propose un type d'objet particulier pour représenter des séries régulières univariées (une seule variable mesurée à chaque fois) : les objets **ts**. Certaines de nos séries d'exemples de la section précédente sont des objets de ce type dès le départ. Prenons `co2` et examinons comment cet objet est représenté.
+R utilise un type d'objet particulier pour représenter des séries régulières univariées (une seule variable mesurée à chaque fois) : les objets **ts**. Certaines de nos séries d'exemples de la section précédente sont des objets de ce type dès le départ. Prenons `co2` et examinons comment cet objet est représenté.
 
 ```{r}
 co2 <- read("co2", package = "datasets")
@@ -251,7 +251,7 @@ Pour inspecter (aux rayons X) un objet dans R, on peut le "déclasser" avec `unc
 unclass(co2)
 ```
 
-Ici, nous voyons qu'il s'agit d'un vecteur de données numériques auquel est ajouté un **attribut** (`attr`) nommé **tsp** pour "**t**ime **s**eries **p**arameters" et qui contient trois valeurs : 1959.000, 1997.917 et 12.000. Où sont les données de temps ? Et que veulent dire ces valeurs de **tsp** ? En fait, pour économiser de la place en mémoire, R n'enregistre pas toutes les dates, mais seulement la première, la dernière et le pas de temps de la série dans **tsp**. À l'aide de ces trois valeurs, il est en fait possible de reconstituer toutes les dates. La fonction `time()` s'en charge :
+Ici, nous voyons qu'il s'agit d'un vecteur de données numériques auquel est ajouté un **attribut** (`attr`) nommé **tsp** pour "**t**ime **s**eries **p**arameters" et qui contient trois valeurs : 1959.000, 1997.917 et 12.000. Où sont les données de temps ? Et que veulent dire ces valeurs de **tsp** ? En fait, pour économiser de la place en mémoire, R n'enregistre pas toutes les dates, mais seulement la première, la dernière et le pas de temps de la série dans **tsp**. À l'aide de ces trois valeurs, il est possible de reconstituer toutes les dates. La fonction `time()` s'en charge :
 
 ```{r}
 time(co2)
@@ -272,9 +272,9 @@ Notez comment R formate notre sortie (il assume qu'une série à fréquence de 1
 time(fake_ser)
 ```
 
-R mesure ici le temps sous forme décimale. C'est pratique, mais nous n'y sommes pas habitués. Ainsi, il divise l'année en 12 douzièmes, peu importe que certains mois contiennent 31, 30 ou même 28/29 jours. Ainsi, le 1^er^ janvier 2010 est 2010.000. Le 1^er^ février 2010 est 2010 + 1/12 = 2010.083. Et le 1^er^ décembre 2014 est 2014 + 11/12 = 2014.917. La petite erreur de décalage du début de chaque mois est minime et sans impacts pratiques pour nos séries chronologiques biologiques, car le vivant se soucie peu de notre calendrier grégorien. Par contre, pour des données comme le cours de la bourse, par exemple, ce genre d'approximation n'est pas utilisable et il faut alors employer des objets qui manipulent les dates de manière plus précise (mais aussi plus fastidieuse), comme ceux du package {xts} (voir plus loin, les séries irrégulières).
+R mesure ici le temps sous forme décimale. C'est pratique, mais nous n'y sommes pas habitués. Ainsi, il divise l'année en 12 douzièmes, peu importe que certains mois contiennent 31, 30 ou même 28/29 jours. Ainsi, le 1^er^ janvier 2010 est 2010.000. Le 1^er^ février 2010 est 2010 + 1/12 = 2010.083. Et le 1^er^ décembre 2014 est 2014 + 11/12 = 2014.917. La petite erreur de décalage du début de chaque mois est minime et sans impacts pratiques pour nos séries chronologiques biologiques, car le vivant se soucie peu de notre calendrier grégorien (dans la grande majorité des cas). Par contre, pour des données comme le cours de la bourse, par exemple, ce genre d'approximation n'est pas utilisable et il faut alors employer des objets qui manipulent les dates de manière plus précise (mais aussi plus fastidieuse), comme ceux du package {xts} (voir plus loin, les séries irrégulières).
 
-Dans notre série `fake_ser` de fréquence 12, le pas de temps est donc d'un mois, soit 1/12 d'année. **Notez que le pas de temps est en fait l'*inverse* de la fréquence des observations**. Si vous êtes plus à l'aise avec ce pas de temps, vous pouvez le substituer à la fréquence dans la fonction `ts()` via l'argument `deltat =`. Ainsi, indiquer `ts(...., frequency = 12)` ou `ts(...., deltat = 1/12)` est strictement équivalent.
+Dans notre série `fake_ser` de fréquence 12, le pas de temps est donc 1/12 d'année, soit un mois en moyenne. **Notez que le pas de temps est en fait l'*inverse* de la fréquence des observations**. Si vous êtes plus à l'aise avec ce pas de temps, vous pouvez le substituer à la fréquence dans la fonction `ts()` via l'argument `deltat =`. Ainsi, indiquer `ts(...., frequency = 12)` ou `ts(...., deltat = 1/12)` est strictement équivalent.
 
 Nous rencontrons également des objets **mts** pour *multivariate time series*. Ces objets contiennent plusieurs variables mesurées sur la même entité au cours du temps. Le vecteur est alors remplacé par une matrice à *n* lignes (le nombre d'observations dans le temps) et *m* colonnes (le nombre de variables mesurées à chaque fois). L'attribut **tsp** est le même que pour **ts**. La sélection des séries au sein de la matrice se fait à l'aide de l'opérateur "crochet" `[,]` où la ou les séries d'intérêt sont reprises en second argument après la virgule soit sous forme d'un vecteur d'entiers qui représentent les positions des colonnes à conserver, soit sous forme d'un vecteur de chaînes de caractères qui reprennent les noms des séries à conserver. Les séries multivariées `marbio_ts` et `marphy_ts` en sont des bons exemples. Les objets **mts** sont également des objets **ts** et des objets **matrix**, qui sont eux-mêmes des **array** (on dit qu'elles *héritent* de ces classes[^04-series-i-2]) :
 
@@ -300,7 +300,7 @@ colnames(marphy_ts[, c("Temperature", "Density")])
 ```
 
 ```{block, type='warning'}
-N'essayez pas d'utiliser la sélection à l'aide de `[,]` sur un objet **ts** contenant une série univariée. Vous génèreriez une erreur car cet objet contient un *vecteur* et non pas une *matrice*. De plus, cela n'a aucun sens de faire une sélection parmi... une seule série dans cet objet !
+N'essayez pas d'utiliser la sélection à l'aide de `[,]` sur un objet **ts** contenant une série univariée. Vous généreriez une erreur car cet objet contient un *vecteur* et non pas une *matrice*. De plus, cela n'a aucun sens de faire une sélection parmi... une seule série dans cet objet !
 ```
 
 ##### À vous de jouer ! {.unnumbered}
@@ -315,11 +315,29 @@ En profitant des propriétés d'autocorrélation de la série, il est possible d
 
 ### Séries irrégulières {#seriesirreguliere}
 
-Dès que le pas de temps entre les observations n'est pas constant, nous parlons de série irrégulière. Les séries irrégulières ne peuvent pas être représentées par des objets **ts** ou **mts** de R qui imposent un pas de temps régulier. Par contre, les packages {zoo} et {xts} permettent de manipuler ce genre de données.
+Dès que le pas de temps entre les observations n'est pas constant, nous parlons de série irrégulière. Les séries irrégulières ne peuvent pas être représentées par des objets **ts** ou **mts** de R qui imposent un pas de temps régulier. Par contre, les packages {zoo} et {xts} permettent de manipuler ce genre de données. 
 
-<!-- TODO: introduction rapide à {xts} et conversion entre objets. -->
+Voyons ce que cela donne avec nos données `lynx`, sachant que {xts} peut bien entendu *aussi* manipuler des séries régulières. Lorsqu'il n'y a pas de colonne sous forme d'objet **Date** ou **time** dans le tableau de départ, il faut d'abord faire la conversion. Pour `lynx`, nous n'avons que les *années*, exprimées par un entier (1821, 1822, ...) Dans ce cas, `as.Date()` ne fonctionne pas et il faut ruser avec des fonctions qui permettent de prendre en compte des *dates partielles*, comme `lubridate::ymd()` où un argument `truncated=` permet d'indiquer combien de "parties" de la date sont manquantes entre **y**ear, **m**onth et **d**ay. Donc, ici, nous utilisons `lubridate::ymd(..., truncated = 2)`. Ensuite, nous convertissons en objet **xts** en précisant dans `order.by=` le nom de la variable temporelle.
 
-De manière générale, nous avons toujours intérêt à réaliser une série régulière, ou la plus régulière possible. Ensuite, il faut penser aux techniques de régularisation si c'est faisable pour obtenir une série régulière qui approxime suffisamment bien les données de départ. En effet, la plupart des techniques d'analyse des séries temporelles se basent sur des séries régulières, et en tous cas celles du package {pastecs}.
+```{r}
+lynx %>.%
+  smutate(., time = lubridate::ymd(time, truncated = 2)) %>.%
+  xts::xts(., order.by = .$time) ->
+  lynx_xts
+class(lynx_xts)
+lynx_xts
+```
+Ici, nous voyons tout de suite que des dates véritables sont utilisées (attribuant chaque observation au 1^er^janvier de chaque année par défaut). Et nous pouvons aussi créer des objets **xts** avec des dates espacées irrégulièrement. Nous constatons aussi que la manipulations de dates complexifie le code. C'est pour cette raison que les objets **ts** et **mts**, ainsi que {pastecs} utilise une version simplifiée du temps. En effet, il n'est pas utile de s'encombrer de notions comme heure d'été/heure d'hiver, ou même, un nombre légèrement différent de jours entre les mois avec la grande majorité des données biologiques. Notez que vous pouvez aussi utiliser `xts::as.xts()` pour convertir un objet **ts** en **xts**.
+
+Terminons ce petit détour par les objets {xts} en vous montrant comment convertir un objet **xts** contenant une série régulière (éventuellement à trous) en objet **ts** ou **mts**. Une application naïve de `as.ts()` comme `as.ts(lynx_xts)` ne donne pas vraiment le résultat attendu. Il faut extraire la colonne qui nous intéresse, la convertir en valeurs numériques, utiliser `ts()` et spécifier deux des trois arguments de **tsp**, ce qui n'est pas pratique du tout, avouons-le.
+
+```{r}
+lynx_ts <- ts(as.numeric(lynx_xts$trapping), start = 1821, frequency = 1)
+class(lynx_ts)
+lynx_ts
+```
+
+De manière générale, nous avons donc toujours intérêt à réaliser une série régulière, ou la plus régulière possible. Ensuite, il faut penser aux techniques de régularisation si c'est faisable pour obtenir une série régulière qui approxime suffisamment bien les données de départ. Cela nous permet de travailler avec les objets **ts** ou **mts** de R de base, nettement plus simples à manipuler que les objets **xts**. La plupart des techniques d'analyse des séries temporelles se basent sur des séries régulières, et en tous cas celles du package {pastecs}.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -337,7 +355,7 @@ De manière générale, nous avons toujours intérêt à réaliser une série r�
 
 -   Nous pouvons créer un objet **ts** ou **mts** à l'aide de la fonction `ts()`. Nous devons donner le vecteur ou la matrice des observations, ainsi que deux des trois paramètres de **tsp**. Nous pouvons substituer le **pas de temps** à la **fréquence** des observations via l'argument `deltat =`. En fait, `deltat == 1/frequence`, le pas de temps est l'inverse de la fréquence.
 
--   Les séries irrégulières doivent être représentées, par exemple, par des objets **xts** et le package {xts} propose une large palette de fonction pour manipuler de tels objets.
+-   Les séries irrégulières doivent être représentées, par exemple, par des objets **xts** et le package {xts} propose une large palette de fonction pour manipuler de tels objets. Mais cela rend le travail beaucoup plus complexe.
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -353,7 +371,7 @@ De manière générale, nous avons toujours intérêt à réaliser une série r�
 
 Tout comme pour les statistiques plus classiques, nous commençons toujours notre exploration de séries chronologiques par une partie purement descriptive, soit numérique, soit graphique. De plus, nous savons que nous ne devons pas espérer obtenir d'emblée des données qui se présentent de manière parfaite. Un petit peu de **manipulation de données** est parfois nécessaire... Nous allons découvrir quelques fonctions utiles dans ce contexte pour les séries chronologiques.
 
-Comme nous l'avons déjà vu, le graphe de base (obtenu par `plot()` ou en utilisant `geom_line()`) est une ligne brisée qui relie les différents points de la série, avec le temps sur l'axe des abscisses, et l'axe des ordonnées représentant les observations de la variable quantitative mesurée au fil du temps.
+Comme nous l'avons déjà vu, le graphe de base (obtenu par `plot()` ou en utilisant `chart()` ou `ggplot()` avec `geom_line()`) est une ligne brisée qui relie les différents points de la série, avec le temps sur l'axe des abscisses, et l'axe des ordonnées représentant les observations de la variable quantitative mesurée au fil du temps.
 
 ### Statistiques glissantes
 
@@ -379,7 +397,7 @@ plot(statsl, stat = "mean", leg = TRUE, lpos = c(55, 2500),
   xlab = "Station", ylab = "ClausocalanusA")
 ```
 
-Toujours pour la même série, on peut calculer toutes les statistiques sur des intervalles irréguliers, puis représenter l'étendue (minimum, maximum) et la médiane pour chaque intervalle comme suit (ces intervalles correspondent aux différentes masses d'eaux croisées le long du transect, voir légende du graphique) :
+Toujours pour la même série, nous pouvons calculer toutes les statistiques sur des intervalles irréguliers, puis représenter l'étendue (minimum, maximum) et la médiane pour chaque intervalle comme suit (ces intervalles correspondent aux différentes masses d'eaux croisées le long du transect) :
 
 ```{r}
 statsl2 <- stat.slide(1:68, marbio_ts[, "ClausocalanusA"],
@@ -403,7 +421,7 @@ text(c(8.4, 21, 27.5, 35, 43.5, 57.2), 2300,
 legend(0, 1900, c("série", "médian", "étendue"), col = 1:3, lty = 1)
 ```
 
-Enfin, on peut extraire différentes statistiques, les valeurs de la série initiale (`y`), les valeurs de temps de la série (`x`), et le vecteur temps de coupure des périodes (`xcut`) à partir de l'objet **stat.slide** renvoyé :
+Enfin, nous pouvons extraire différentes statistiques, les valeurs de la série initiale (`y`), les valeurs de temps de la série (`x`), et le vecteur temps de coupure des périodes (`xcut`) à partir de l'objet **stat.slide** renvoyé :
 
 ```{r}
 statsl2$stat[c("mean", "median", "min", "max"), ]
@@ -422,7 +440,7 @@ statsl2$xcut
 
 ### Manipulations de **ts**
 
-Les jeux de données bricolés artificiellement sont parfois bien utiles pour explorer de nouvelles techniques. En effet, puisque nous les construisons nous-mêmes, nous savons dès le départ de quoi ils sont faits. Et donc, nous pouvons vérifier que le résultat obtenu est bien conforme. Par exemple, nous pouvons construire une série de données mensuelle commençant en avril 1998 (`start = c(1998, 4)`), contenant 100 valeurs et comportant une composante sinusoïdale d'une période annuelle ainsi qu'une composante aléatoire ayant une distribution normale de moyenne nulle et d'écart type 0.5 :
+Les jeux de données générés artificiellement sont parfois bien utiles pour explorer de nouvelles techniques. En effet, puisque nous les construisons nous-mêmes, nous savons dès le départ de quoi ils sont faits. Et donc, nous pouvons vérifier que le résultat obtenu est bien conforme. Par exemple, nous pouvons construire une série de données mensuelles commençant en avril 1998 (`start = c(1998, 4)`), contenant 100 valeurs et comportant une composante sinusoïdale d'une période annuelle ainsi qu'une composante aléatoire ayant une distribution normale de moyenne nulle et d'écart type (`sd=`) 0.5 :
 
 ```{r}
 tser <- ts(sin((1:100) / 6 * pi) + rnorm(100, sd = 0.5), start = c(1998, 4), 
@@ -448,7 +466,7 @@ end(tser)
 frequency(tser)
 ```
 
-Nous avons déjà vu la fonction `time()` qui permet de reconstituer le vecteur temps pour la série. La fonction `cycle()` indique l'appartenance de chaque donnée de la série à un cycle. Elle permet, par exemple, de séparer les données par mois si la base de temps est l'année à l'aide de la fonction `split()`. Ensuite, il est possible de traiter ou de représenter séparément les statistiques mois par mois pour en faire, par exemple, des boites de dispersions parallèles :
+Nous avons déjà vu la fonction `time()` qui permet de reconstituer le vecteur temps pour la série. La fonction `cycle()` indique l'appartenance de chaque donnée de la série à un cycle. Elle permet, par exemple, de séparer les données par mois si la base de temps est l'année à l'aide de la fonction `split()`. Ensuite, il est possible de traiter ou de représenter séparément les statistiques mois par mois pour en faire, par exemple, des boites à moustaches parallèles :
 
 ```{r}
 tser.cycle <- cycle(tser)
@@ -498,7 +516,7 @@ tser <- ts(sin((1:100) / 6 * pi) + rnorm(100, sd = 0.5), start = c(1998, 4),
 acf(tser)
 ```
 
-Pour un décalage nul, la première barre verticale monte jusqu'à un toujours le long de l'axe des ordonnées. Les barres suivantes montrent jusqu'où l'**effet mémoire** de la série se marque. Les traits bleus horizontaux représentent une enveloppe de confiance à 95%. Donc, les barres qui dépassent (largement) de l'intervalle entre ces deux traits bleus sont significatives. Nous voyons ici que l'effet mémoire se marque sur les deux mois qui suivent (2 barres au-dessus du trait bleu). Ensuite, le graphique est caractéristique d'une série périodique. En effet, l'autocorrélation passe par un minimum lorsque la série est décalée d'une demi-période. Ici, le cycle a une période d'un an. Nous voyons que nous passons par une autocorrélation négative et minimale après un décalage de 6, puis de 18 mois. L'axe des abscisses *Lag* est exprimé dans l'unité de la série qui est l'année ici. Cela correspond donc à respectivement 0.5 et 1.5 unité. Par contre, l'autocorrélation redevient positive et maximale pour un décalage d'une période exactement ou d'un multiple de cette période. Ainsi, nous avons un mode pour un décalage de 1 année. Nous étudierons juste en dessous une technique plus puissante pour détecter les cycles dans une série (analyse spectrale), mais lorsqu'ils sont flagrants comme ici, ils sont également clairement visibles sur le graphique de l'autocorrélation.
+Pour un décalage nul, la première barre verticale monte jusqu'à un toujours le long de l'axe des ordonnées. Les barres suivantes montrent jusqu'où l'**effet mémoire** de la série se marque. Les traits bleus horizontaux représentent une enveloppe de confiance à 95%. Donc, les barres qui dépassent (largement) de l'intervalle entre ces deux traits bleus sont significatives. Nous voyons ici que l'effet mémoire se marque sur les deux mois qui suivent (2 barres au-dessus du trait bleu). Ensuite, le graphique est caractéristique d'une série périodique. En effet, l'autocorrélation passe par un minimum lorsque la série est décalée d'une demi-période. Ici, le cycle a une période d'un an. Nous voyons que nous passons par une autocorrélation négative et minimale après un décalage de 6, puis de 18 mois. L'axe des abscisses *Lag* est exprimé dans l'unité de la série qui est l'année ici. Cela correspond donc à respectivement 0.5 et 1.5 unité. Par contre, l'autocorrélation redevient positive et maximale pour un décalage d'une période exactement ou d'un multiple de cette période. Ainsi, nous avons un mode pour un décalage de 1 année. Nous étudierons un peu plus loin une technique plus puissante pour détecter les cycles dans une série (analyse spectrale), mais lorsqu'ils sont flagrants comme ici, ils sont également clairement visibles sur le graphique de l'autocorrélation.
 
 Pour un bruit blanc (une série constituée d'observations indépendantes les unes des autres), l'autocorrélation doit être nulle. Générons artificiellement une telle série afin de visualiser le graphique de l'autocorrélation correspondant :
 
@@ -509,7 +527,7 @@ plot(white_noise)
 acf(white_noise)
 ```
 
-Effectivement, pratiquement toutes les barres sont comprises à l'intérieur de l'enveloppe de confiance à 95%. Il est normal que 5% des barres sortent de cette enveloppe. À part la première pour un décalage nul qui ne doit pas être comptabilisé, nous avons une barre qui sort très légèrement sur 20, soit 5% (il pourrait aussi y en avoir deux ou trois, ou bien zéro au contraire par le biais du hasard, sans que cela change nos conclusions). Ce type de graphique doit nous diriger immédiatement vers la conclusion que l'autocorrélation est nulle ou négligeable dans la série.
+Effectivement, pratiquement toutes les barres sont comprises à l'intérieur de l'enveloppe de confiance à 95%. Il est normal que 5% des barres sortent de cette enveloppe. À part la première pour un décalage nul qui ne doit pas être comptabilisé, nous avons une barre qui sort très légèrement sur 20, soit 5% (il pourrait aussi y en avoir deux ou trois, ou bien zéro au contraire par pur hasard, sans que cela change nos conclusions). Ce type de graphique doit nous diriger immédiatement vers la conclusion que l'autocorrélation est nulle ou négligeable dans la série.
 
 Si le graphique de la fonction d'autocorrélation a des barres qui sont toutes positives et significatives, cela signifie probablement qu'une tendance générale à l'augmentation domine le signal (elle est alors déjà bien souvent visible dans le graphique de la série elle-même). Si les barres sont toutes significatives et qu'il y a en plus une oscillation, nous avons alors à la fois une tendance et un cycle dont les effets sont à peu près équivalents. Le graphique de la fonction d'autocorrélation suivant est issu de la décomposition du jeu de données `co2` où nous avons extrait uniquement la tendance générale (voir l'exemple de décomposition de la série `co2` plus loin).
 
@@ -521,7 +539,7 @@ co2_trend <- extract(co2_dec, components = "filtered")
 acf(co2_trend)
 ```
 
-Bien que nettement moins utilisé en pratique, on peut également tracer le graphique de l'autocovariance (la covariance est calculée entre la série de départ et la série décalée à la place de la corrélation) en précisant l'argument `type = "covariance"` à l'appel de `acf()`. On a aussi la possibilité de calculer une autocorrélation partielle avec `type = "partial"`. En outre, R fournit également `ccf()`, fonction qui calcule la **cross-corrélation** (ou corrélation croisée) ou la cross-covariance entre deux séries. Ceci peut s'avérer utile pour déterminer s'il y a une dépendance entre les deux séries, et éventuellement estimer également un décalage éventuel dans le temps pour cette dépendance. À titre d'illustration, prenons notre série artificielle `tser` et décalons-là de cinq mois. Traçons ensuite le graphique de cross-corrélation entre ces deux séries :
+Bien que nettement moins utilisé en pratique, on peut également tracer le graphique de l'autocovariance (la covariance est calculée entre la série de départ et la série décalée à la place de la corrélation) en précisant l'argument `type = "covariance"` à l'appel de `acf()`. On a aussi la possibilité de calculer une autocorrélation partielle avec `type = "partial"`. En outre, R fournit également `ccf()`, fonction qui calcule la **cross-corrélation** (ou corrélation croisée) ou la cross-covariance entre deux séries. Ceci peut s'avérer utile pour déterminer s'il y a une dépendance entre les deux séries, et estimer également un décalage éventuel dans le temps pour cette dépendance. À titre d'illustration, prenons notre série artificielle `tser` et décalons-là de cinq mois. Traçons ensuite le graphique de cross-corrélation entre ces deux séries :
 
 ```{r}
 mtser <- ts.intersect(tser, stats::lag(tser, 5))
@@ -546,7 +564,7 @@ Si vous voulez affiner votre compréhension du graphique de l'autocorrélation, 
 
 ### Analyse spectrale
 
-Pour identifier de manière fine les composantes cycliques d'une série chronologique, nous pouvons considérer que cette série est la combinaison d'un ensemble de signaux (co)sinusoïdaux de fréquence croissante. Pour rappel, la **période** d'un signal cyclique est le temps nécessaire pour accomplir exactement un cycle. Par contre, la **fréquence**, notée oméga ($\omega$) est l'inverse de cette période $\omega = 1/période$, et cela correspond au nombre de cycles qui rentrent dans une unité de temps exactement (pour rappel, vous choisissez librement l'unité ici, année, quadrimestre, mois, jour, minute, seconde... millénaire, etc.). Un signal périodique élémentaire peut s'écrire alors à l'aide d'une fonction cosinus à trois paramètres : outre la **fréquence** $\omega$, il y a l'**amplitude** du signal notée $A$ et la **phase** phi ($\phi$) qui définit où le cycle commence sur l'axe du temps. Cette phase est un peu l'équivalent de l'ordonnée à l'origine pour une droite, soit un décalage du signal sur l'axe temporel.
+Pour identifier de manière fine les composantes cycliques d'une série chronologique, nous pouvons considérer que cette série est la combinaison d'un ensemble de signaux (co)sinusoïdaux de fréquence croissante. La **période** d'un signal cyclique est le temps nécessaire pour accomplir exactement un cycle. Par contre, la **fréquence**, notée oméga ($\omega$) est l'inverse de cette période $\omega = 1/période$, et cela correspond au nombre de cycles qui rentrent dans une unité de temps exactement (pour rappel, vous choisissez librement l'unité ici, année, quadrimestre, mois, jour, minute, seconde... millénaire, etc.). Un signal périodique élémentaire peut s'écrire alors à l'aide d'une fonction cosinus à trois paramètres : outre la **fréquence** $\omega$, il y a l'**amplitude** du signal notée $A$ et la **phase** phi ($\phi$) qui définit où le cycle commence sur l'axe du temps. Cette phase est un peu l'équivalent de l'ordonnée à l'origine pour une droite, soit un décalage du signal sur l'axe temporel.
 
 $$x_t = A \cdot \cos(2 \pi \omega t + \phi)$$
 
@@ -570,7 +588,7 @@ Sur le graphique nous avons représenté trois cosinusoïdes pour vous illustrer
 
 -   Avec $\omega$ = 3, nous avons exactement trois cycles dans une unité de *t*, donc, trois cycles entre 0 et 1 sur l'axe des abscisses pour toutes les courbes. En faisant varier $\omega$ on resserre ou étale les cycles sur cet axe (horizontalement).
 
--   La courbe grise ayant une amplitude *A* d'un, est comprise entre +1 et -1 sur l'axe des ordonnées (étalement vertical). Les deux autres ont une amplitude *A* doublée de deux. Par conséquent, le signal monte et descend deux fois plus entre +2 et -2.
+-   La courbe grise ayant une amplitude *A* de 1. Elle est donc comprise entre +1 et -1 sur l'axe des ordonnées (étalement vertical). Les deux autres ont une amplitude *A* doublée de deux. Par conséquent, le signal monte et descend deux fois plus entre +2 et -2.
 
 -   Enfin, la phase $\phi$ des courbes grises et noires étant nulle, nous passons par un maximum en zéro sur l'axe des abscisses, car cos(0) = 1 = valeur maximale. Par contre, la courbe rouge est la même que la noire, mais déphasée de 1.6, ce qui la translate sur l'axe *t*. Avec une phase de 1.6 qui est environ égale à $\pi/2$, notre courbe rouge passe pratiquement par zéro pour $x_t$ lorsque $t = 0$.
 
@@ -605,7 +623,7 @@ spectrum(tser, spans = c(3, 5)) # Périodogramme lissé
 par(mfrow = c(1, 1))            # Valeur par défaut pour mfrow
 ```
 
-Le lissage du périodogramme fait intervenir un argument `spans =` qui prend un vecteur de deux entiers impairs. Plus ces valeurs seront élevées, plus le lissage sera important, mais attention à ne pas tomber dans l'excès non plus. En pratique, nous pouvons tester différentes combinaisons et retenir celle qui donne visuellement le meilleur périodogramme. Notez comme le lissage a changé la largeur de bande (*bandwidth* en anglais) entre les deux graphiques. Naturellement, en pratique, nousd ne réaliserons *pas* le périodogramme non lissé, mais uniquement la version lissée. Ici, vous avez les deux dans un but pédagogique de comparaison.
+Le lissage du périodogramme fait intervenir un argument `spans=` qui prend un vecteur de deux entiers impairs. Plus ces valeurs sont élevées, plus le lissage sera important, mais attention à ne pas tomber dans l'excès. En pratique, nous pouvons tester différentes combinaisons et retenir celle qui donne visuellement le meilleur périodogramme. Notez comme le lissage a changé la largeur de bande (*bandwidth* en anglais) entre les deux graphiques. Naturellement, en pratique, nous ne réaliserons *pas* le périodogramme non lissé, mais uniquement la version lissée. *Ici, vous avez les deux dans un but pédagogique de comparaison.*
 
 Pour l'interprétation, nous nous référons à la barre bleue à droite du graphique qui matérialise la zone sur l'axe des ordonnées pour laquelle une fréquence peut être considérée comme significative d'après le test d'hypothèse associé, en utilisant $\alpha$ = 5%. Alors que sur le périodogramme brut il peut sembler que la courbe traverse cette zone sensible un grand nombre de fois, c'est le périodogramme lissé qui nous indique de manière correcte que ces données artificielles ne comportent qu'une seule fréquence significative au seuil $\alpha$ de 5% : la fréquence de 1. Le périodogramme brut est donc inutilisable pour identifier correctement les fréquences significatives. Voilà pourquoi nous utiliserons *toujours* en pratique un périodogramme lissé pour nos analyses.
 
@@ -746,7 +764,7 @@ set.seed(9037)
 (co2_trend_test <- trend.test(co2, R = 999))
 ```
 
-Le calcul est plus long, mais nous n'avons plus l'avis concernant les ex æquos, car ceux-ci sont pris en compte dans la distribution bootstrappée. Nous voyons que la fonction `tsboot()` est utilisée en interne. C'est cette fonction qui prend en compte l'autocorrélation temporelle de la série dans le calcul. Mais comment interpréter ce test ? Nous devons passer par une représentation graphique de la distribution bootstrappée :
+Le calcul est plus long, mais nous n'avons plus l'avis concernant les ex æquos, car ceux-ci sont pris en compte dans la distribution bootstrappée. La fonction `tsboot()` est utilisée en interne. C'est cette fonction qui prend en compte l'autocorrélation temporelle de la série dans le calcul. Mais comment interpréter ce test ? Nous devons passer par une représentation graphique de la distribution bootstrappée :
 
 ```{r}
 plot(co2_trend_test)
@@ -801,13 +819,13 @@ La distribution n'est pas très différente d'une *t* de Student, et d'autre par
 
 ### Tendance locale
 
-Nous pouvons être confrontés à des séries qui montrent **différentes phases d'évolution à long terme**, par exemple, une croissance, suivie d'une décroissance. Dans ce cas, la tendance générale risque de ne pas être significative, alors qu'elle le serait si les deux phases de la série sont séparées l'une de l'autre et analysées individuellement. Ceci montre qu'il est utile d'identifier les cas où des phases successives existent dans notre série, et surtout, à indiquer à quelles date(s) la ou les transitions se font.
+Nous pouvons être confrontés à des séries qui montrent **différentes phases d'évolution à long terme**, par exemple, une croissance, suivie d'une décroissance. Dans ce cas, la tendance générale risque de ne pas être significative, alors qu'elle le serait si les deux phases de la série sont séparées l'une de l'autre et analysées individuellement. Ceci montre qu'il est utile d'identifier les cas où des phases successives existent dans notre série, et surtout, à indiquer à quelle(s) date(s) la ou les transition(s) se font.
 
 Une méthode simple, dite des **sommes cumulées**, permet de reconnaître de tels **changements de tendance** d'une série. Elle permet :
 
 -   de détecter les changements survenant dans le niveau moyen de la série,
 -   de déterminer la date d'apparition de ces changements,
--   d'estimer la valeur moyenne d'intervalles homogènes.
+-   d'estimer la valeur moyenne d'intervalles constants.
 
 En partant d'une série régulière $x_t$ avec *n* observations, nous allons choisir une **valeur de référence** $k$. Cette valeur est par défaut la moyenne des $x_t$ pour toute la série, mais nous pouvons très bien choisir une autre constante. Ensuite, nous allons **cumuler les observations jusqu'à chaque position** $q$, donc pour $t = q$, tout en soustrayant $k$ autant de fois qu'il y a d'observations dans notre somme cumulée ($q$ fois). Le calcul de la somme cumulée $S_q$ est donc :
 
@@ -854,7 +872,7 @@ ts2_lt <- local.trend(ts2)
 identify(ts2_lt)
 ```
 
-Ensuite, vous cliquez sur les points du graphique qui vous semblent définir les deux segments de droites formant le "V" (donc, la première observation, puis celle à la pointe du "V", et enfin, une observation vers la fin de la série). Le gif animé suivant montre cette procédure.
+Ensuite, vous cliquez sur les points du graphique qui vous semblent définir les deux segments de droites formant le "V" (donc, la première observation, puis celle à la pointe du "V", et enfin, une observation vers la fin de la série) et puis vous cliquez sur le bouton "Finir" ou "Finish". Le gif animé suivant montre cette procédure.
 
 `r img("04-series1/identify_local_trend.gif", caption = "Utilisation de '''identify()''' avec un graphique généré à la Console R pour déterminer les points de transitions des segments de droites représentant les sommes cumulées.")`
 
