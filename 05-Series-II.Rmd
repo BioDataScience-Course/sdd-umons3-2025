@@ -58,7 +58,7 @@ La fonction centrale qui effectue le traitement sur une ou plusieurs séries et 
 
 [^05-series-ii-1]: Toutefois, étant donné que les fonctions `decxxx()` renvoient aussi des objets **tsd**, l'utilisateur avancé peut les préférer pour des questions de performance ou de simplicité dans ses propres scripts.
 
-Une fois qu'une décomposition est réalisée, il est possible d'extraire les différentes composantes (grâce à `tseries()`) ou une partie d'entre elles (en utilisant la méthode `extract()`) et de les retransformer en objet de séries régulières (objet **ts** ou **mts**). On peut ainsi appliquer de nouvelles méthodes de décomposition sur un ou plusieurs composants et approfondir l'analyse des séries par des traitements de décomposition en cascade jusqu'à ce qu'on ait extrait et analysé toute l'information pertinente contenue dans ces séries.
+Une fois qu'une décomposition est réalisée, il est possible d'extraire les différentes composantes (grâce à `tseries()`) ou une partie d'entre elles (en utilisant la méthode `extract()`) et de les transformer en objet de séries régulières (objet **ts** ou **mts**). On peut ainsi appliquer de nouvelles méthodes de décomposition sur un ou plusieurs composants et approfondir l'analyse des séries par des traitements de décomposition en cascade jusqu'à ce qu'on ait extrait et analysé toute l'information pertinente contenue dans ces séries.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -91,7 +91,7 @@ L'objet `co2_dec` est de classe **tsd**.
 class(co2_dec)
 ```
 
-Outre son graphique qui est des plus utiles pour juger le résultat de notre décomposition visuellement, nous pouvons retransformer toutes les composantes obtenues en un objet **mts** à l'aide de `tseries()`, ou alors, extraire une ou plusieurs composantes avec `extract()`. Effectuons les deux successivement.
+Outre son graphique qui est des plus utiles pour juger le résultat de notre décomposition visuellement, nous pouvons transformer toutes les composantes obtenues en un objet **mts** à l'aide de `tseries()`, ou alors, extraire une ou plusieurs composantes avec `extract()`. Effectuons les deux successivement.
 
 ```{r}
 co2_mts <- tseries(co2_dec)
@@ -119,7 +119,7 @@ plot(co2_stat)
 Comme `co2_stat` est maintenant une série stationnarisée, nous pouvons réaliser une analyse spectrale dessus.
 
 ```{r}
-spectrum(co2_stat, span = c(5, 3))
+spectrum(co2_stat, spans = c(5, 3))
 ```
 
 Nous avons un cycle saisonnier très net, et un second pic à une fréquence de 2 cycles/an (soit un cycle par 1/2 an ou encore, par 6 mois), mais tout juste pas significatif. Rien n'interdit de décomposer encore plus avant notre série, par exemple, en déterminant comment la composante saisonnière peut être ajustée ou non avec un signal sinusoïdal parfait (encore une fois, les détails de la technique seront abordés plus loin). Il nous suffit de construire un modèle sinusoïdal qui s'ajuste dans les données et d'utiliser ensuite `tsd(<series>, method = "reg", xreg = predict(<model>))` pour effectuer la décomposition de la série à l'aide de ce modèle (nous utilisons une astuce pour ajuster ce modèle sinusoïdal à l'aide de `lm()` que nous expliquerons, encore une fois, plus loin).
@@ -422,7 +422,7 @@ L'objet `density_lin` est un objet **lm** tout à fait classique. Nous pouvons d
 summary(density_lin)
 ```
 
-L'ANOVA, et les tests de Student sur les paramètres ne peuvent être utilisés ici, même si nous pouvons les calculer à partir de `summary()` ou `anova()`. Afin d'utiliser ce modèle linéaire pour décomposer la série, nous utilisons `predict()` pour récupérer les valeurs prédites par le modèle pour la tendance, et nous les utilisons dans `decreg()` ou `tsd(methode = "reg")` :
+L'ANOVA, et les tests de Student sur les paramètres ne peuvent être utilisés ici, même si nous pouvons les calculer à partir de `summary()` ou `anova()`. Pour utiliser ce modèle linéaire pour décomposer la série, nous utilisons `predict()` pour récupérer les valeurs prédites par le modèle pour la tendance, et nous les utilisons dans `decreg()` ou `tsd(methode = "reg")` :
 
 ```{r}
 trend_lin <- predict(density_lin)
@@ -491,13 +491,13 @@ $$X_t = A \cdot \cos(2 \pi \omega t + \phi)$$
 
 avec $\omega$ la fréquence du signal, $\phi$ son déphasage et $A$ son amplitude. Mais nous avons aussi vu qu'il est possible de reparamétrer cette forme en une somme de sinus et cosinus :
 
-$$A \cdot \cos(2 \pi \omega t + \phi) = \beta_1 \cdot \cos(2 \pi \omega t) + \beta_2 \cdot \sin(2 \pi \omega t)$$
+$$X_t = A \cdot \cos(2 \pi \omega t + \phi) = \beta_1 \cdot \cos(2 \pi \omega t) + \beta_2 \cdot \sin(2 \pi \omega t)$$
 
 Dès lors, et à condition de cibler une fréquence particulière $\omega$ connue à l'avance pour le cycle (par exemple, pour un cycle saisonnier on sait d'avance que la fréquence est d'exactement 1 cycle/an), nous pouvons calculer deux variables issues de $t$ : $T_1 = \cos(2 \pi \omega t)$ et $T_2 = \sin(2 \pi \omega t)$. Ainsi, nous obtenons l'équation suivante :
 
-$$\beta_1 \cdot T_1 + \beta_2 \cdot T_2$$
+$$X_t = \beta_1 \cdot T_1 + \beta_2 \cdot T_2$$
 
-Cette dernière forme est assimilable à une régression multiple sur deux variables $T_1$ et $T_2$ dont l'ordonnée à l'origine vaut zéro, et que nous pouvons ajuster facilement à l'aide de la fonction `lm()`[^05-series-ii-2].
+Cette dernière forme est assimilable à une régression multiple sur deux variables $T_1$ et $T_2$ dont l'ordonnée à l'origine vaut zéro, et que nous pouvons ajuster facilement à l'aide de la fonction `lm()`[^05-series-ii-2]. En pratique, nous ne forcerons pas l'ordonnée à l'origine dans notre régression (co-)sinusoïdale, car le signal peut varier autour d'une moyenne qui n'est pas forcément nulle.
 
 [^05-series-ii-2]: Utiliser des transformations successives d'une même variable et l'ajuster via une régression linéaire multiple est une astuce que nous avions déjà employée avec succès dans la régression polynomiale.
 
@@ -536,7 +536,7 @@ Avec un choix judicieux de *k*, et éventuellement en réitérant le processus, 
 
 Comme les résidus ont rarement une distribution normale et ne sont souvent pas indépendants entre eux dans les séries, les conditions de départ indispensables pour la régression à l'aide de la méthode des moindres carrés sont violées la plupart du temps. Ainsi, pour obtenir une estimation plus exacte des composantes, il est possible d'utiliser une méthode de régression plus robuste (*i.e.*, moins sensible à la violation de ces conditions d'application). On peut par exemple décider de pondérer les valeurs de manière inversement proportionnelle à leur influence respective sur la régression. Ainsi, une valeur qui, à elle seule, aurait tendance à tirer la courbe vers elle (valeur isolée, très éloignée du nuage formé par toutes les autres) recevra une pondération très faible afin de minimiser son effet.
 
-L'algorithme implémenté dans `decloess()` ou `tsd(method = "loess")`, lui-même implémenté dans la fonction  `stl()` du package {stats} qui effectue véritablement le calcul est en réalité un peu plus complexe, avec des passages multiples des différents filtres dans un ordre particulier, et avec un calcul supplémentaire éventuellement entre ces passages. Ceci explique que la méthode est plus efficace qu'une simple moyenne mobile. Cependant, les explications ci-dessus suffisent pour en comprendre le principe général. Si vous êtes intéressés par les détails, vous pouvez lire la page d'aide de `?stl`.
+L'algorithme implémenté dans `decloess()` ou `tsd(method = "loess")`, lui-même implémenté dans la fonction `stl()` du package {stats} qui effectue véritablement le calcul, est en réalité un peu plus complexe avec des passages multiples des différents filtres dans un ordre particulier, et avec un calcul supplémentaire éventuellement entre ces passages. Ceci explique que la méthode est plus efficace qu'une simple moyenne mobile. Cependant, les explications ci-dessus suffisent pour en comprendre le principe général. Si vous êtes intéressés par les détails, vous pouvez lire la page d'aide de `?stl`.
 
 ##### Exemple {.unnumbered}
 
@@ -631,14 +631,14 @@ if (exists("assignment2"))
 La régularisation d'une série spatio-temporelle permet de transformer une série échantillonnée avec un pas de temps irrégulier ou présentant des trous en une série régulière. Malheureusement, en biologie, on a rarement affaire à des séries parfaitement régulières, soit parce qu'il y a des observations manquantes, soit parce qu'on ne contrôle pas l'intervalle de temps. Dans ce cas, la régularisation est une opération préliminaire indispensable à beaucoup d'analyses de séries spatio-temporelles, que ce soit avec les outils {pastecs} ou avec d'autres méthodes. Les objets **ts** doivent être *d'office* des séries spatio-temporelles régulières dans R. Cette étape est donc requise pour adapter des **data frame**s avant de pouvoir les transformer en séries temporelles ! Plusieurs méthodes de régularisation sont disponibles dans {pastecs} : régularisation par valeur constante (`regconst()`), linéaire (`reglin()`), par courbes splines (`regspline()`) et par la méthode des aires (`regarea()`). Afin de simplifier le travail de régularisation, et de faciliter ensuite la création des séries temporelles, toutes ces fonctions ont été regroupées sous une fonction commune `regul()`, dans la même philosophie que `tsd()` regroupe les différentes techniques de décomposition, par ailleurs implémentées par les fonctions `decXXX()`.
 
 ```{block, type='warning'}
-Toutes ces méthodes sont à utiliser **avec précaution**. Il est très facile d’obtenir n’importe quoi si l’on choisit des mauvais paramètres ! Il n’y a pas de règle absolue dans leurs choix, étant donné qu’ils sont liés à la nature-même des données à régulariser. Par exemple, il faut être extrêmement attentif à ne pas régulariser à tort des données physico-chimiques (par exemple à l’aide de la méthode des aires avec une très grande fenêtre).
+Toutes ces méthodes sont à utiliser **avec précaution**. Il est très facile d’obtenir n’importe quoi si l’on choisit des mauvais paramètres ! Il n’y a pas de règle absolue dans leur choix, étant donné qu’ils sont liés à la nature-même des données à régulariser. Par exemple, il faut être extrêmement attentif à ne pas régulariser à tort des données physico-chimiques (par exemple à l’aide de la méthode des aires avec une très grande fenêtre).
 ```
 
 Quelle que soit la méthode utilisée, on doit veiller à obtenir un pas de temps de la série régulière aussi proche que possible du pas de temps (moyen) de la série échantillonnée. De même, on doit aussi essayer d'obtenir autant de valeurs non interpolées que possible dans la série régulière finale. Quant à l'extrapolation (obtenue à l'aide de l'argument `rule = 2`), elle est à proscrire. La fonction `regul()` admet beaucoup de paramètres. Vous êtes invité à essayer différents réglages sur vos propres données, et à visualiser le résultat à l'aide de `plot.regul()` et `hist.regul()` pour vous familiariser avec ses possibilités. La transformation du temps depuis un décompte des jours vers une "année numérique simplifiée" (longueur de 365,25 jours, et chaque mois correspondant à exactement 1/12 de cette valeur) n'est pas très intuitive, mais une fois que l'on a compris le principe, c'est très facile à faire avec l'argument `units = "daystoyears"` de `regul()` (voir l'exemple ci-dessous).
 
 Dans le cas où l'on voudrait condenser des données (par exemple, transformer un échantillonnage mensuel en valeurs saisonnières ou des données quotidiennes en série par semaine ou par mois), il vaut mieux agréger les données en calculant des moyennes ou des médianes successives. On peut aussi régulariser la série avec le pas temps initial si ce dernier est un multiple du pas de temps visé, et utiliser ensuite la fonction `aggregate()` de R, que nous avons déjà utilisée.
 
-Dans le cadre de ce cours, la régularisation de série irrégulière est une matière optionnelle. La présentation très succincte ci-dessus vous permet de prendre connaissance de l'existence de ces techniques (faites toujours `?<nom_de_function` pour lire la page d'aide de chaque fonction citée comme point de départ). Revenez vers cette section, et vers les liens qu'elle renferme, si vous vous trouvez confronté à une situation où une régularisation de série est nécessaire. Le [manuel de {pastecs}](https://github.com/phgrosjean/pastecs/blob/master/manual/pastecs_manuel_utilisateur.pdf) renferme tout un chapitre qui décrit en détail comment procéder.
+Dans le cadre de ce cours, la régularisation de série irrégulière est une matière optionnelle. La présentation très succincte ci-dessus vous permet de prendre connaissance de l'existence de ces techniques (faites toujours `?<nom_de_function` pour lire la page d'aide de chaque fonction citée comme point de départ). Revenez vers cette section, et vers les liens qu'elle renferme, si vous vous trouvez confronté à une situation où une régularisation de série est nécessaire. Le [manuel de {pastecs}](https://github.com/phgrosjean/pastecs/blob/master/manual/pastecs_manuel_utilisateur.pdf) renferme un chapitre complet qui décrit en détail comment procéder.
 
 ### Application pratique
 
