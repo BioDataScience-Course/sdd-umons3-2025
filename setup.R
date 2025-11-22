@@ -57,7 +57,7 @@ learnitdown$mod <- as.data.frame(tibble::tribble(
   "C02",      "Q1",  !"{W[7]+1}", "08:15-10:15",  !"{W[7]+5}", "08:15-12:30", !"{W[8]+1}",  "continue...",          "-",  !"{W[7]+5}",
   "C03",      "Q1",  !"{W[9]+1}", "08:15-10:15",  !"{W[9]+3}", "13:30-17:45", !"{W[10]+1}",  !"{W[12]+2}",  !"{W[9]+3}",          "-",
   "C04",      "Q1", !"{W[11]+1}", "08:15-10:15", !"{W[11]+5}", "08:15-12:30", !"{W[12]+1}",  !"{W[11]+5}",          "-", !"{W[11]+5}",
-  "C05",      "Q1", !"{W[13]+1}", "08:15-10:15", !"{W[13]+5}", "08:15-12:30", !"{W[14]+1}",  !"{W[15]+2}",          "-", !"{W[13]+5}",
+  "C05",      "Q1", !"{W[13]+1}", "08:15-10:15", !"{W[13]+5}", "08:15-12:30", !"{W[14]+1}",  !"{W[15]+4}",          "-", !"{W[13]+5}",
   "remed",    "Q1", !"{W[15]+1}", "08:15-10:15",          "-",           "-",          "-",           "-",          "-",          "-",
   # SDD IV
   "D06",      "Q1",  !"{W[4]+2}", "10:30-12:30",   !"{W[4]+4}", "08:15-12:30", !"{W[5]+1}",            "-",          "-",          "-",
@@ -80,7 +80,7 @@ learnitdown$assign_url <- list(
   C03Ca_ml_wine        = "https://classroom.github.com/a/...",
   C04Ia_ts             = "https://classroom.github.com/a/dbACkh84",
   C04Ga_tseries        = "https://classroom.github.com/a/MsFhNyx3",
-  C05Ia_tsd            = "https://classroom.github.com/a/...",
+  C05Ia_tsd            = "https://classroom.github.com/a/HxuNIeEa",
   # SDD4
   D00Qa_issues         = "https://classroom.github.com/a/2-eyJMao",
   D06Ia_map            = "https://classroom.github.com/a/...",
